@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ Thống Ấp Trứng Thông Minh - HCMUTE FAE</title>
     
-    <!-- Favicon Tab Logo -->
-    <link rel="icon" type="image/png" href="blob:https://gemini.google.com/fe178b91-be58-4c84-a049-ef60bde556ae">
+    <!-- Favicon Logo chuẩn -->
+    <link rel="icon" type="image/png" href="C:\TĐH\logotab.png">
+    <link rel="apple-touch-icon" href="C:\TĐH\logotab.png">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -42,7 +43,7 @@
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: #f4f6f8;
             overflow-x: hidden;
-            padding-bottom: 80px; /* Tránh che khuất bởi bottom menu bar trên mobile */
+            padding-bottom: 90px; /* Tránh che khuất bởi bottom menu bar trên mobile */
         }
 
         @media (min-width: 768px) {
@@ -53,7 +54,7 @@
 
         /* Glassmorphism cực trong suốt (Ultra-Clear Liquid Glass) */
         .ultra-glass {
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.6);
@@ -71,7 +72,7 @@
         /* Liquid Nav Container */
         .liquid-nav-container {
             position: relative;
-            background: rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.8);
@@ -80,7 +81,7 @@
             padding: 5px;
         }
 
-        /* Pill chạy đuổi (Chuyển động mượt) */
+        /* Pill chạy đuổi mượt mà không lag */
         .liquid-pill {
             position: absolute;
             top: 5px;
@@ -88,9 +89,10 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 9999px;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0,0,0,0.05);
-            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
             pointer-events: none;
             z-index: 1;
+            will-change: transform, width;
         }
 
         .liquid-nav-item {
@@ -196,12 +198,11 @@
                     </div>
 
                     <div>
-                        <!-- Tiêu đề Intro bar cập nhật theo Yêu cầu 6 -->
                         <h1 class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center gap-2">
                             <span>Group 4 - Automation and Control Engineering Technology</span>
                         </h1>
                         <div class="flex items-center gap-2 text-[11px] text-slate-300">
-                            <span>Bảng Điều Khiển Buồng Ấp Trứng Dành Cho Bà Con Nông Dân</span>
+                            <span>Bảng Điều Khiển Hệ Thống Ấp Trứng Thông Minh</span>
                         </div>
                     </div>
                 </div>
@@ -209,12 +210,12 @@
                 <div class="flex items-center gap-2 sm:gap-3">
                     <div id="user-badge" class="hidden flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold">
                         <i class="fa-solid fa-user-check"></i>
-                        <span id="current-user-display">Bà Con Nông Dân</span>
+                        <span id="current-user-display">Người dùng</span>
                     </div>
 
                     <div id="connection-status-badge" class="flex items-center gap-2 bg-rose-950/80 text-rose-300 border border-rose-500/30 px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap">
                         <span id="connection-dot" class="w-2 h-2 rounded-full bg-rose-500"></span>
-                        <span id="connection-text">Tủ Ấp Chưa Kết Nối</span>
+                        <span id="connection-text">Chưa Kết Nối</span>
                     </div>
 
                     <button id="logout-btn" onclick="handleLogout()" class="hidden px-3 py-1 rounded-full bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold transition">
@@ -234,9 +235,8 @@
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500 to-emerald-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-amber-500/20 mx-auto mb-3">
                             <i class="fa-solid fa-egg"></i>
                         </div>
-                        <!-- Tiêu đề cập nhật theo Yêu cầu 9 -->
                         <h2 class="text-2xl font-black text-slate-900 tracking-tight">HỆ THỐNG ẤP TRỨNG THÔNG MINH</h2>
-                        <p class="text-xs text-slate-600 font-bold">Bà con nhập tài khoản để theo dõi và vận hành tủ ấp</p>
+                        <p class="text-xs text-slate-600 font-bold">Đăng nhập tài khoản để theo dõi và vận hành tủ ấp</p>
                     </div>
 
                     <div class="flex bg-slate-200/60 p-1 rounded-2xl text-xs font-bold">
@@ -279,7 +279,7 @@
                     </form>
 
                     <div class="pt-2 border-t border-slate-200/60 text-[11px] text-slate-500 text-center space-y-1">
-                        <p class="font-bold text-slate-700">Tài khoản dùng thử sẵn cho bà con:</p>
+                        <p class="font-bold text-slate-700">Tài khoản dùng thử sẵn:</p>
                         <p>● Tên: <span class="font-mono font-bold text-emerald-600">AnduongG4</span> | Mật khẩu: <span class="font-mono font-bold">12345</span></p>
                         <p>● Tên: <span class="font-mono font-bold text-emerald-600">BaKietG4</span> | Mật khẩu: <span class="font-mono font-bold">12345</span></p>
                     </div>
@@ -314,7 +314,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         <div class="ultra-glass p-6 space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="text-xs font-extrabold text-slate-500 uppercase tracking-wider">Độ Ẩm Khí Trần Tủ</span>
+                                <span class="text-xs font-extrabold text-slate-500 uppercase tracking-wider">Độ Ẩm Hút Vào</span>
                                 <div class="w-11 h-11 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center">
                                     <i class="fa-solid fa-droplet text-xl"></i>
                                 </div>
@@ -323,7 +323,7 @@
                                 <span id="hum-ceiling-val" class="text-4xl font-black text-sky-600">58.5</span>
                                 <span class="text-slate-500 text-sm font-bold">%</span>
                             </div>
-                            <p class="text-xs text-slate-500 font-semibold">Cảm biến gió trên miệng quạt</p>
+                            <p class="text-xs text-slate-500 font-semibold">Cảm biến luồng khí vào</p>
                         </div>
 
                         <div class="ultra-glass p-6 space-y-3">
@@ -338,7 +338,7 @@
                                 <span class="text-slate-500 text-sm font-bold">°C</span>
                             </div>
                             <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-200/60 font-bold">
-                                <span class="text-slate-500">Độ ẩm đáy tủ:</span>
+                                <span class="text-slate-500">Độ ẩm buồng ấp:</span>
                                 <span id="hum-ground-val" class="text-sky-600">62.0 %</span>
                             </div>
                         </div>
@@ -355,7 +355,7 @@
                                 <span class="text-slate-500 text-sm font-bold">Độ</span>
                             </div>
                             <p class="text-xs text-emerald-600 font-extrabold flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Tủ đang tự động đảo trứng
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Hệ thống đang tự động đảo trứng
                             </p>
                         </div>
                     </div>
@@ -363,8 +363,8 @@
                     <div class="ultra-glass p-6 space-y-4">
                         <div class="flex items-center justify-between border-b border-slate-200/60 pb-4">
                             <div>
-                                <h3 class="font-black text-lg text-slate-900">Bật / Tắt Nhanh Quạt, Sưởi & Bơm Nước</h3>
-                                <p class="text-xs text-slate-500 font-semibold">Bà con có thể gạt công tắc nhanh cho từng thiết bị trong buồng ấp</p>
+                                <h3 class="font-black text-lg text-slate-900">Bật / Tắt Nhanh Thiết Bị</h3>
+                                <p class="text-xs text-slate-500 font-semibold">Công tắc điều khiển trực tiếp từng thiết bị trong buồng ấp</p>
                             </div>
                             <span id="quick-auto-badge" class="px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-extrabold">
                                 CHẾ ĐỘ: TỰ ĐỘNG (AUTO)
@@ -385,7 +385,7 @@
                             </div>
                             <div>
                                 <h3 class="text-lg font-black text-slate-900">Chế Độ Tự Động Ấp Trứng Thông Minh</h3>
-                                <p class="text-xs text-slate-600 font-semibold">Khi bật BÀ CON TỰ ĐỘNG, tủ sẽ tự điều chỉnh độ ấm, quạt gió và tự xoay trứng đúng giờ.</p>
+                                <p class="text-xs text-slate-600 font-semibold">Khi bật TỰ ĐỘNG, tủ sẽ tự điều chỉnh nhiệt độ, độ ẩm, quạt gió và xoay trứng theo lịch.</p>
                             </div>
                         </div>
 
@@ -452,8 +452,8 @@
                                         <i class="fa-solid fa-fire-burner"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-bold text-sm text-slate-900">Bộ Sưởi Ấm Gốm</h4>
-                                        <p class="text-[11px] text-slate-500 font-semibold">Tạo độ ấm cho trứng</p>
+                                        <h4 class="font-bold text-sm text-slate-900">Bộ Sưởi Gốm</h4>
+                                        <p class="text-[11px] text-slate-500 font-semibold">Tạo nhiệt độ ấm cho trứng</p>
                                     </div>
                                 </div>
                                 <span id="heaterPowerVal" class="text-xl font-black text-amber-600">75%</span>
@@ -462,7 +462,7 @@
                                 <input type="range" id="heaterPowerSlider" min="0" max="100" value="75" oninput="updateHeaterPower(this.value)">
                                 <div class="flex justify-between text-[11px] text-slate-500 font-bold">
                                     <span>Tắt</span>
-                                    <span>Nóng Ấm</span>
+                                    <span>Ấm Vừa</span>
                                     <span>Nóng Nhất</span>
                                 </div>
                             </div>
@@ -476,7 +476,7 @@
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-sm text-slate-900">Bơm Nước Tạo Ẩm</h4>
-                                        <p class="text-[11px] text-slate-500 font-semibold">Tưới nước màn làm mát</p>
+                                        <p class="text-[11px] text-slate-500 font-semibold">Tấp nước màn làm mát</p>
                                     </div>
                                 </div>
                                 <span id="pumpFlowVal" class="text-xl font-black text-teal-600">40%</span>
@@ -486,7 +486,7 @@
                                 <div class="flex justify-between text-[11px] text-slate-500 font-bold">
                                     <span>Tắt</span>
                                     <span>Vừa</span>
-                                    <span>Bơm Nhiều</span>
+                                    <span>Tối Đa</span>
                                 </div>
                             </div>
                         </div>
@@ -504,13 +504,13 @@
                             <div>
                                 <h3 class="font-extrabold text-base text-slate-900 flex items-center gap-2">
                                     <i class="fa-solid fa-egg text-amber-500 text-lg"></i>
-                                    <span>Khay Đảo 6 Quả Trứng - Bấm Vào Quả Trứng Để Soi Chi Tiết</span>
+                                    <span>Khay Đảo 6 Quả Trứng - Chọn Trứng Để Soi Chi Tiết</span>
                                 </h3>
-                                <p class="text-xs text-slate-600 font-semibold">Bà con bấm vào từng quả trứng bên dưới để xem tình hình phôi sống và ngày nở</p>
+                                <p class="text-xs text-slate-600 font-semibold">Nhấp vào từng quả trứng bên dưới để xem tình trạng phôi và ngày nở dự kiến</p>
                             </div>
 
                             <button id="btn-back-overview" onclick="selectEgg(null)" class="hidden px-4 py-2 rounded-full bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold transition flex items-center gap-1.5 border border-slate-200 shadow-sm">
-                                <i class="fa-solid fa-arrow-left"></i> Xem Tất Cả 6 Trứng
+                                <i class="fa-solid fa-arrow-left"></i> Xem Tổng Quan 6 Trứng
                             </button>
                         </div>
 
@@ -529,16 +529,16 @@
                                         <i class="fa-solid fa-droplet text-lg"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-bold text-sm text-slate-900">Cảm Biến Khí Trên Miệng Tủ</h3>
-                                        <p class="text-[11px] text-slate-500 font-semibold">Đo luồng khí vào buồng ấp</p>
+                                        <h3 class="font-bold text-sm text-slate-900">Cảm Biến Độ Ẩm Luồng Khí</h3>
+                                        <p class="text-[11px] text-slate-500 font-semibold">Đo độ ẩm luồng khí đầu vào</p>
                                     </div>
                                 </div>
-                                <span class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 font-bold text-xs">Độ Ẩm Trần</span>
+                                <span class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 font-bold text-xs">Độ Ẩm Hút Vào</span>
                             </div>
 
                             <div class="pt-2">
                                 <div class="bg-white/80 p-4 rounded-2xl border border-slate-200">
-                                    <div class="text-xs text-slate-500 font-bold">Độ Ẩm Khí Trần Đo Được</div>
+                                    <div class="text-xs text-slate-500 font-bold">Độ Ẩm Đầu Vào Đo Được</div>
                                     <div id="info-hum-ceiling" class="text-3xl font-black text-sky-600 mt-1">58.5 %</div>
                                 </div>
                             </div>
@@ -548,14 +548,14 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
                                     <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
-                                        <i class="fa-solid fa-arrow-down text-lg"></i>
+                                        <i class="fa-solid fa-temperature-half text-lg"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-bold text-sm text-slate-900">Cảm Biến Đáy Buồng Ấp Trứng</h3>
-                                        <p class="text-[11px] text-slate-500 font-semibold">Vị trí ngay sát 6 quả trứng</p>
+                                        <h3 class="font-bold text-sm text-slate-900">Cảm Biến Buồng Ấp</h3>
+                                        <p class="text-[11px] text-slate-500 font-semibold">Vị trí trực tiếp khu vực đặt trứng</p>
                                     </div>
                                 </div>
-                                <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs">Vùng Ấp Ấm Chuẩn</span>
+                                <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs">Khu Vực Ấp</span>
                             </div>
 
                             <div class="grid grid-cols-2 gap-3 pt-2">
@@ -572,13 +572,13 @@
                     </div>
 
                     <div class="ultra-glass p-6 space-y-3">
-                        <h3 class="font-bold text-base text-slate-900">Sổ Nhật Ký Tự Động Của Tủ Ấp</h3>
+                        <h3 class="font-bold text-base text-slate-900">Nhật Ký Hoạt Động Tự Động</h3>
                         <div id="env-logs-list" class="space-y-2 text-xs font-mono text-slate-600 max-h-48 overflow-y-auto no-scrollbar">
                         </div>
                     </div>
                 </div>
 
-                <!-- 4. SETTINGS TAB (MỤC CÀI ĐẶT MÁY & CHỌN MẠCH KẾT NỐI ARDUINO) -->
+                <!-- 4. SETTINGS TAB -->
                 <div id="content-settings" class="tab-content hidden space-y-6">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         
@@ -590,8 +590,8 @@
                                         <i class="fa-solid fa-microchip"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-bold text-base text-slate-900">Chọn Mạch Kết Nối Tủ Ấp</h3>
-                                        <p class="text-xs text-slate-500 font-semibold">Tùy chọn bo mạch Arduino / ESP để kết nối điều khiển</p>
+                                        <h3 class="font-bold text-base text-slate-900">Cấu Hình Mạch Kết Nối</h3>
+                                        <p class="text-xs text-slate-500 font-semibold">Tùy chọn bo mạch vi điều khiển để vận hành tủ ấp</p>
                                     </div>
                                 </div>
                                 <span id="ip-lock-badge" class="px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center gap-1">
@@ -600,30 +600,28 @@
                             </div>
 
                             <div class="space-y-4 text-xs pt-1">
-                                <!-- Mục Chọn Mạch Kết Nối (Yêu cầu 10) -->
                                 <div>
                                     <label class="block text-slate-800 font-extrabold mb-1.5">Mạch Điều Khiển Sử Dụng:</label>
                                     <select id="board-type-select" disabled class="w-full bg-slate-100 border border-slate-300 rounded-xl px-3.5 py-2.5 font-bold text-slate-700 focus:outline-none transition cursor-not-allowed">
-                                        <option value="arduino_wifi">Arduino + ESP8266 Wi-Fi (Tùy chọn chuẩn)</option>
+                                        <option value="arduino_wifi">Arduino + ESP8266 Wi-Fi (Khuyên dùng)</option>
                                         <option value="esp32_wifi">Mạch ESP32 Wi-Fi Tích hợp</option>
                                         <option value="arduino_uno_eth">Arduino Uno + Ethernet Shield W5500</option>
                                         <option value="esp32_ble">Mạch ESP32 Kết nối Bluetooth (BLE)</option>
                                     </select>
                                 </div>
 
-                                <!-- Cài đặt IP Arduino Wi-Fi (Yêu cầu 5) -->
                                 <div>
-                                    <label class="block text-slate-800 font-extrabold mb-1.5">Địa chỉ IP kết nối Arduino Wi-Fi:</label>
+                                    <label class="block text-slate-800 font-extrabold mb-1.5">Địa chỉ IP kết nối Wi-Fi:</label>
                                     <input type="text" id="esp-ip-input" value="192.168.1.50" disabled class="w-full bg-slate-100 border border-slate-300 rounded-xl px-3.5 py-2.5 font-mono font-bold text-slate-600 focus:outline-none transition cursor-not-allowed">
                                 </div>
 
                                 <div id="ip-control-btns" class="grid grid-cols-1 gap-2 pt-2">
                                     <button id="btn-unlock-ip" onclick="unlockAdminIP()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-extrabold transition shadow-md shadow-amber-500/20 flex items-center justify-center gap-2">
-                                        <i class="fa-solid fa-key"></i> Mở Mạch & Cấu Hình (Nhập Mật Khẩu 12345)
+                                        <i class="fa-solid fa-key"></i> Mở Mạch & Cấu Hình (Mật Khẩu: 12345)
                                     </button>
                                     <div id="ip-action-group" class="hidden grid grid-cols-2 gap-3">
                                         <button onclick="connectWebSocket()" class="py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold transition shadow-md shadow-emerald-600/20">
-                                            Lưu & Kết Nối Arduino
+                                            Lưu & Kết Nối Mạch
                                         </button>
                                         <button onclick="lockAdminIP()" class="py-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-extrabold transition">
                                             Khóa Lại
@@ -641,18 +639,18 @@
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-base text-slate-900">Cài Đặt Đảo Trứng Tự Động</h3>
-                                    <p class="text-xs text-slate-500 font-semibold">Cài đặt mấy tiếng đảo trứng 1 lần và độ nghiêng khay</p>
+                                    <p class="text-xs text-slate-500 font-semibold">Cài đặt chu kỳ thời gian đảo trứng và góc nghiêng khay</p>
                                 </div>
                             </div>
 
                             <div class="space-y-4 text-xs">
                                 <div>
-                                    <label class="block text-slate-800 font-extrabold mb-1.5">Mấy giờ xoay khay trứng 1 lần? (Tiếng)</label>
+                                    <label class="block text-slate-800 font-extrabold mb-1.5">Chu kỳ đảo trứng (Giờ / Lần)</label>
                                     <input type="number" id="turn-interval" value="2" min="1" max="12" class="w-full bg-white/80 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 font-bold focus:outline-none focus:border-emerald-500 text-sm">
                                 </div>
 
                                 <div>
-                                    <label class="block text-slate-800 font-extrabold mb-1.5">Góc xoay nghiêng khay trứng (Độ)</label>
+                                    <label class="block text-slate-800 font-extrabold mb-1.5">Góc nghiêng khay trứng (Độ)</label>
                                     <input type="number" id="turn-angle" value="60" min="15" max="180" class="w-full bg-white/80 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 font-bold focus:outline-none focus:border-emerald-500 text-sm">
                                 </div>
 
@@ -668,29 +666,29 @@
 
         </main>
 
-        <!-- MENU BAR CỦA DỆT MẠNG MOBILE (HIỂN THỊ DƯỚI CÙNG - MOBILE BOTTOM NAVBAR) -->
-        <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-gradient-to-t from-slate-900/60 to-transparent pointer-events-none">
-            <nav id="fluid-nav-mobile" class="liquid-nav-container pointer-events-auto flex items-center justify-around w-full max-w-md mx-auto shadow-2xl border border-white/80">
+        <!-- MENU BAR CỦA MOBILE (HIỂN THỊ DƯỚI CÙNG - CỐ ĐỊNH HOÀN HẢO) -->
+        <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-2 bg-slate-900/40 backdrop-blur-lg border-t border-white/20">
+            <nav id="fluid-nav-mobile" class="liquid-nav-container flex items-center justify-between w-full max-w-md mx-auto shadow-2xl relative">
                 <div id="fluid-pill-mobile" class="liquid-pill"></div>
 
-                <button onclick="switchTab('overview')" id="tab-mobile-overview" class="liquid-nav-item flex-1 py-2 text-center text-xs font-bold text-slate-900 transition flex flex-col items-center gap-1">
-                    <i class="fa-solid fa-chart-pie text-sky-600 text-base"></i>
-                    <span class="text-[10px]">Trạng thái</span>
+                <button onclick="switchTab('overview')" id="tab-mobile-overview" class="liquid-nav-item flex-1 py-1.5 text-center transition flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-chart-pie text-sky-600 text-base mb-0.5"></i>
+                    <span class="text-[10px] leading-none">Trạng thái</span>
                 </button>
 
-                <button onclick="switchTab('control')" id="tab-mobile-control" class="liquid-nav-item flex-1 py-2 text-center text-xs font-semibold text-slate-600 hover:text-slate-900 transition flex flex-col items-center gap-1">
-                    <i class="fa-solid fa-sliders text-emerald-600 text-base"></i>
-                    <span class="text-[10px]">Bật/Tắt</span>
+                <button onclick="switchTab('control')" id="tab-mobile-control" class="liquid-nav-item flex-1 py-1.5 text-center transition flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-sliders text-emerald-600 text-base mb-0.5"></i>
+                    <span class="text-[10px] leading-none">Bật/Tắt</span>
                 </button>
 
-                <button onclick="switchTab('information')" id="tab-mobile-information" class="liquid-nav-item flex-1 py-2 text-center text-xs font-semibold text-slate-600 hover:text-slate-900 transition flex flex-col items-center gap-1">
-                    <i class="fa-solid fa-egg text-amber-500 text-base"></i>
-                    <span class="text-[10px]">Soi Trứng</span>
+                <button onclick="switchTab('information')" id="tab-mobile-information" class="liquid-nav-item flex-1 py-1.5 text-center transition flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-egg text-amber-500 text-base mb-0.5"></i>
+                    <span class="text-[10px] leading-none">Soi Trứng</span>
                 </button>
 
-                <button onclick="switchTab('settings')" id="tab-mobile-settings" class="liquid-nav-item flex-1 py-2 text-center text-xs font-semibold text-slate-600 hover:text-slate-900 transition flex flex-col items-center gap-1">
-                    <i class="fa-solid fa-gear text-slate-600 text-base"></i>
-                    <span class="text-[10px]">Cài Đặt</span>
+                <button onclick="switchTab('settings')" id="tab-mobile-settings" class="liquid-nav-item flex-1 py-1.5 text-center transition flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-gear text-slate-600 text-base mb-0.5"></i>
+                    <span class="text-[10px] leading-none">Cài Đặt</span>
                 </button>
             </nav>
         </div>
@@ -704,7 +702,7 @@
                 <div>
                     <h3 class="text-xl font-black text-slate-900">Xác Nhận Thao Tác?</h3>
                     <p id="modal-desc" class="text-xs text-slate-600 mt-2 font-medium leading-relaxed">
-                        Bà con có chắc chắn muốn thay đổi công tắc bật/tắt của thiết bị này không?
+                        Bạn có chắc chắn muốn thay đổi trạng thái hoạt động của thiết bị này không?
                     </p>
                 </div>
                 <div class="grid grid-cols-2 gap-3 pt-2">
@@ -743,7 +741,7 @@
                     </div>
 
                     <div>
-                        <div class="font-extrabold text-slate-900 text-sm mb-2">Hỗ Trợ Kỹ Thuật Cho Bà Con</div>
+                        <div class="font-extrabold text-slate-900 text-sm mb-2">Hỗ Trợ Kỹ Thuật</div>
                         <div class="space-y-1.5 text-slate-600 font-semibold">
                             <p class="flex items-center gap-2">
                                 <i class="fa-solid fa-phone text-emerald-600"></i>
@@ -780,13 +778,13 @@
         let currentUser = null;
         let isAdminUnlocked = false;
 
-        // DỮ LIỆU SOĨ 6 QUẢ TRỨNG
+        // DỮ LIỆU SOI 6 QUẢ TRỨNG
         let selectedEggId = null;
         const eggsData = [
             { id: 1, name: "Trứng Quả #1", status: 1, age: 14, hatchTime: "04 Ngày nữa nở", heartbeat: "145 nhịp/phút", vein: "Mạch máu phôi rõ", notes: "Phôi trứng khỏe mạnh, tim đập tốt" },
             { id: 2, name: "Trứng Quả #2", status: 1, age: 14, hatchTime: "04 Ngày nữa nở", heartbeat: "142 nhịp/phút", vein: "Mạch máu rõ", notes: "Phôi trứng phát triển bình thường" },
             { id: 3, name: "Trứng Quả #3", status: 1, age: 14, hatchTime: "04 Ngày nữa nở", heartbeat: "148 nhịp/phút", vein: "Mạch máu rõ", notes: "Phôi trứng rất khỏe" },
-            { id: 4, name: "Trứng Quả #4", status: 3, age: 14, hatchTime: "Không nở được", heartbeat: "0 nhịp/phút", vein: "Không có phôi", notes: "Trứng hỏng hoặc không có phôi. Bà con nên nhặt bỏ" },
+            { id: 4, name: "Trứng Quả #4", status: 3, age: 14, hatchTime: "Không nở được", heartbeat: "0 nhịp/phút", vein: "Không có phôi", notes: "Trứng hỏng hoặc không có phôi. Nên loại bỏ khỏi khay" },
             { id: 5, name: "Trứng Quả #5", status: 1, age: 14, hatchTime: "04 Ngày nữa nở", heartbeat: "140 nhịp/phút", vein: "Mạch máu rõ", notes: "Phôi trứng phát triển bình thường" },
             { id: 6, name: "Trứng Quả #6", status: 1, age: 14, hatchTime: "04 Ngày nữa nở", heartbeat: "144 nhịp/phút", vein: "Mạch máu rõ", notes: "Phôi trứng phát triển bình thường" }
         ];
@@ -796,11 +794,11 @@
         let isHardwareConnected = false;
         let espIp = "192.168.1.50";
 
-        // DANH SÁCH THIẾT BỊ BẮT MẮT CHO NÔNG DÂN
+        // DANH SÁCH THIẾT BỊ
         const incubatorDevices = [
             { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió Nóng', icon: 'fa-fan', state: true },
             { id: 'intake_fan', nameVI: 'Quạt Thổi Khí Tủ', icon: 'fa-wind', state: true },
-            { id: 'ptc_heater', nameVI: 'Bộ Sưởi Ấm Trứng', icon: 'fa-fire-burner', state: true },
+            { id: 'ptc_heater', nameVI: 'Bộ Sưởi Gốm', icon: 'fa-fire-burner', state: true },
             { id: 'water_pump', nameVI: 'Bơm Nước Tạo Ẩm', icon: 'fa-water', state: true },
             { id: 'candling_light', nameVI: 'Đèn Soi Trứng', icon: 'fa-lightbulb', state: false },
             { id: 'carousel_motor', nameVI: 'Mô Tơ Xoay Trứng', icon: 'fa-rotate', state: true }
@@ -808,7 +806,7 @@
 
         // MỞ KHÓA BẢO VỆ CẤU HÌNH MẠCH VỚI MẬT KHẨU 12345
         function unlockAdminIP() {
-            const pwd = prompt("Xác minh kỹ thuật / Người vận hành:\nBà con hoặc sinh viên vui lòng nhập mật khẩu (Mặc định: 12345):");
+            const pwd = prompt("Xác minh người vận hành:\nVui lòng nhập mật khẩu (Mặc định: 12345):");
             if (pwd === "12345") {
                 isAdminUnlocked = true;
                 
@@ -924,10 +922,10 @@
                         <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
                             <div class="space-y-2 text-center lg:text-left">
                                 <span class="px-3.5 py-1 rounded-full bg-amber-200/80 text-amber-900 text-xs font-black uppercase tracking-wide">
-                                    <i class="fa-solid fa-chart-pie mr-1"></i> Báo Cáo Khay Trứng Cho Bà Con
+                                    <i class="fa-solid fa-chart-pie mr-1"></i> Báo Cáo Khay Trứng
                                 </span>
-                                <h2 class="text-3xl font-black text-slate-900">Dự Đoán Ngày Trứng Nở Thành Gà Con</h2>
-                                <p class="text-xs text-slate-600 font-semibold">Tự động tính dựa theo độ ấm và độ ẩm buồng ấp</p>
+                                <h2 class="text-3xl font-black text-slate-900">Dự Đoán Thời Gian Trứng Nở</h2>
+                                <p class="text-xs text-slate-600 font-semibold">Tự động tính dựa theo nhiệt độ và độ ẩm thực tế buồng ấp</p>
                             </div>
 
                             <div class="bg-white/90 p-6 rounded-2xl border border-amber-200 shadow-lg text-center min-w-[280px]">
@@ -938,7 +936,7 @@
                                 <div class="w-full bg-amber-100 h-3 rounded-full overflow-hidden my-2">
                                     <div class="bg-gradient-to-r from-amber-500 to-emerald-500 h-full w-[80%] rounded-full"></div>
                                 </div>
-                                <div id="hatch-index-val" class="text-xs text-emerald-700 font-bold">Tỷ lệ nở tốt: 83.3% (Rất Đạt)</div>
+                                <div id="hatch-index-val" class="text-xs text-emerald-700 font-bold">Tỷ lệ nở tối ưu: 83.3%</div>
                             </div>
                         </div>
                     </div>
@@ -947,19 +945,19 @@
                         <div class="bg-emerald-50/90 p-5 rounded-2xl border border-emerald-200 shadow-sm">
                             <div class="text-xs font-extrabold text-emerald-800 uppercase">Trứng Khỏe Mạnh</div>
                             <div class="text-4xl font-black text-emerald-600 my-2">${goodCount} Quả</div>
-                            <div class="text-xs text-emerald-700 font-semibold">Phôi đang sống rất khỏe</div>
+                            <div class="text-xs text-emerald-700 font-semibold">Phôi phát triển rất tốt</div>
                         </div>
 
                         <div class="bg-amber-50/90 p-5 rounded-2xl border border-amber-200 shadow-sm">
                             <div class="text-xs font-extrabold text-amber-800 uppercase">Trứng Phôi Yếu</div>
                             <div class="text-4xl font-black text-amber-600 my-2">${weakCount} Quả</div>
-                            <div class="text-xs text-amber-700 font-semibold">Cần chú ý độ ẩm</div>
+                            <div class="text-xs text-amber-700 font-semibold">Cần theo dõi sát độ ẩm</div>
                         </div>
 
                         <div class="bg-rose-50/90 p-5 rounded-2xl border border-rose-200 shadow-sm">
                             <div class="text-xs font-extrabold text-rose-800 uppercase">Trứng Hỏng</div>
                             <div class="text-4xl font-black text-rose-600 my-2">${badCount} Quả</div>
-                            <div class="text-xs text-rose-700 font-semibold">Bà con nên bỏ ra ngoài</div>
+                            <div class="text-xs text-rose-700 font-semibold">Khuyến nghị loại bỏ</div>
                         </div>
                     </div>
                 </div>
@@ -993,7 +991,7 @@
                                     <h2 class="text-2xl font-black text-slate-900">${egg.name}</h2>
                                     <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeColor}">${statusText}</span>
                                 </div>
-                                <p class="text-xs text-slate-500 font-semibold mt-1">Thông tin soi từ Camera AI thông minh HuskyLens</p>
+                                <p class="text-xs text-slate-500 font-semibold mt-1">Thông tin nhận diện qua Camera AI HuskyLens</p>
                             </div>
                         </div>
 
@@ -1007,7 +1005,7 @@
                         <div class="bg-white/90 p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
                             <div class="text-xs text-slate-500 font-bold">Số Ngày Đã Ấp</div>
                             <div class="text-2xl font-black text-slate-900">${egg.age} / 21 <span class="text-xs font-bold text-slate-500">Ngày</span></div>
-                            <div class="text-[11px] text-emerald-600 font-bold">Đang mọc lông phôi</div>
+                            <div class="text-[11px] text-emerald-600 font-bold">Giai đoạn phát triển phôi</div>
                         </div>
 
                         <div class="bg-white/90 p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
@@ -1017,21 +1015,21 @@
                         </div>
 
                         <div class="bg-white/90 p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
-                            <div class="text-xs text-slate-500 font-bold">Mạch Máu Trong Trứng</div>
+                            <div class="text-xs text-slate-500 font-bold">Mạch Máu Phôi</div>
                             <div class="text-base font-black text-sky-600 mt-1">${egg.vein}</div>
-                            <div class="text-[11px] text-emerald-600 font-bold">Mạch bao phủ tốt</div>
+                            <div class="text-[11px] text-emerald-600 font-bold">Mạch phân nhánh tốt</div>
                         </div>
 
                         <div class="bg-white/90 p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
-                            <div class="text-xs text-slate-500 font-bold">Góc Xoay Nghiêng</div>
+                            <div class="text-xs text-slate-500 font-bold">Góc Xoay Hiện Tại</div>
                             <div class="text-2xl font-black text-amber-600">60.0 °</div>
-                            <div class="text-[11px] text-slate-500 font-semibold">Tự động xoay tròn</div>
+                            <div class="text-[11px] text-slate-500 font-semibold">Đảo khay tự động</div>
                         </div>
                     </div>
 
                     <div class="bg-amber-100/70 p-4 rounded-2xl border border-amber-300 text-xs space-y-1">
                         <div class="font-bold text-amber-900 flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-circle-info text-amber-600"></i> Hướng Dẫn Cho Bà Con:
+                            <i class="fa-solid fa-circle-info text-amber-600"></i> Ghi chú khuyến nghị:
                         </div>
                         <p class="text-slate-800 font-semibold leading-relaxed pl-6">${egg.notes}</p>
                     </div>
@@ -1041,7 +1039,7 @@
 
         // TRUYỀN LỆNH ARDUINO Wi-Fi
         function sendToArduino(command) {
-            console.log("Gửi lệnh sang Arduino Wi-Fi: " + command);
+            console.log("Gửi lệnh Arduino Wi-Fi: " + command);
             if (wsSocket && wsSocket.readyState === WebSocket.OPEN) {
                 wsSocket.send(command);
             } else {
@@ -1061,7 +1059,7 @@
 
                 wsSocket.onopen = function() {
                     updateHardwareStatus(true);
-                    addEnvLog("Đã kết nối thành công với mạch Arduino Wi-Fi tủ ấp!");
+                    addEnvLog("Kết nối thành công với vi điều khiển Arduino Wi-Fi!");
                 };
 
                 wsSocket.onmessage = function(event) {
@@ -1115,11 +1113,11 @@
             if (connected) {
                 badge.className = "flex items-center gap-2 bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap";
                 dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
-                txt.innerText = "Tủ Ấp Đang Kết Nối";
+                txt.innerText = "Đã Kết Nối";
             } else {
                 badge.className = "flex items-center gap-2 bg-rose-950/80 text-rose-300 border border-rose-500/30 px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap";
                 dot.className = "w-2 h-2 rounded-full bg-rose-500";
-                txt.innerText = "Tủ Ấp Chưa Kết Nối";
+                txt.innerText = "Chưa Kết Nối";
             }
         }
 
@@ -1206,7 +1204,7 @@
 
             err.classList.add('hidden');
             userDatabase[u] = p;
-            alert(`Đã đăng ký tài khoản '${u}' thành công! Bà con đăng nhập để dùng.`);
+            alert(`Đăng ký tài khoản '${u}' thành công! Bạn có thể đăng nhập ngay.`);
             switchAuthTab('login');
             document.getElementById('login-username').value = u;
             document.getElementById('login-password').value = p;
@@ -1220,7 +1218,7 @@
             document.getElementById('subpage-wrapper').classList.add('hidden');
         }
 
-        // KHỞI TẠO HIỆU ỨNG LIQUID CLASS VÀ VIÊN THUỐC CHẠY ĐUỔI (CHO CẢ MOBILE VÀ MÁY TÍNH)
+        // TỐI ƯU HIỆU ỨNG LIQUID PILL ĐẢM BẢO KHÔNG BỊ GIẬT/LAG TRÊN MOBILE
         function initFluidNav() {
             setupFluidForMenu('fluid-nav-desktop', 'fluid-pill-desktop', 'desktop');
             setupFluidForMenu('fluid-nav-mobile', 'fluid-pill-mobile', 'mobile');
@@ -1233,11 +1231,11 @@
 
             function updatePillPosition(targetEl) {
                 if (!targetEl || !pill || !nav) return;
-                const navRect = nav.getBoundingClientRect();
-                const targetRect = targetEl.getBoundingClientRect();
+                const offsetLeft = targetEl.offsetLeft;
+                const width = targetEl.offsetWidth;
 
-                pill.style.left = `${targetRect.left - navRect.left}px`;
-                pill.style.width = `${targetRect.width}px`;
+                pill.style.transform = `translateX(${offsetLeft - 5}px)`;
+                pill.style.width = `${width}px`;
             }
 
             const items = nav.querySelectorAll('.liquid-nav-item');
@@ -1261,7 +1259,6 @@
         function switchTab(tabId) {
             currentTab = tabId;
             
-            // Cập nhật giao diện nút máy tính & mobile
             ['desktop', 'mobile'].forEach(type => {
                 const nav = document.getElementById(`fluid-nav-${type}`);
                 if (!nav) return;
@@ -1278,10 +1275,10 @@
 
                     const pill = document.getElementById(`fluid-pill-${type}`);
                     if (pill) {
-                        const navRect = nav.getBoundingClientRect();
-                        const targetRect = activeBtn.getBoundingClientRect();
-                        pill.style.left = `${targetRect.left - navRect.left}px`;
-                        pill.style.width = `${targetRect.width}px`;
+                        const offsetLeft = activeBtn.offsetLeft;
+                        const width = activeBtn.offsetWidth;
+                        pill.style.transform = `translateX(${offsetLeft - 5}px)`;
+                        pill.style.width = `${width}px`;
                     }
                 }
             });
@@ -1385,7 +1382,7 @@
             const angle = document.getElementById('turn-angle').value;
 
             sendToArduino(`CAROUSEL_CFG:${interval},${angle}`);
-            alert(`Đã lưu cài đặt sang máy ấp! Chu kỳ: ${interval} giờ/lần - Góc xoay: ${angle} độ.`);
+            alert(`Đã lưu cấu hình sang tủ ấp! Chu kỳ: ${interval} giờ/lần - Góc xoay: ${angle} độ.`);
         }
 
         function addEnvLog(msg) {
@@ -1403,7 +1400,6 @@
             }
         }
 
-        // Tự động điều chỉnh Liquid Pill khi đổi kích thước màn hình
         window.addEventListener('resize', () => {
             initFluidNav();
         });
