@@ -29,7 +29,7 @@ let isHardwareConnected = false;
 // TỰ ĐỘNG NHẬN DẠNG IP HOTSPOT DÀNH CHO MOBILE
 let espIp = (window.location.hostname === "192.168.4.1" || window.location.hostname.startsWith("192.168.4.")) 
             ? "192.168.4.1" 
-            : (localStorage.getItem("saved_esp_ip") || "smartegg.local");
+            : (localStorage.getItem("saved_esp_ip") || "10.77.157.50");
 
 // DANH SÁCH THIẾT BỊ
 const incubatorDevices = [
@@ -40,6 +40,51 @@ const incubatorDevices = [
     { id: 'candling_light', nameVI: 'Đèn Soi Trứng', icon: 'fa-lightbulb', state: false },
     { id: 'carousel_motor', nameVI: 'Mô Tơ Xoay Trứng', icon: 'fa-rotate', state: true }
 ];
+
+// KIỂM TRA LỖI HTTPS VÀ TRÌNH DUYỆT DI ĐỘNG KHI TẢI TRANG
+window.addEventListener('DOMContentLoaded', () => {
+    checkHttpsMobileIssue();
+});
+
+function checkHttpsMobileIssue() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isHttps = window.location.protocol === 'https:';
+
+    if (isHttps && isMobile) {
+        showHttpsWarningBanner();
+    }
+}
+
+function showHttpsWarningBanner() {
+    if (document.getElementById('https-warning-banner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'https-warning-banner';
+    banner.className = "fixed top-16 left-3 right-3 z-50 p-4 bg-amber-500 text-white rounded-2xl shadow-2xl border border-amber-300 backdrop-blur-md animate-bounce";
+    
+    banner.innerHTML = `
+        <div class="flex items-start gap-3">
+            <div class="text-2xl mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="flex-1 text-xs space-y-1">
+                <div class="font-extrabold text-sm">Cảnh báo kết nối Mobile (HTTPS)</div>
+                <p class="leading-relaxed">Trình duyệt điện thoại chặn WebSocket không mã hóa từ web HTTPS (GitHub Pages). Để kết nối mạch thành công, vui lòng mở bằng HTTP local:</p>
+                <div class="pt-2 flex gap-2">
+                    <button onclick="redirectToHttpLocal()" class="px-3 py-1.5 bg-slate-900 hover:bg-black text-white font-black text-xs rounded-xl shadow transition">
+                        Chuyển sang http://${espIp}
+                    </button>
+                    <button onclick="document.getElementById('https-warning-banner').remove()" class="px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white font-bold text-xs rounded-xl transition">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(banner);
+}
+
+function redirectToHttpLocal() {
+    window.location.href = `http://${espIp}`;
+}
 
 // MỞ KHÓA BẢO VỆ CẤU HÌNH MẠCH VỚI MẬT KHẨU 12345
 function unlockAdminIP() {
@@ -303,6 +348,10 @@ function connectWebSocket() {
         wsSocket.onopen = function() {
             updateHardwareStatus(true);
             addEnvLog("Kết nối thành công với vi điều khiển tủ ấp!");
+            
+            // Xóa thông báo cảnh báo nếu kết nối thành công
+            const banner = document.getElementById('https-warning-banner');
+            if (banner) banner.remove();
         };
 
         wsSocket.onmessage = function(event) {
@@ -315,9 +364,10 @@ function connectWebSocket() {
         wsSocket.onclose = function() { updateHardwareStatus(false); };
         wsSocket.onerror = function(err) { 
             updateHardwareStatus(false); 
-            if (espIp === "smartegg.local") {
-                console.log("mDNS bị chặn trên thiết bị di động, tự chuyển đổi sang 192.168.4.1...");
-                espIp = "192.168.4.1";
+            
+            // Nếu bị lỗi kết nối trên HTTPS + Mobile -> hiện lại cảnh báo
+            if (window.location.protocol === 'https:') {
+                showHttpsWarningBanner();
             }
         };
     } catch(e) {
