@@ -362,7 +362,7 @@
                     <div class="ultra-glass p-4 sm:p-6 space-y-3 sm:space-y-4">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200/60 pb-3 gap-2">
                             <div>
-                                <h3 class="font-black text-base sm:text-lg text-slate-900">Bật / Tắt Nhanh Thiết Bị</h3>
+                                <h3 class="font-black text-base sm:text-lg text-slate-900">Bật / Tắt Nhanh Thiết Bị (Mặc định: Tắt)</h3>
                                 <p class="text-[11px] sm:text-xs text-slate-500 font-semibold">Điều khiển công tắc trực tiếp từng thiết bị</p>
                             </div>
                             <span id="quick-auto-badge" class="self-start sm:self-auto px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] sm:text-xs font-extrabold">
@@ -370,7 +370,7 @@
                             </span>
                         </div>
 
-                        <div id="quick-devices-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4">
+                        <div id="quick-devices-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
                         </div>
                     </div>
                 </div>
@@ -397,7 +397,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
                         <div class="ultra-glass p-4 sm:p-6 space-y-3">
                             <div class="flex items-center justify-between border-b border-slate-200/60 pb-2.5">
                                 <div class="flex items-center gap-2.5">
@@ -409,33 +409,10 @@
                                         <p class="text-[10px] text-slate-500">Thải khí nóng</p>
                                     </div>
                                 </div>
-                                <span id="exhaustFanSpeedVal" class="text-lg sm:text-xl font-black text-sky-600">65%</span>
+                                <span id="exhaustFanSpeedVal" class="text-lg sm:text-xl font-black text-sky-600">0%</span>
                             </div>
                             <div class="space-y-1.5 pt-1">
-                                <input type="range" id="exhaustFanSlider" min="0" max="100" value="65" oninput="updateExhaustFanSpeed(this.value)">
-                                <div class="flex justify-between text-[10px] text-slate-500 font-bold">
-                                    <span>Tắt</span>
-                                    <span>Vừa</span>
-                                    <span>Mạnh</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ultra-glass p-4 sm:p-6 space-y-3">
-                            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2.5">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-base">
-                                        <i class="fa-solid fa-wind"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Quạt Thổi Khí</h4>
-                                        <p class="text-[10px] text-slate-500">Đều nhiệt độ</p>
-                                    </div>
-                                </div>
-                                <span id="intakeFanSpeedVal" class="text-lg sm:text-xl font-black text-indigo-600">50%</span>
-                            </div>
-                            <div class="space-y-1.5 pt-1">
-                                <input type="range" id="intakeFanSlider" min="0" max="100" value="50" oninput="updateIntakeFanSpeed(this.value)">
+                                <input type="range" id="exhaustFanSlider" min="0" max="100" value="0" oninput="updateExhaustFanSpeed(this.value)">
                                 <div class="flex justify-between text-[10px] text-slate-500 font-bold">
                                     <span>Tắt</span>
                                     <span>Vừa</span>
@@ -451,14 +428,14 @@
                                         <i class="fa-solid fa-fire-burner"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bộ Sưởi Gốm</h4>
-                                        <p class="text-[10px] text-slate-500">Tạo nhiệt tủ</p>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bộ Sưởi</h4>
+                                        <p class="text-[10px] text-slate-500">Tạo nhiệt tủ (+ Quạt D3)</p>
                                     </div>
                                 </div>
-                                <span id="heaterPowerVal" class="text-lg sm:text-xl font-black text-amber-600">75%</span>
+                                <span id="heaterPowerVal" class="text-lg sm:text-xl font-black text-amber-600">0%</span>
                             </div>
                             <div class="space-y-1.5 pt-1">
-                                <input type="range" id="heaterPowerSlider" min="0" max="100" value="75" oninput="updateHeaterPower(this.value)">
+                                <input type="range" id="heaterPowerSlider" min="0" max="100" value="0" oninput="updateHeaterPower(this.value)">
                                 <div class="flex justify-between text-[10px] text-slate-500 font-bold">
                                     <span>Tắt</span>
                                     <span>Ấm Vừa</span>
@@ -475,13 +452,13 @@
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bơm Tạo Ẩm</h4>
-                                        <p class="text-[10px] text-slate-500">Cấp nước ẩm</p>
+                                        <p class="text-[10px] text-slate-500">Cấp nước ẩm (+ Quạt D6)</p>
                                     </div>
                                 </div>
-                                <span id="pumpFlowVal" class="text-lg sm:text-xl font-black text-teal-600">40%</span>
+                                <span id="pumpFlowVal" class="text-lg sm:text-xl font-black text-teal-600">0%</span>
                             </div>
                             <div class="space-y-1.5 pt-1">
-                                <input type="range" id="pumpFlowSlider" min="0" max="100" value="40" oninput="updatePumpFlow(this.value)">
+                                <input type="range" id="pumpFlowSlider" min="0" max="100" value="0" oninput="updatePumpFlow(this.value)">
                                 <div class="flex justify-between text-[10px] text-slate-500 font-bold">
                                     <span>Tắt</span>
                                     <span>Vừa</span>
@@ -491,13 +468,12 @@
                         </div>
                     </div>
 
-                    <div id="detailed-control-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+                    <div id="detailed-control-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5">
                     </div>
                 </div>
 
                 <!-- 3. INFORMATION TAB -->
                 <div id="content-information" class="tab-content hidden space-y-4 sm:space-y-6">
-                    
                     <div class="ultra-glass p-4 sm:p-6 space-y-3 sm:space-y-4">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-200/60 pb-3">
                             <div>
@@ -534,7 +510,6 @@
                                 </div>
                                 <span class="px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700 font-bold text-[10px] sm:text-xs">Đầu Vào</span>
                             </div>
-
                             <div class="pt-1">
                                 <div class="bg-white/80 p-3 sm:p-4 rounded-xl border border-slate-200">
                                     <div class="text-[11px] text-slate-500 font-bold">Độ Ẩm Đo Được</div>
@@ -556,7 +531,6 @@
                                 </div>
                                 <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[10px] sm:text-xs">Khu Ấp</span>
                             </div>
-
                             <div class="grid grid-cols-2 gap-2.5 pt-1">
                                 <div class="bg-white/80 p-3 sm:p-4 rounded-xl border border-slate-200">
                                     <div class="text-[11px] text-slate-500 font-bold">Nhiệt Độ Buồng</div>
@@ -580,8 +554,6 @@
                 <!-- 4. SETTINGS TAB -->
                 <div id="content-settings" class="tab-content hidden space-y-4 sm:space-y-6">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                        
-                        <!-- Cấu hình chọn mạch & IP Arduino -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-4 border-l-4 border-l-emerald-600">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2.5">
@@ -604,8 +576,6 @@
                                     <select id="board-type-select" disabled class="w-full bg-slate-100 border border-slate-300 rounded-xl px-3 py-2 font-bold text-slate-700 focus:outline-none cursor-not-allowed text-xs sm:text-sm">
                                         <option value="arduino_wifi">Arduino + ESP8266 Wi-Fi (Khuyên dùng)</option>
                                         <option value="esp32_wifi">Mạch ESP32 Wi-Fi Tích hợp</option>
-                                        <option value="arduino_uno_eth">Arduino Uno + Ethernet Shield W5500</option>
-                                        <option value="esp32_ble">Mạch ESP32 Kết nối Bluetooth (BLE)</option>
                                     </select>
                                 </div>
 
@@ -630,7 +600,6 @@
                             </div>
                         </div>
 
-                        <!-- Cài đặt Lịch tự động đảo trứng -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-4">
                             <div class="flex items-center gap-2.5">
                                 <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg">
@@ -658,14 +627,13 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
 
         </main>
 
-        <!-- MENU BAR CỦA MOBILE (HIỂN THỊ DƯỚI CÙNG - CỐ ĐỊNH TỐI ƯU CỰC NÉT) -->
+        <!-- MENU BAR CỦA MOBILE -->
         <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-2 safe-bottom bg-slate-900/60 backdrop-blur-xl border-t border-white/20">
             <nav id="fluid-nav-mobile" class="liquid-nav-container flex items-center justify-between w-full max-w-md mx-auto shadow-2xl relative">
                 <div id="fluid-pill-mobile" class="liquid-pill"></div>
@@ -764,7 +732,6 @@
     </div>
 
     <script>
-        // MẬT KHẨU TÀI KHOẢN VÀ BẢO VỆ MẠCH: 12345
         const userDatabase = {
             "AnduongG4": "12345",
             "BaKietG4": "12345"
@@ -777,7 +744,6 @@
         let currentUser = null;
         let isAdminUnlocked = false;
 
-        // DỮ LIỆU SOI 6 QUẢ TRỨNG
         let selectedEggId = null;
         const eggsData = [
             { id: 1, name: "Trứng Quả #1", status: 1, age: 14, hatchTime: "04 Ngày nữa nở", heartbeat: "145 nhịp/phút", vein: "Mạch máu phôi rõ", notes: "Phôi trứng khỏe mạnh, tim đập tốt" },
@@ -788,27 +754,23 @@
             { id: 6, name: "Trứng Quả #6", status: 1, age: 14, hatchTime: "04 Ngày nữa nở", heartbeat: "144 nhịp/phút", vein: "Mạch máu rõ", notes: "Phôi trứng phát triển bình thường" }
         ];
 
-        // GIAO TIẾP ARDUINO / ESP
         let wsSocket = null;
         let isHardwareConnected = false;
         let espIp = "192.168.1.50";
 
-        // DANH SÁCH THIẾT BỊ
+        // --- ĐÃ LOẠI BỎ: Đèn soi trứng, quạt thổi tủ khí, mô tơ xoay trứng ---
+        // --- ĐÃ ĐỔI TÊN: "Bộ sưởi gốm" thành "Bộ sưởi" ---
+        // --- MẶC ĐỊNH: state: false (tắt khi mới kết nối) ---
         const incubatorDevices = [
-            { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió Nóng', icon: 'fa-fan', state: true },
-            { id: 'intake_fan', nameVI: 'Quạt Thổi Khí Tủ', icon: 'fa-wind', state: true },
-            { id: 'ptc_heater', nameVI: 'Bộ Sưởi Gốm', icon: 'fa-fire-burner', state: true },
-            { id: 'water_pump', nameVI: 'Bơm Nước Tạo Ẩm', icon: 'fa-water', state: true },
-            { id: 'candling_light', nameVI: 'Đèn Soi Trứng', icon: 'fa-lightbulb', state: false },
-            { id: 'carousel_motor', nameVI: 'Mô Tơ Xoay Trứng', icon: 'fa-rotate', state: true }
+            { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió Nóng', icon: 'fa-fan', state: false },
+            { id: 'ptc_heater', nameVI: 'Bộ Sưởi', icon: 'fa-fire-burner', state: false },
+            { id: 'water_pump', nameVI: 'Bơm Nước Tạo Ẩm', icon: 'fa-water', state: false }
         ];
 
-        // MỞ KHÓA BẢO VỆ CẤU HÌNH MẠCH VỚI MẬT KHẨU 12345
         function unlockAdminIP() {
             const pwd = prompt("Xác minh người vận hành:\nVui lòng nhập mật khẩu (Mặc định: 12345):");
             if (pwd === "12345") {
                 isAdminUnlocked = true;
-                
                 const selectBoard = document.getElementById('board-type-select');
                 const ipInput = document.getElementById('esp-ip-input');
                 
@@ -833,7 +795,6 @@
 
         function lockAdminIP() {
             isAdminUnlocked = false;
-            
             const selectBoard = document.getElementById('board-type-select');
             const ipInput = document.getElementById('esp-ip-input');
 
@@ -853,7 +814,6 @@
             badge.innerHTML = `<i class="fa-solid fa-lock"></i> Đã Khóa`;
         }
 
-        // RENDER TRỨNG
         function renderEggSelectorGrid() {
             const grid = document.getElementById('egg-selector-grid');
             if (!grid) return;
@@ -875,7 +835,6 @@
                 }
 
                 const isSelected = selectedEggId === egg.id;
-
                 const card = document.createElement('div');
                 card.onclick = () => selectEgg(egg.id);
                 card.className = `ultra-glass p-3 sm:p-4 text-center cursor-pointer transition-all border ${isSelected ? 'egg-card-selected' : 'border-white/60 hover:border-amber-400'}`;
@@ -944,19 +903,14 @@
                         <div class="bg-emerald-50/90 p-3 sm:p-5 rounded-2xl border border-emerald-200 shadow-sm">
                             <div class="text-[10px] sm:text-xs font-extrabold text-emerald-800 uppercase truncate">Trứng Khỏe</div>
                             <div class="text-2xl sm:text-4xl font-black text-emerald-600 my-1">${goodCount} Quả</div>
-                            <div class="text-[10px] sm:text-xs text-emerald-700 font-semibold hidden sm:block">Phôi phát triển tốt</div>
                         </div>
-
                         <div class="bg-amber-50/90 p-3 sm:p-5 rounded-2xl border border-amber-200 shadow-sm">
                             <div class="text-[10px] sm:text-xs font-extrabold text-amber-800 uppercase truncate">Phôi Yếu</div>
                             <div class="text-2xl sm:text-4xl font-black text-amber-600 my-1">${weakCount} Quả</div>
-                            <div class="text-[10px] sm:text-xs text-amber-700 font-semibold hidden sm:block">Cần theo dõi sát</div>
                         </div>
-
                         <div class="bg-rose-50/90 p-3 sm:p-5 rounded-2xl border border-rose-200 shadow-sm">
                             <div class="text-[10px] sm:text-xs font-extrabold text-rose-800 uppercase truncate">Trứng Hỏng</div>
                             <div class="text-2xl sm:text-4xl font-black text-rose-600 my-1">${badCount} Quả</div>
-                            <div class="text-[10px] sm:text-xs text-rose-700 font-semibold hidden sm:block">Nên loại bỏ</div>
                         </div>
                     </div>
                 </div>
@@ -979,71 +933,27 @@
             }
 
             container.innerHTML = `
-                <div class="ultra-glass p-4 sm:p-6 bg-gradient-to-r from-amber-50/60 via-white/80 to-emerald-50/60 border-amber-200 shadow-md space-y-4 sm:space-y-6">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-2xl sm:text-3xl shadow-md shrink-0">
-                                <i class="fa-solid fa-egg"></i>
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2 flex-wrap">
-                                    <h2 class="text-lg sm:text-2xl font-black text-slate-900">${egg.name}</h2>
-                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${badgeColor}">${statusText}</span>
-                                </div>
-                                <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Nhận diện qua Camera HuskyLens</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-white/90 px-3.5 py-2 rounded-xl border border-amber-200 shadow-sm w-full sm:w-auto text-left sm:text-right">
-                            <div class="text-[10px] text-slate-500 font-bold uppercase">Dự Kiến Nở</div>
-                            <div class="text-base sm:text-xl font-black text-amber-600">${egg.hatchTime}</div>
-                        </div>
+                <div class="ultra-glass p-4 sm:p-6 bg-gradient-to-r from-amber-50/60 via-white/80 to-emerald-50/60 border-amber-200 shadow-md space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-200/60 pb-3">
+                        <h2 class="text-lg sm:text-2xl font-black text-slate-900">${egg.name}</h2>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold border ${badgeColor}">${statusText}</span>
                     </div>
-
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
-                        <div class="bg-white/90 p-3 sm:p-4 rounded-xl border border-slate-200 space-y-0.5">
-                            <div class="text-[10px] sm:text-xs text-slate-500 font-bold">Ngày Đã Ấp</div>
-                            <div class="text-lg sm:text-2xl font-black text-slate-900">${egg.age} / 21 <span class="text-xs font-bold text-slate-500">Ngày</span></div>
-                            <div class="text-[10px] text-emerald-600 font-bold">Giai đoạn phôi</div>
-                        </div>
-
-                        <div class="bg-white/90 p-3 sm:p-4 rounded-xl border border-slate-200 space-y-0.5">
-                            <div class="text-[10px] sm:text-xs text-slate-500 font-bold">Nhịp Tim Phôi</div>
-                            <div class="text-lg sm:text-2xl font-black text-rose-600">${egg.heartbeat}</div>
-                            <div class="text-[10px] text-slate-500 font-semibold">Cảm biến quang học</div>
-                        </div>
-
-                        <div class="bg-white/90 p-3 sm:p-4 rounded-xl border border-slate-200 space-y-0.5">
-                            <div class="text-[10px] sm:text-xs text-slate-500 font-bold">Mạch Máu Phôi</div>
-                            <div class="text-sm sm:text-base font-black text-sky-600 mt-1">${egg.vein}</div>
-                            <div class="text-[10px] text-emerald-600 font-bold">Phân nhánh tốt</div>
-                        </div>
-
-                        <div class="bg-white/90 p-3 sm:p-4 rounded-xl border border-slate-200 space-y-0.5">
-                            <div class="text-[10px] sm:text-xs text-slate-500 font-bold">Góc Xoay Hiện Tại</div>
-                            <div class="text-lg sm:text-2xl font-black text-amber-600">60.0 °</div>
-                            <div class="text-[10px] text-slate-500 font-semibold">Đảo khay tự động</div>
-                        </div>
-                    </div>
-
-                    <div class="bg-amber-100/70 p-3 sm:p-4 rounded-xl border border-amber-300 text-xs space-y-1">
-                        <div class="font-bold text-amber-900 flex items-center gap-1.5 text-xs sm:text-sm">
-                            <i class="fa-solid fa-circle-info text-amber-600"></i> Ghi chú khuyến nghị:
-                        </div>
-                        <p class="text-slate-800 font-semibold leading-relaxed pl-5 text-[11px] sm:text-xs">${egg.notes}</p>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                        <div class="bg-white/90 p-3 rounded-xl border">Ngày: <strong>${egg.age}/21</strong></div>
+                        <div class="bg-white/90 p-3 rounded-xl border">Tim: <strong class="text-rose-600">${egg.heartbeat}</strong></div>
+                        <div class="bg-white/90 p-3 rounded-xl border">Mạch máu: <strong class="text-sky-600">${egg.vein}</strong></div>
+                        <div class="bg-white/90 p-3 rounded-xl border">Góc xoay: <strong>60.0°</strong></div>
                     </div>
                 </div>
             `;
         }
 
-        // TRUYỀN LỆNH ARDUINO Wi-Fi
         function sendToArduino(command) {
-            console.log("Gửi lệnh Arduino Wi-Fi: " + command);
+            console.log("Gửi lệnh Arduino: " + command);
             if (wsSocket && wsSocket.readyState === WebSocket.OPEN) {
                 wsSocket.send(command);
             } else {
-                fetch(`http://${espIp}/cmd?val=${encodeURIComponent(command)}`, { mode: 'no-cors' })
-                    .catch(err => console.log("Lỗi HTTP Arduino Wi-Fi:", err));
+                fetch(`http://${espIp}/cmd?val=${encodeURIComponent(command)}`, { mode: 'no-cors' }).catch(err => {});
             }
         }
 
@@ -1051,23 +961,20 @@
             const ipInput = document.getElementById('esp-ip-input');
             if (ipInput) espIp = ipInput.value.trim();
 
-            const wsUrl = `ws://${espIp}:81/`;
             try {
                 if (wsSocket) wsSocket.close();
-                wsSocket = new WebSocket(wsUrl);
+                wsSocket = new WebSocket(`ws://${espIp}:81/`);
 
                 wsSocket.onopen = function() {
                     updateHardwareStatus(true);
                     addEnvLog("Kết nối thành công với vi điều khiển Arduino Wi-Fi!");
                 };
-
                 wsSocket.onmessage = function(event) {
                     try {
                         const data = JSON.parse(event.data);
                         processArduinoIncomingData(data);
                     } catch(e) {}
                 };
-
                 wsSocket.onclose = function() { updateHardwareStatus(false); };
                 wsSocket.onerror = function(err) { updateHardwareStatus(false); };
             } catch(e) {
@@ -1078,28 +985,12 @@
         function processArduinoIncomingData(data) {
             if (data.humCeiling !== undefined) {
                 document.getElementById('hum-ceiling-val').innerText = data.humCeiling.toFixed(1);
-                document.getElementById('info-hum-ceiling').innerText = `${data.humCeiling.toFixed(1)} %`;
             }
-
             if (data.tempGround !== undefined) {
                 document.getElementById('temp-ground-val').innerText = data.tempGround.toFixed(1);
-                document.getElementById('info-temp-ground').innerText = `${data.tempGround.toFixed(1)} °C`;
             }
             if (data.humGround !== undefined) {
                 document.getElementById('hum-ground-val').innerText = data.humGround.toFixed(1);
-                document.getElementById('info-hum-ground').innerText = `${data.humGround.toFixed(1)} %`;
-            }
-
-            if (data.carouselAngle !== undefined) {
-                document.getElementById('carousel-angle-val').innerText = data.carouselAngle;
-            }
-
-            if (data.eggs && Array.isArray(data.eggs) && data.eggs.length === 6) {
-                data.eggs.forEach((st, idx) => {
-                    if(eggsData[idx]) eggsData[idx].status = st;
-                });
-                renderEggSelectorGrid();
-                if(selectedEggId === null) renderOverallEggsView();
             }
         }
 
@@ -1110,11 +1001,11 @@
             const txt = document.getElementById('connection-text');
 
             if (connected) {
-                badge.className = "flex items-center gap-1.5 bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap";
+                badge.className = "flex items-center gap-1.5 bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full text-xs font-semibold";
                 dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
                 txt.innerText = "Đã Kết Nối";
             } else {
-                badge.className = "flex items-center gap-1.5 bg-rose-950/80 text-rose-300 border border-rose-500/30 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap";
+                badge.className = "flex items-center gap-1.5 bg-rose-950/80 text-rose-300 border border-rose-500/30 px-2.5 py-1 rounded-full text-xs font-semibold";
                 dot.className = "w-2 h-2 rounded-full bg-rose-500";
                 txt.innerText = "Ngắt kết nối";
             }
@@ -1125,19 +1016,14 @@
             sendToArduino(`FAN_EXHAUST:${val}`);
         }
 
-        function updateIntakeFanSpeed(val) {
-            document.getElementById('intakeFanSpeedVal').innerText = val + '%';
-            sendToArduino(`FAN_INTAKE:${val}`);
-        }
-
         function updateHeaterPower(val) {
             document.getElementById('heaterPowerVal').innerText = val + '%';
-            sendToArduino(`HEATER_MOSFET:${val}`);
+            sendToArduino(`HEATER_MOSFET:${val}`); // Đồng bộ quạt D3 trong code .ino
         }
 
         function updatePumpFlow(val) {
             document.getElementById('pumpFlowVal').innerText = val + '%';
-            sendToArduino(`PUMP_FLOW:${val}`);
+            sendToArduino(`PUMP_FLOW:${val}`); // Đồng bộ quạt D6 trong code .ino
         }
 
         function switchAuthTab(tab) {
@@ -1178,7 +1064,6 @@
                 initFluidNav();
                 renderOverviewDevices();
                 renderDetailedControlDevices();
-
                 renderEggSelectorGrid();
                 renderOverallEggsView();
 
@@ -1217,7 +1102,6 @@
             document.getElementById('subpage-wrapper').classList.add('hidden');
         }
 
-        // TỐI ƯU HIỆU ỨNG LIQUID PILL KHÔNG LAG TRÊN MOBILE
         function initFluidNav() {
             setupFluidForMenu('fluid-nav-desktop', 'fluid-pill-desktop', 'desktop');
             setupFluidForMenu('fluid-nav-mobile', 'fluid-pill-mobile', 'mobile');
@@ -1229,19 +1113,16 @@
             if (!nav || !pill) return;
 
             function updatePillPosition(targetEl) {
-                if (!targetEl || !pill || !nav) return;
+                if (!targetEl || !pill) return;
                 const offsetLeft = targetEl.offsetLeft;
                 const width = targetEl.offsetWidth;
-
                 pill.style.transform = `translateX(${offsetLeft - 4}px)`;
                 pill.style.width = `${width}px`;
             }
 
             const items = nav.querySelectorAll('.liquid-nav-item');
             items.forEach(item => {
-                item.addEventListener('mouseenter', (e) => {
-                    updatePillPosition(e.currentTarget);
-                });
+                item.addEventListener('mouseenter', (e) => updatePillPosition(e.currentTarget));
             });
 
             nav.addEventListener('mouseleave', () => {
@@ -1257,39 +1138,28 @@
 
         function switchTab(tabId) {
             currentTab = tabId;
-            
             ['desktop', 'mobile'].forEach(type => {
                 const nav = document.getElementById(`fluid-nav-${type}`);
                 if (!nav) return;
-
                 nav.querySelectorAll('.liquid-nav-item').forEach(btn => {
                     btn.classList.remove('text-slate-900', 'font-bold');
                     btn.classList.add('text-slate-600', 'font-semibold');
                 });
-
                 const activeBtn = document.getElementById(`tab-${type}-${tabId}`);
                 if (activeBtn) {
                     activeBtn.classList.add('text-slate-900', 'font-bold');
                     activeBtn.classList.remove('text-slate-600');
-
                     const pill = document.getElementById(`fluid-pill-${type}`);
                     if (pill) {
-                        const offsetLeft = activeBtn.offsetLeft;
-                        const width = activeBtn.offsetWidth;
-                        pill.style.transform = `translateX(${offsetLeft - 4}px)`;
-                        pill.style.width = `${width}px`;
+                        pill.style.transform = `translateX(${activeBtn.offsetLeft - 4}px)`;
+                        pill.style.width = `${activeBtn.offsetWidth}px`;
                     }
                 }
             });
 
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
             const activeContent = document.getElementById(`content-${tabId}`);
-            if (activeContent) {
-                activeContent.classList.remove('hidden');
-            }
+            if (activeContent) activeContent.classList.remove('hidden');
         }
 
         function renderOverviewDevices() {
@@ -1310,7 +1180,7 @@
                         </label>
                     </div>
                     <div class="font-bold text-xs text-slate-900 truncate">${dev.nameVI}</div>
-                    ${isMasterAuto ? `<div class="text-[9px] sm:text-[10px] text-emerald-600 font-extrabold mt-0.5">● TỰ ĐỘNG</div>` : `<div class="text-[9px] sm:text-[10px] text-amber-600 font-extrabold mt-0.5">● THỦ CÔNG</div>`}
+                    <div class="text-[9px] sm:text-[10px] ${dev.state ? 'text-emerald-600' : 'text-slate-400'} font-extrabold mt-0.5">${dev.state ? '● ĐANG BẬT' : '● ĐÃ TẮT'}</div>
                 `;
                 grid.appendChild(card);
             });
@@ -1379,7 +1249,6 @@
         function saveIncubatorConfig() {
             const interval = document.getElementById('turn-interval').value;
             const angle = document.getElementById('turn-angle').value;
-
             sendToArduino(`CAROUSEL_CFG:${interval},${angle}`);
             alert(`Đã lưu cấu hình sang tủ ấp! Chu kỳ: ${interval} giờ/lần - Góc xoay: ${angle} độ.`);
         }
@@ -1387,21 +1256,14 @@
         function addEnvLog(msg) {
             const logsContainer = document.getElementById('env-logs-list');
             if (!logsContainer) return;
-
             const now = new Date().toLocaleTimeString();
             const logItem = document.createElement('div');
             logItem.className = "flex items-center gap-2 text-[10px] sm:text-[11px] text-slate-600 border-b border-slate-200/60 pb-1";
             logItem.innerHTML = `<span class="text-emerald-600 font-bold">[${now}]</span> ${msg}`;
             logsContainer.insertBefore(logItem, logsContainer.firstChild);
-
-            if (logsContainer.children.length > 10) {
-                logsContainer.removeChild(logsContainer.lastChild);
-            }
         }
 
-        window.addEventListener('resize', () => {
-            initFluidNav();
-        });
+        window.addEventListener('resize', () => initFluidNav());
     </script>
 </body>
 </html>
