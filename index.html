@@ -43,7 +43,7 @@
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: #f4f6f8;
             overflow-x: hidden;
-            padding-bottom: 90px; /* Tránh che khuất bởi bottom bar trên mobile */
+            padding-bottom: 90px;
         }
 
         @media (min-width: 768px) {
@@ -52,7 +52,6 @@
             }
         }
 
-        /* Glassmorphism cực trong suốt */
         .ultra-glass {
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(16px);
@@ -69,7 +68,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.12);
         }
 
-        /* Liquid Nav Container */
         .liquid-nav-container {
             position: relative;
             background: rgba(255, 255, 255, 0.85);
@@ -100,7 +98,6 @@
             transition: color 0.2s ease;
         }
 
-        /* iOS Switch */
         .ios-switch {
             position: relative;
             display: inline-block;
@@ -145,7 +142,6 @@
             transform: translateX(20px);
         }
 
-        /* Custom Slider Input Range */
         input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
@@ -288,7 +284,7 @@
             <!-- SUBPAGES WRAPPER -->
             <div id="subpage-wrapper" class="hidden space-y-4 sm:space-y-6">
 
-                <!-- MENU BAR CỦA MÁY TÍNH (HIỂN THỊ Ở TRÊN - DESKTOP ONLY) -->
+                <!-- MENU BAR DESKTOP -->
                 <div class="hidden md:flex justify-center w-full">
                     <nav id="fluid-nav-desktop" class="liquid-nav-container inline-flex items-center gap-1 overflow-x-auto max-w-full no-scrollbar">
                         <div id="fluid-pill-desktop" class="liquid-pill"></div>
@@ -311,37 +307,38 @@
                 <!-- 1. OVERVIEW TAB -->
                 <div id="content-overview" class="tab-content space-y-4 sm:space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5">
+                        <!-- CẢM BIẾN TRẦN D7 -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-2 sm:space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="text-[11px] sm:text-xs font-extrabold text-slate-500 uppercase tracking-wider">Độ Ẩm Hút Vào</span>
+                                <span class="text-[11px] sm:text-xs font-extrabold text-slate-500 uppercase tracking-wider">Cảm Biến Trần (D7)</span>
                                 <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center">
-                                    <i class="fa-solid fa-droplet text-base sm:text-xl"></i>
+                                    <i class="fa-solid fa-cloud text-base sm:text-xl"></i>
                                 </div>
                             </div>
                             <div class="flex items-baseline gap-1.5">
-                                <span id="hum-ceiling-val" class="text-3xl sm:text-4xl font-black text-sky-600">58.5</span>
-                                <span class="text-slate-500 text-xs sm:text-sm font-bold">%</span>
+                                <span id="hum-ceiling-val" class="text-2xl sm:text-3xl font-black text-sky-600">0 (LOW)</span>
                             </div>
-                            <p class="text-[11px] text-slate-500 font-semibold">Cảm biến luồng khí vào</p>
+                            <p id="info-hum-ceiling" class="text-[11px] text-slate-500 font-semibold">Tín hiệu digital cổng D7</p>
                         </div>
 
+                        <!-- CẢM BIẾN S14 D2 -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-2 sm:space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="text-[11px] sm:text-xs font-extrabold text-slate-500 uppercase tracking-wider">Nhiệt Độ Ấp Trứng</span>
+                                <span class="text-[11px] sm:text-xs font-extrabold text-slate-500 uppercase tracking-wider">Cảm Biến S14 (D2)</span>
                                 <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
-                                    <i class="fa-solid fa-temperature-half text-base sm:text-xl"></i>
+                                    <i class="fa-solid fa-microchip text-base sm:text-xl"></i>
                                 </div>
                             </div>
                             <div class="flex items-baseline gap-1.5">
-                                <span id="temp-ground-val" class="text-3xl sm:text-4xl font-black text-slate-900">37.4</span>
-                                <span class="text-slate-500 text-xs sm:text-sm font-bold">°C</span>
+                                <span id="temp-ground-val" class="text-2xl sm:text-3xl font-black text-slate-900">0 (LOW)</span>
                             </div>
                             <div class="flex items-center justify-between text-[11px] sm:text-xs pt-1 border-t border-slate-200/60 font-bold">
-                                <span class="text-slate-500">Độ ẩm buồng ấp:</span>
-                                <span id="hum-ground-val" class="text-sky-600">62.0 %</span>
+                                <span class="text-slate-500">Trạng thái:</span>
+                                <span id="info-temp-ground" class="text-emerald-600">Chờ dữ liệu S14...</span>
                             </div>
                         </div>
 
+                        <!-- KHAY ĐẢO TRỨNG -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-2 sm:space-y-3">
                             <div class="flex items-center justify-between">
                                 <span class="text-[11px] sm:text-xs font-extrabold text-slate-500 uppercase tracking-wider">Khay Đảo 6 Trứng</span>
@@ -362,15 +359,15 @@
                     <div class="ultra-glass p-4 sm:p-6 space-y-3 sm:space-y-4">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200/60 pb-3 gap-2">
                             <div>
-                                <h3 class="font-black text-base sm:text-lg text-slate-900">Bật / Tắt Nhanh Thiết Bị (Mặc định: Tắt)</h3>
-                                <p class="text-[11px] sm:text-xs text-slate-500 font-semibold">Điều khiển công tắc trực tiếp từng thiết bị</p>
+                                <h3 class="font-black text-base sm:text-lg text-slate-900">Bật / Tắt Nhanh Thiết Bị</h3>
+                                <p class="text-[11px] sm:text-xs text-slate-500 font-semibold">Công tắc điều khiển trực tiếp từng chân Relay / MOSFET</p>
                             </div>
                             <span id="quick-auto-badge" class="self-start sm:self-auto px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] sm:text-xs font-extrabold">
                                 CHẾ ĐỘ: TỰ ĐỘNG (AUTO)
                             </span>
                         </div>
 
-                        <div id="quick-devices-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
+                        <div id="quick-devices-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4">
                         </div>
                     </div>
                 </div>
@@ -397,7 +394,9 @@
                         </div>
                     </div>
 
+                    <!-- KÉO THANH TỐC ĐỘ / CƯỜNG ĐỘ -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
+                        <!-- Quạt hút gió D1 -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-3">
                             <div class="flex items-center justify-between border-b border-slate-200/60 pb-2.5">
                                 <div class="flex items-center gap-2.5">
@@ -405,8 +404,8 @@
                                         <i class="fa-solid fa-fan animate-spin"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Quạt Hút Gió</h4>
-                                        <p class="text-[10px] text-slate-500">Thải khí nóng</p>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Quạt Hút Gió (D1)</h4>
+                                        <p class="text-[10px] text-slate-500">Thải khí nóng (PWM)</p>
                                     </div>
                                 </div>
                                 <span id="exhaustFanSpeedVal" class="text-lg sm:text-xl font-black text-sky-600">0%</span>
@@ -421,6 +420,7 @@
                             </div>
                         </div>
 
+                        <!-- Bộ sưởi D4 (+ Quạt 6x6 D3) -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-3">
                             <div class="flex items-center justify-between border-b border-slate-200/60 pb-2.5">
                                 <div class="flex items-center gap-2.5">
@@ -428,8 +428,8 @@
                                         <i class="fa-solid fa-fire-burner"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bộ Sưởi</h4>
-                                        <p class="text-[10px] text-slate-500">Tạo nhiệt tủ (+ Quạt D3)</p>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bộ Sưởi (D4)</h4>
+                                        <p class="text-[10px] text-slate-500">Tạo nhiệt + Quạt 6x6 (D3)</p>
                                     </div>
                                 </div>
                                 <span id="heaterPowerVal" class="text-lg sm:text-xl font-black text-amber-600">0%</span>
@@ -444,6 +444,7 @@
                             </div>
                         </div>
 
+                        <!-- Bơm tạo ẩm D5 (+ Quạt 8x8 D6) -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-3">
                             <div class="flex items-center justify-between border-b border-slate-200/60 pb-2.5">
                                 <div class="flex items-center gap-2.5">
@@ -451,8 +452,8 @@
                                         <i class="fa-solid fa-water"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bơm Tạo Ẩm</h4>
-                                        <p class="text-[10px] text-slate-500">Cấp nước ẩm (+ Quạt D6)</p>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bơm Tạo Ẩm (D5)</h4>
+                                        <p class="text-[10px] text-slate-500">Cấp nước ẩm + Quạt 8x8 (D6)</p>
                                     </div>
                                 </div>
                                 <span id="pumpFlowVal" class="text-lg sm:text-xl font-black text-teal-600">0%</span>
@@ -496,54 +497,6 @@
                     <div id="egg-info-display-container">
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
-                        <div class="ultra-glass p-4 sm:p-6 space-y-3 border-l-4 border-l-sky-500">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold">
-                                        <i class="fa-solid fa-droplet text-base"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-xs sm:text-sm text-slate-900">Cảm Biến Độ Ẩm Luồng Khí</h3>
-                                        <p class="text-[10px] text-slate-500">Đo khí đầu vào</p>
-                                    </div>
-                                </div>
-                                <span class="px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700 font-bold text-[10px] sm:text-xs">Đầu Vào</span>
-                            </div>
-                            <div class="pt-1">
-                                <div class="bg-white/80 p-3 sm:p-4 rounded-xl border border-slate-200">
-                                    <div class="text-[11px] text-slate-500 font-bold">Độ Ẩm Đo Được</div>
-                                    <div id="info-hum-ceiling" class="text-2xl sm:text-3xl font-black text-sky-600 mt-0.5">58.5 %</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ultra-glass p-4 sm:p-6 space-y-3 border-l-4 border-l-emerald-500">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
-                                        <i class="fa-solid fa-temperature-half text-base"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-xs sm:text-sm text-slate-900">Cảm Biến Buồng Ấp</h3>
-                                        <p class="text-[10px] text-slate-500">Vị trí khay trứng</p>
-                                    </div>
-                                </div>
-                                <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[10px] sm:text-xs">Khu Ấp</span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2.5 pt-1">
-                                <div class="bg-white/80 p-3 sm:p-4 rounded-xl border border-slate-200">
-                                    <div class="text-[11px] text-slate-500 font-bold">Nhiệt Độ Buồng</div>
-                                    <div id="info-temp-ground" class="text-xl sm:text-2xl font-black text-emerald-600 mt-0.5">37.4 °C</div>
-                                </div>
-                                <div class="bg-white/80 p-3 sm:p-4 rounded-xl border border-slate-200">
-                                    <div class="text-[11px] text-slate-500 font-bold">Độ Ẩm Buồng</div>
-                                    <div id="info-hum-ground" class="text-xl sm:text-2xl font-black text-sky-600 mt-0.5">62.0 %</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="ultra-glass p-4 sm:p-6 space-y-2">
                         <h3 class="font-bold text-sm sm:text-base text-slate-900">Nhật Ký Hoạt Động Tự Động</h3>
                         <div id="env-logs-list" class="space-y-1.5 text-[11px] font-mono text-slate-600 max-h-40 overflow-y-auto no-scrollbar">
@@ -562,7 +515,7 @@
                                     </div>
                                     <div>
                                         <h3 class="font-bold text-sm sm:text-base text-slate-900">Cấu Hình Mạch Kết Nối</h3>
-                                        <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Tùy chọn bo vi điều khiển</p>
+                                        <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Tùy chọn bo vi điều khiển ESP8266</p>
                                     </div>
                                 </div>
                                 <span id="ip-lock-badge" class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] sm:text-xs font-bold flex items-center gap-1">
@@ -574,13 +527,12 @@
                                 <div>
                                     <label class="block text-slate-800 font-extrabold mb-1">Mạch Điều Khiển Sử Dụng:</label>
                                     <select id="board-type-select" disabled class="w-full bg-slate-100 border border-slate-300 rounded-xl px-3 py-2 font-bold text-slate-700 focus:outline-none cursor-not-allowed text-xs sm:text-sm">
-                                        <option value="arduino_wifi">Arduino + ESP8266 Wi-Fi (Khuyên dùng)</option>
-                                        <option value="esp32_wifi">Mạch ESP32 Wi-Fi Tích hợp</option>
+                                        <option value="arduino_wifi">ESP8266 NodeMCU / WeMos D1 (Sử dụng chuẩn)</option>
                                     </select>
                                 </div>
 
                                 <div>
-                                    <label class="block text-slate-800 font-extrabold mb-1">Địa chỉ IP kết nối Wi-Fi:</label>
+                                    <label class="block text-slate-800 font-extrabold mb-1">Địa chỉ IP kết nối Wi-Fi ESP8266:</label>
                                     <input type="text" id="esp-ip-input" value="192.168.1.50" disabled class="w-full bg-slate-100 border border-slate-300 rounded-xl px-3 py-2 font-mono font-bold text-slate-600 focus:outline-none cursor-not-allowed text-xs sm:text-sm">
                                 </div>
 
@@ -633,7 +585,7 @@
 
         </main>
 
-        <!-- MENU BAR CỦA MOBILE -->
+        <!-- MENU MOBILE -->
         <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-2 safe-bottom bg-slate-900/60 backdrop-blur-xl border-t border-white/20">
             <nav id="fluid-nav-mobile" class="liquid-nav-container flex items-center justify-between w-full max-w-md mx-auto shadow-2xl relative">
                 <div id="fluid-pill-mobile" class="liquid-pill"></div>
@@ -731,6 +683,7 @@
 
     </div>
 
+    <!-- ==================== TOÀN BỘ CODE JAVASCRIPT XỬ LÝ KẾT NỐI ARDUINO ==================== -->
     <script>
         const userDatabase = {
             "AnduongG4": "12345",
@@ -756,15 +709,13 @@
 
         let wsSocket = null;
         let isHardwareConnected = false;
-        let espIp = "192.168.1.50";
+        let espIp = "192.168.1.50"; 
 
-        // --- ĐÃ LOẠI BỎ: Đèn soi trứng, quạt thổi tủ khí, mô tơ xoay trứng ---
-        // --- ĐÃ ĐỔI TÊN: "Bộ sưởi gốm" thành "Bộ sưởi" ---
-        // --- MẶC ĐỊNH: state: false (tắt khi mới kết nối) ---
+        // DANH SÁCH THIẾT BỊ KHỚP HOÀN TOÀN VỚI FILE CODE .INO
         const incubatorDevices = [
-            { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió Nóng', icon: 'fa-fan', state: false },
-            { id: 'ptc_heater', nameVI: 'Bộ Sưởi', icon: 'fa-fire-burner', state: false },
-            { id: 'water_pump', nameVI: 'Bơm Nước Tạo Ẩm', icon: 'fa-water', state: false }
+            { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió Nóng (D1)', icon: 'fa-fan', state: false },
+            { id: 'ptc_heater', nameVI: 'Bộ Sưởi D4 (+ Quạt D3)', icon: 'fa-fire-burner', state: false },
+            { id: 'water_pump', nameVI: 'Bơm Nước D5 (+ Quạt D6)', icon: 'fa-water', state: false }
         ];
 
         function unlockAdminIP() {
@@ -774,13 +725,17 @@
                 const selectBoard = document.getElementById('board-type-select');
                 const ipInput = document.getElementById('esp-ip-input');
                 
-                selectBoard.disabled = false;
-                selectBoard.classList.remove('bg-slate-100', 'cursor-not-allowed');
-                selectBoard.classList.add('bg-white');
+                if (selectBoard) {
+                    selectBoard.disabled = false;
+                    selectBoard.classList.remove('bg-slate-100', 'cursor-not-allowed');
+                    selectBoard.classList.add('bg-white');
+                }
 
-                ipInput.disabled = false;
-                ipInput.classList.remove('bg-slate-100', 'text-slate-600', 'cursor-not-allowed');
-                ipInput.classList.add('bg-white', 'text-slate-800');
+                if (ipInput) {
+                    ipInput.disabled = false;
+                    ipInput.classList.remove('bg-slate-100', 'text-slate-600', 'cursor-not-allowed');
+                    ipInput.classList.add('bg-white', 'text-slate-800');
+                }
 
                 document.getElementById('btn-unlock-ip').classList.add('hidden');
                 document.getElementById('ip-action-group').classList.remove('hidden');
@@ -798,13 +753,17 @@
             const selectBoard = document.getElementById('board-type-select');
             const ipInput = document.getElementById('esp-ip-input');
 
-            selectBoard.disabled = true;
-            selectBoard.classList.add('bg-slate-100', 'cursor-not-allowed');
-            selectBoard.classList.remove('bg-white');
+            if (selectBoard) {
+                selectBoard.disabled = true;
+                selectBoard.classList.add('bg-slate-100', 'cursor-not-allowed');
+                selectBoard.classList.remove('bg-white');
+            }
 
-            ipInput.disabled = true;
-            ipInput.classList.add('bg-slate-100', 'text-slate-600', 'cursor-not-allowed');
-            ipInput.classList.remove('bg-white', 'text-slate-800');
+            if (ipInput) {
+                ipInput.disabled = true;
+                ipInput.classList.add('bg-slate-100', 'text-slate-600', 'cursor-not-allowed');
+                ipInput.classList.remove('bg-white', 'text-slate-800');
+            }
 
             document.getElementById('btn-unlock-ip').classList.remove('hidden');
             document.getElementById('ip-action-group').classList.add('hidden');
@@ -948,18 +907,23 @@
             `;
         }
 
+        // HÀM GỬI LỆNH ĐIỀU KHIỂN SANG ESP8266 (WEBSOCKET / HTTP FALLBACK)
         function sendToArduino(command) {
-            console.log("Gửi lệnh Arduino: " + command);
+            console.log("Gửi lệnh sang ESP8266: " + command);
             if (wsSocket && wsSocket.readyState === WebSocket.OPEN) {
                 wsSocket.send(command);
             } else {
-                fetch(`http://${espIp}/cmd?val=${encodeURIComponent(command)}`, { mode: 'no-cors' }).catch(err => {});
+                fetch(`http://${espIp}/cmd?val=${encodeURIComponent(command)}`, { mode: 'no-cors' })
+                    .catch(err => console.log("Lỗi gửi HTTP:", err));
             }
         }
 
+        // HÀM KẾT NỐI WEBSOCKET
         function connectWebSocket() {
             const ipInput = document.getElementById('esp-ip-input');
-            if (ipInput) espIp = ipInput.value.trim();
+            if (ipInput && ipInput.value.trim() !== "") {
+                espIp = ipInput.value.trim();
+            }
 
             try {
                 if (wsSocket) wsSocket.close();
@@ -967,7 +931,7 @@
 
                 wsSocket.onopen = function() {
                     updateHardwareStatus(true);
-                    addEnvLog("Kết nối thành công với vi điều khiển Arduino Wi-Fi!");
+                    addEnvLog("Kết nối thành công với ESP8266 qua WebSocket!");
                 };
                 wsSocket.onmessage = function(event) {
                     try {
@@ -982,16 +946,51 @@
             }
         }
 
+        // HÀM NHẬN VÀ XỬ LÝ DỮ LIỆU CẢM BIẾN D2 & D7 TỪ ESP8266 GỬI VỀ
         function processArduinoIncomingData(data) {
-            if (data.humCeiling !== undefined) {
-                document.getElementById('hum-ceiling-val').innerText = data.humCeiling.toFixed(1);
+            // 1. Cảm biến S14 ở Chân D2
+            if (data.s14 !== undefined) {
+                const valEl = document.getElementById('temp-ground-val');
+                const infoEl = document.getElementById('info-temp-ground');
+                if (valEl) {
+                    valEl.innerText = data.s14 === 1 ? "1 (HIGH)" : "0 (LOW)";
+                    valEl.className = data.s14 === 1 ? "text-2xl sm:text-3xl font-black text-emerald-600" : "text-2xl sm:text-3xl font-black text-slate-500";
+                }
+                if (infoEl) {
+                    infoEl.innerText = data.s14 === 1 ? "Đang nhận tín hiệu (1)" : "Không có tín hiệu (0)";
+                    infoEl.className = data.s14 === 1 ? "text-emerald-600 font-bold" : "text-slate-500 font-bold";
+                }
             }
-            if (data.tempGround !== undefined) {
-                document.getElementById('temp-ground-val').innerText = data.tempGround.toFixed(1);
+
+            // 2. Cảm biến Trần ở Chân D7
+            if (data.ceilingSensor !== undefined) {
+                const ceilEl = document.getElementById('hum-ceiling-val');
+                const ceilInfoEl = document.getElementById('info-hum-ceiling');
+                if (ceilEl) {
+                    ceilEl.innerText = data.ceilingSensor === 1 ? "1 (HIGH)" : "0 (LOW)";
+                    ceilEl.className = data.ceilingSensor === 1 ? "text-2xl sm:text-3xl font-black text-sky-600" : "text-2xl sm:text-3xl font-black text-slate-500";
+                }
+                if (ceilInfoEl) {
+                    ceilInfoEl.innerText = data.ceilingSensor === 1 ? "Tín hiệu trần HIGH (1)" : "Tín hiệu trần LOW (0)";
+                }
             }
-            if (data.humGround !== undefined) {
-                document.getElementById('hum-ground-val').innerText = data.humGround.toFixed(1);
+
+            // 3. Đồng bộ trạng thái thiết bị
+            if (data.exhaust_fan !== undefined) {
+                const dev = incubatorDevices.find(d => d.id === 'exhaust_fan');
+                if (dev) dev.state = (data.exhaust_fan === 1);
             }
+            if (data.ptc_heater !== undefined) {
+                const dev = incubatorDevices.find(d => d.id === 'ptc_heater');
+                if (dev) dev.state = (data.ptc_heater === 1);
+            }
+            if (data.water_pump !== undefined) {
+                const dev = incubatorDevices.find(d => d.id === 'water_pump');
+                if (dev) dev.state = (data.water_pump === 1);
+            }
+
+            renderOverviewDevices();
+            renderDetailedControlDevices();
         }
 
         function updateHardwareStatus(connected) {
@@ -1011,6 +1010,7 @@
             }
         }
 
+        // HÀM ĐIỀU CHỈNH CƯỜNG ĐỘ CÁC THIẾT BỊ
         function updateExhaustFanSpeed(val) {
             document.getElementById('exhaustFanSpeedVal').innerText = val + '%';
             sendToArduino(`FAN_EXHAUST:${val}`);
@@ -1018,12 +1018,12 @@
 
         function updateHeaterPower(val) {
             document.getElementById('heaterPowerVal').innerText = val + '%';
-            sendToArduino(`HEATER_MOSFET:${val}`); // Đồng bộ quạt D3 trong code .ino
+            sendToArduino(`HEATER_MOSFET:${val}`);
         }
 
         function updatePumpFlow(val) {
             document.getElementById('pumpFlowVal').innerText = val + '%';
-            sendToArduino(`PUMP_FLOW:${val}`); // Đồng bộ quạt D6 trong code .ino
+            sendToArduino(`PUMP_FLOW:${val}`);
         }
 
         function switchAuthTab(tab) {
