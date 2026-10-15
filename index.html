@@ -323,7 +323,7 @@
                             <div class="flex items-center justify-between border-b pb-2">
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-fan text-sky-600 text-base"></i>
-                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Quạt Hút Gió (D0)</h4>
+                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Quạt Hút Gió (V3)</h4>
                                 </div>
                                 <span id="exhaustFanSpeedVal" class="text-base font-black text-sky-600">0%</span>
                             </div>
@@ -337,7 +337,7 @@
                             <div class="flex items-center justify-between border-b pb-2">
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-fire-burner text-amber-600 text-base"></i>
-                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Sưởi PTC IBT-2 (D3)</h4>
+                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Sưởi PTC IBT-2 (V4)</h4>
                                 </div>
                                 <span id="heaterPowerVal" class="text-base font-black text-amber-600">0%</span>
                             </div>
@@ -351,7 +351,7 @@
                             <div class="flex items-center justify-between border-b pb-2">
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-water text-teal-600 text-base"></i>
-                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bơm Tạo Ẩm (D5)</h4>
+                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bơm Tạo Ẩm (V5)</h4>
                                 </div>
                                 <span id="pumpFlowVal" class="text-base font-black text-teal-600">0%</span>
                             </div>
@@ -494,7 +494,7 @@
 
     </div>
 
-    <!-- JAVASCRIPT XỬ LÝ -->
+    <!-- JAVASCRIPT XỬ LÝ CHUẨN XÁC CHỐNG LỖI V3/V4/V5 VÀ V2 BLYNK API -->
     <script>
         const userDatabase = { "AnduongG4": "12345", "BaKietG4": "12345" };
 
@@ -512,10 +512,13 @@
         let bleTxCharacteristic = null;
         let isBleConnected = false;
 
+        let sliderDebounceTimer = null;
+        let lastUserInteractionTime = 0;
+
         const incubatorDevices = [
-            { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió (D0)', icon: 'fa-fan', state: false },
-            { id: 'ptc_heater', nameVI: 'Sưởi PTC IBT-2 (D3/D4)', icon: 'fa-fire-burner', state: false },
-            { id: 'water_pump', nameVI: 'Bơm Tạo Ẩm (D5)', icon: 'fa-water', state: false }
+            { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió (V3)', icon: 'fa-fan', state: false },
+            { id: 'ptc_heater', nameVI: 'Sưởi PTC IBT-2 (V4)', icon: 'fa-fire-burner', state: false },
+            { id: 'water_pump', nameVI: 'Bơm Tạo Ẩm (V5)', icon: 'fa-water', state: false }
         ];
 
         let eggsData = [
@@ -531,6 +534,18 @@
             currentScanningEggId = (currentScanningEggId % 6) + 1;
             renderEggSummary();
         }, 2000);
+
+        // HÀM ĐỌC LINH HOẠT TÊN PIN TỪ BLYNK REST API (HỖ TRỢ "v0", "V0", "0")
+        function getBlynkVal(data, pin) {
+            if (!data || typeof data !== 'object') return undefined;
+            const lowerKey = pin.toLowerCase();
+            const upperKey = pin.toUpperCase();
+            const numKey = pin.replace(/[^0-9]/g, '');
+            if (data[lowerKey] !== undefined) return data[lowerKey];
+            if (data[upperKey] !== undefined) return data[upperKey];
+            if (data[numKey] !== undefined) return data[numKey];
+            return undefined;
+        }
 
         function saveAlertEmail() {
             const email = document.getElementById('alert-email-input').value.trim();
@@ -554,7 +569,7 @@
             }
         }
 
-        // HÀM ROUTING LỆNH CHUẨN XÁC VÀO BLUETOOTH BLE HOẶC BLYNK REST API
+        // HÀM ROUTING LỆNH CHUẨN XÁC TÁCH RIÊNG CÁC CHÂN
         function sendToArduino(command) {
             console.log("[Lệnh gửi]:", command);
 
@@ -564,41 +579,48 @@
                 return;
             }
 
-            let virtualPin = "";
-            let value = 0;
+            if (!BLYNK_AUTH_TOKEN) return;
 
             if (command.startsWith("MODE_AUTO:")) {
-                virtualPin = "v2"; 
-                value = parseInt(command.split(":")[1]);
+                const isAuto = parseInt(command.split(":")[1]);
+                // Chỉ gửi duy nhất chân v2
+                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=${isAuto}`)
+                    .then(() => console.log(`[Blynk Cloud] Đã chuyển Auto V2 = ${isAuto}`))
+                    .catch(err => console.error("[Blynk Lỗi]:", err));
             } 
             else if (command.startsWith("FAN_EXHAUST:")) {
-                virtualPin = "v3"; 
-                value = parseInt(command.split(":")[1]);
+                const val = parseInt(command.split(":")[1]);
+                // Tắt Auto (v2=0) và Cập nhật Quạt (v3=val) riêng
+                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0`);
+                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v3=${val}`);
             } 
             else if (command.startsWith("HEATER_MOSFET:")) {
-                virtualPin = "v4"; 
-                value = parseInt(command.split(":")[1]);
+                const val = parseInt(command.split(":")[1]);
+                // Tắt Auto (v2=0) và Cập nhật Sưởi (v4=val)
+                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0`);
+                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v4=${val}`);
             } 
             else if (command.startsWith("PUMP_FLOW:")) {
-                virtualPin = "v5"; 
-                value = parseInt(command.split(":")[1]);
+                const val = parseInt(command.split(":")[1]);
+                // Tắt Auto (v2=0) và Cập nhật Bơm (v5=val)
+                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0`);
+                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v5=${val}`);
             } 
             else if (command.startsWith("TOGGLE:")) {
                 const parts = command.split(":");
                 const devId = parts[1];
-                const state = parts[2];
+                const state = parseInt(parts[2]);
+                const val = (state === 1) ? 100 : 0;
                 
-                if (devId === "exhaust_fan") { virtualPin = "v3"; value = (state == 1) ? 100 : 0; }
-                else if (devId === "ptc_heater") { virtualPin = "v4"; value = (state == 1) ? 100 : 0; }
-                else if (devId === "water_pump") { virtualPin = "v5"; value = (state == 1) ? 100 : 0; }
-            }
+                let targetPin = "";
+                if (devId === "exhaust_fan") targetPin = "v3";
+                else if (devId === "ptc_heater") targetPin = "v4";
+                else if (devId === "water_pump") targetPin = "v5";
 
-            if (virtualPin !== "" && BLYNK_AUTH_TOKEN) {
-                // Tắt Auto mode trên Blynk (v2=0) đồng thời cập nhật giá trị PWM
-                const url = `https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0&${virtualPin}=${value}`;
-                fetch(url)
-                    .then(res => console.log(`[Blynk Cloud] Đã gửi ${virtualPin} =${value}%`))
-                    .catch(err => console.error("[Blynk Cloud Lỗi]:", err));
+                if (targetPin) {
+                    fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0`);
+                    fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&${targetPin}=${val}`);
+                }
             }
         }
 
@@ -612,42 +634,56 @@
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
-                        if (data.v0 !== undefined) document.getElementById('temp-ground-val').innerText = parseFloat(data.v0).toFixed(1);
-                        if (data.v1 !== undefined) document.getElementById('hum-ground-val').innerText = parseFloat(data.v1).toFixed(1);
-                        
-                        if (data.v2 !== undefined) {
-                            const isAuto = (parseInt(data.v2) === 1);
-                            document.getElementById('master-auto-toggle').checked = isAuto;
-                            document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
-                            document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
+                        const valV0 = getBlynkVal(data, 'v0');
+                        const valV1 = getBlynkVal(data, 'v1');
+                        const valV2 = getBlynkVal(data, 'v2');
+                        const valV3 = getBlynkVal(data, 'v3');
+                        const valV4 = getBlynkVal(data, 'v4');
+                        const valV5 = getBlynkVal(data, 'v5');
+                        const valV7 = getBlynkVal(data, 'v7');
+                        const valV8 = getBlynkVal(data, 'v8');
+
+                        if (valV0 !== undefined) document.getElementById('temp-ground-val').innerText = parseFloat(valV0).toFixed(1);
+                        if (valV1 !== undefined) document.getElementById('hum-ground-val').innerText = parseFloat(valV1).toFixed(1);
+
+                        // KHÓA THỜI GIAN 5 GIÂY ĐỂ TRÁNH BỊ TIẾN TRÌNH TẢI NGẦM ĐỀ DỮ LIỆU CŨ VỀ GIAO DIỆN
+                        const isUserActive = (Date.now() - lastUserInteractionTime < 5000);
+
+                        if (!isUserActive) {
+                            if (valV2 !== undefined) {
+                                const isAuto = (parseInt(valV2) === 1);
+                                document.getElementById('master-auto-toggle').checked = isAuto;
+                                document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
+                                document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
+                            }
+
+                            if (valV3 !== undefined) {
+                                const val = parseInt(valV3);
+                                document.getElementById('exhaustFanSlider').value = val;
+                                document.getElementById('exhaustFanSpeedVal').innerText = val + "%";
+                                const dev = incubatorDevices.find(d => d.id === 'exhaust_fan');
+                                if (dev) dev.state = (val > 0);
+                            }
+
+                            if (valV4 !== undefined) {
+                                const val = parseInt(valV4);
+                                document.getElementById('heaterPowerSlider').value = val;
+                                document.getElementById('heaterPowerVal').innerText = val + "%";
+                                const dev = incubatorDevices.find(d => d.id === 'ptc_heater');
+                                if (dev) dev.state = (val > 0);
+                            }
+
+                            if (valV5 !== undefined) {
+                                const val = parseInt(valV5);
+                                document.getElementById('pumpFlowSlider').value = val;
+                                document.getElementById('pumpFlowVal').innerText = val + "%";
+                                const dev = incubatorDevices.find(d => d.id === 'water_pump');
+                                if (dev) dev.state = (val > 0);
+                            }
                         }
 
-                        if (data.v3 !== undefined) {
-                            const val = parseInt(data.v3);
-                            document.getElementById('exhaustFanSlider').value = val;
-                            document.getElementById('exhaustFanSpeedVal').innerText = val + "%";
-                            const dev = incubatorDevices.find(d => d.id === 'exhaust_fan');
-                            if (dev) dev.state = (val > 0);
-                        }
-
-                        if (data.v4 !== undefined) {
-                            const val = parseInt(data.v4);
-                            document.getElementById('heaterPowerSlider').value = val;
-                            document.getElementById('heaterPowerVal').innerText = val + "%";
-                            const dev = incubatorDevices.find(d => d.id === 'ptc_heater');
-                            if (dev) dev.state = (val > 0);
-                        }
-
-                        if (data.v5 !== undefined) {
-                            const val = parseInt(data.v5);
-                            document.getElementById('pumpFlowSlider').value = val;
-                            document.getElementById('pumpFlowVal').innerText = val + "%";
-                            const dev = incubatorDevices.find(d => d.id === 'water_pump');
-                            if (dev) dev.state = (val > 0);
-                        }
-
-                        if (data.v7 !== undefined && typeof data.v7 === 'string') {
-                            const eggItems = data.v7.split(";");
+                        if (valV7 !== undefined && typeof valV7 === 'string') {
+                            const eggItems = valV7.split(";");
                             eggItems.forEach((item, index) => {
                                 const parts = item.split(",");
                                 if (parts.length === 3 && eggsData[index]) {
@@ -657,8 +693,10 @@
                             });
                         }
 
-                        if (data.v8 !== undefined && typeof data.v8 === 'string' && data.v8.trim() !== "") {
-                            document.getElementById('alert-email-input').value = data.v8;
+                        if (valV8 !== undefined && typeof valV8 === 'string' && valV8.trim() !== "") {
+                            if (document.activeElement?.id !== 'alert-email-input') {
+                                document.getElementById('alert-email-input').value = valV8;
+                            }
                         }
 
                         renderOverviewDevices();
@@ -730,14 +768,17 @@
                 document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
                 document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
 
-                document.getElementById('exhaustFanSlider').value = fan;
-                document.getElementById('exhaustFanSpeedVal').innerText = fan + "%";
+                const isUserActive = (Date.now() - lastUserInteractionTime < 5000);
+                if (!isUserActive) {
+                    document.getElementById('exhaustFanSlider').value = fan;
+                    document.getElementById('exhaustFanSpeedVal').innerText = fan + "%";
 
-                document.getElementById('heaterPowerSlider').value = heater;
-                document.getElementById('heaterPowerVal').innerText = heater + "%";
+                    document.getElementById('heaterPowerSlider').value = heater;
+                    document.getElementById('heaterPowerVal').innerText = heater + "%";
 
-                document.getElementById('pumpFlowSlider').value = pump;
-                document.getElementById('pumpFlowVal').innerText = pump + "%";
+                    document.getElementById('pumpFlowSlider').value = pump;
+                    document.getElementById('pumpFlowVal').innerText = pump + "%";
+                }
 
                 if (eggStr) {
                     const eggItems = eggStr.split(";");
@@ -763,9 +804,16 @@
             startBlynkDataPolling();
         }
 
-        // ĐÃ KHẮC PHỤC: SỬ DỤNG HÀM sendToArduino VỚI LỆNH CHUẨN DÀNH CHO BLE LẪN BLYNK
+        function toggleMasterAuto(checked) {
+            lastUserInteractionTime = Date.now();
+            document.getElementById('master-mode-label').innerText = checked ? "TỰ ĐỘNG" : "THỦ CÔNG";
+            document.getElementById('overview-auto-status-text').innerText = checked ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
+            sendToArduino(`MODE_AUTO:${checked ? 1 : 0}`);
+        }
+
         function updateExhaustFanSpeed(val) {
             document.getElementById('exhaustFanSpeedVal').innerText = val + "%";
+            lastUserInteractionTime = Date.now();
             
             const autoToggle = document.getElementById('master-auto-toggle');
             if (autoToggle && autoToggle.checked) {
@@ -774,11 +822,15 @@
                 document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
             }
             
-            sendToArduino(`FAN_EXHAUST:${val}`);
+            clearTimeout(sliderDebounceTimer);
+            sliderDebounceTimer = setTimeout(() => {
+                sendToArduino(`FAN_EXHAUST:${val}`);
+            }, 300);
         }
 
         function updateHeaterPower(val) { 
             document.getElementById('heaterPowerVal').innerText = val + "%";
+            lastUserInteractionTime = Date.now();
             
             const autoToggle = document.getElementById('master-auto-toggle');
             if (autoToggle && autoToggle.checked) {
@@ -787,11 +839,15 @@
                 document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
             }
             
-            sendToArduino(`HEATER_MOSFET:${val}`);
+            clearTimeout(sliderDebounceTimer);
+            sliderDebounceTimer = setTimeout(() => {
+                sendToArduino(`HEATER_MOSFET:${val}`);
+            }, 300);
         }
 
         function updatePumpFlow(val) { 
             document.getElementById('pumpFlowVal').innerText = val + "%";
+            lastUserInteractionTime = Date.now();
             
             const autoToggle = document.getElementById('master-auto-toggle');
             if (autoToggle && autoToggle.checked) {
@@ -800,7 +856,10 @@
                 document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
             }
             
-            sendToArduino(`PUMP_FLOW:${val}`);
+            clearTimeout(sliderDebounceTimer);
+            sliderDebounceTimer = setTimeout(() => {
+                sendToArduino(`PUMP_FLOW:${val}`);
+            }, 300);
         }
 
         function renderEggSummary() {
@@ -928,10 +987,6 @@
                 dot.className = "w-2 h-2 rounded-full bg-rose-500";
                 txt.innerText = "Chưa kết nối";
             }
-        }
-
-        function toggleMasterAuto(checked) {
-            sendToArduino(`MODE_AUTO:${checked ? 1 : 0}`);
         }
 
         function handleDeviceToggle(devId, newState, switchEl) {
