@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- CHART.JS DÙNG CHO BIỂU ĐỒ REALTIME -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -35,10 +38,10 @@
         @media (min-width: 768px) { body { padding-bottom: 0px; } }
 
         .ultra-glass {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.85);
             box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.04);
             border-radius: 20px;
         }
@@ -65,7 +68,7 @@
             background: #ffffff;
             border-radius: 9999px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
             pointer-events: none;
             z-index: 1;
         }
@@ -76,11 +79,11 @@
         .ios-switch input { opacity: 0; width: 0; height: 0; }
         .ios-slider {
             position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.15); transition: .3s; border-radius: 30px;
+            background-color: rgba(0, 0, 0, 0.15); transition: .25s; border-radius: 30px;
         }
         .ios-slider:before {
             position: absolute; content: ""; height: 24px; width: 24px; left: 3px; bottom: 3px;
-            background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            background-color: white; transition: .25s; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
         }
         input:checked + .ios-slider { background-color: #10b981; }
         input:checked + .ios-slider:before { transform: translateX(22px); }
@@ -195,9 +198,10 @@
                         </button>
                     </form>
 
-                    <div class="pt-2 border-t border-slate-200/60 text-[11px] text-slate-500 text-center space-y-1">
-                        <p class="font-bold text-slate-700">Tài khoản mặc định:</p>
-                        <p>Tên: <span class="font-mono font-bold text-emerald-600">AnduongG4</span> | Mật khẩu: <span class="font-mono font-bold">12345</span></p>
+                    <div class="pt-2 border-t border-slate-200/60 text-[11px] text-slate-600 text-center space-y-1">
+                        <p class="font-bold text-slate-800">Tài khoản truy cập:</p>
+                        <p>Giảng viên: <span class="font-mono font-bold text-indigo-600">ThayTaVanPhuong</span> | Pass: <span class="font-mono font-bold">UTE26151</span></p>
+                        <p>Sinh viên: <span class="font-mono font-bold text-emerald-600">AnduongG4</span> | Pass: <span class="font-mono font-bold">12345</span></p>
                     </div>
                 </div>
             </section>
@@ -205,21 +209,27 @@
             <!-- SUBPAGES WRAPPER -->
             <div id="subpage-wrapper" class="hidden space-y-4 sm:space-y-6">
 
-                <!-- MENU DESKTOP -->
+                <!-- MENU DESKTOP KHÔNG BỊ BẮT DÒNG CÓ THÊM MỤC BIỂU ĐỒ -->
                 <div class="hidden md:flex justify-center w-full">
                     <nav id="fluid-nav-desktop" class="liquid-nav-container inline-flex items-center gap-1 overflow-x-auto max-w-full no-scrollbar">
                         <div id="fluid-pill-desktop" class="liquid-pill"></div>
 
-                        <button onclick="switchTab('overview')" id="tab-desktop-overview" class="liquid-nav-item px-6 py-2.5 rounded-full text-sm font-bold text-slate-900 transition flex items-center gap-2">
-                            <i class="fa-solid fa-chart-pie text-sky-600"></i><span>Trạng thái chung</span>
+                        <button onclick="switchTab('overview')" id="tab-desktop-overview" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold text-slate-900 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-chart-pie text-sky-600"></i><span>Trạng thái</span>
                         </button>
-                        <button onclick="switchTab('control')" id="tab-desktop-control" class="liquid-nav-item px-6 py-2.5 rounded-full text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-emerald-600"></i><span>Điều chỉnh thiết bị</span>
+                        <button onclick="switchTab('control')" id="tab-desktop-control" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-sliders text-emerald-600"></i><span>Điều chỉnh</span>
                         </button>
-                        <button onclick="switchTab('information')" id="tab-desktop-information" class="liquid-nav-item px-6 py-2.5 rounded-full text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+                        
+                        <!-- THÊM MỤC BIỂU ĐỒ TRÊN THANH MENU -->
+                        <button onclick="switchTab('chart')" id="tab-desktop-chart" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-chart-line text-purple-600"></i><span>Biểu đồ RT</span>
+                        </button>
+
+                        <button onclick="switchTab('information')" id="tab-desktop-information" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
                             <i class="fa-solid fa-egg text-amber-500"></i><span>Soi 6 quả trứng</span>
                         </button>
-                        <button onclick="switchTab('settings')" id="tab-desktop-settings" class="liquid-nav-item px-6 py-2.5 rounded-full text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+                        <button onclick="switchTab('settings')" id="tab-desktop-settings" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
                             <i class="fa-solid fa-gear text-slate-600"></i><span>Cài đặt Cloud & BLE</span>
                         </button>
                     </nav>
@@ -227,7 +237,6 @@
 
                 <!-- 1. OVERVIEW TAB -->
                 <div id="content-overview" class="tab-content space-y-4 sm:space-y-6">
-                    
                     <div class="ultra-glass p-4 sm:p-5 bg-gradient-to-r from-emerald-50 via-teal-50 to-sky-50 border-emerald-200 shadow-sm">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                             <div>
@@ -254,7 +263,7 @@
                                 <span id="temp-ground-val" class="text-2xl sm:text-4xl font-black text-slate-900">0.0</span>
                                 <span class="text-slate-500 text-xs font-bold">°C</span>
                             </div>
-                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Mục tiêu: <strong id="target-temp-val" class="text-emerald-600">37.5 °C</strong></p>
+                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Mục tiêu: <strong id="target-temp-val" class="text-emerald-600">37.8 °C</strong></p>
                         </div>
 
                         <div class="ultra-glass p-3.5 sm:p-6 space-y-1.5">
@@ -266,7 +275,7 @@
                                 <span id="hum-ground-val" class="text-2xl sm:text-4xl font-black text-sky-600">0.0</span>
                                 <span class="text-slate-500 text-xs font-bold">%</span>
                             </div>
-                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold"><strong id="target-hum-val" class="text-emerald-600"></strong></p>
+                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Mục tiêu: <strong class="text-emerald-600">50 - 55%</strong></p>
                         </div>
 
                         <div class="ultra-glass p-3.5 sm:p-6 space-y-1.5 col-span-2 sm:col-span-1">
@@ -363,7 +372,56 @@
                     </div>
                 </div>
 
-                <!-- 3. SOI 6 QUẢ TRỨNG TAB -->
+                <!-- 3. TAB BIỂU ĐỒ REAL-TIME MỚI -->
+                <div id="content-chart" class="tab-content hidden space-y-4 sm:space-y-6">
+                    <div class="ultra-glass p-4 sm:p-6 space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
+                            <div>
+                                <h3 class="font-extrabold text-sm sm:text-base text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-line text-purple-600"></i>
+                                    <span>Biểu Đồ Thông Số Nhiệt Độ & Độ Ẩm Theo Thời Gian Thực</span>
+                                </h3>
+                                <p class="text-[10px] sm:text-xs text-slate-500">Cập nhật liên tục từ tủ ấp 50x50x50 cm</p>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <button onclick="toggleChartPause()" id="btn-chart-pause" class="px-3 py-1.5 rounded-xl bg-purple-100 text-purple-700 text-xs font-bold hover:bg-purple-200 transition">
+                                    <i class="fa-solid fa-pause mr-1"></i>Tạm dừng
+                                </button>
+                                <button onclick="clearChartData()" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200 transition">
+                                    <i class="fa-solid fa-rotate-right mr-1"></i>Xóa dữ liệu
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- THỐNG KÊ NHANH CỦA BIỂU ĐỒ -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
+                            <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200">
+                                <span class="text-[10px] text-amber-700 uppercase">Nhiệt độ hiện tại</span>
+                                <div id="chart-temp-cur" class="text-lg font-black text-amber-600">-- °C</div>
+                            </div>
+                            <div class="bg-sky-50/80 p-3 rounded-xl border border-sky-200">
+                                <span class="text-[10px] text-sky-700 uppercase">Độ ẩm hiện tại</span>
+                                <div id="chart-hum-cur" class="text-lg font-black text-sky-600">-- %</div>
+                            </div>
+                            <div class="bg-purple-50/80 p-3 rounded-xl border border-purple-200">
+                                <span class="text-[10px] text-purple-700 uppercase">Nhiệt độ TB</span>
+                                <div id="chart-temp-avg" class="text-lg font-black text-purple-600">-- °C</div>
+                            </div>
+                            <div class="bg-emerald-50/80 p-3 rounded-xl border border-emerald-200">
+                                <span class="text-[10px] text-emerald-700 uppercase">Độ ẩm TB</span>
+                                <div id="chart-hum-avg" class="text-lg font-black text-emerald-600">-- %</div>
+                            </div>
+                        </div>
+
+                        <!-- CANVAS VẼ BIỂU ĐỒ -->
+                        <div class="relative w-full h-[320px] sm:h-[400px] bg-white/60 p-2 rounded-2xl border border-slate-200">
+                            <canvas id="realtimeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. SOI 6 QUẢ TRỨNG TAB -->
                 <div id="content-information" class="tab-content hidden space-y-4">
                     <div class="ultra-glass p-4 sm:p-6 space-y-4">
                         <div class="flex items-center justify-between border-b border-slate-200/60 pb-3">
@@ -386,11 +444,10 @@
                     <div id="egg-detail-container"></div>
                 </div>
 
-                <!-- 4. SETTINGS TAB -->
+                <!-- 5. SETTINGS TAB -->
                 <div id="content-settings" class="tab-content hidden space-y-4 sm:space-y-6">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         
-                        <!-- CẤU HÌNH BLYNK CLOUD AUTH TOKEN & EMAIL BÁO ĐỘNG -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-4 border-l-4 border-l-emerald-600">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2.5">
@@ -423,7 +480,6 @@
                             </div>
                         </div>
 
-                        <!-- KẾT NỐI BLUETOOTH BLE -->
                         <div class="ultra-glass p-4 sm:p-6 space-y-4 border-l-4 border-l-indigo-600">
                             <div class="flex items-center gap-2.5">
                                 <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-base">
@@ -446,7 +502,7 @@
                     </div>
                 </div>
 
-                <!-- MENU MOBILE -->
+                <!-- MENU MOBILE THÊM MỤC BIỂU ĐỒ -->
                 <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-2 safe-bottom bg-slate-900/80 backdrop-blur-xl border-t border-white/10 shadow-2xl">
                     <nav id="fluid-nav-mobile" class="liquid-nav-container flex items-center justify-between w-full max-w-md mx-auto relative">
                         <div id="fluid-pill-mobile" class="liquid-pill"></div>
@@ -459,6 +515,11 @@
                         <button onclick="switchTab('control')" id="tab-mobile-control" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-sliders text-emerald-600 text-base mb-0.5"></i>
                             <span class="text-[10px] font-bold">Điều chỉnh</span>
+                        </button>
+
+                        <button onclick="switchTab('chart')" id="tab-mobile-chart" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
+                            <i class="fa-solid fa-chart-line text-purple-600 text-base mb-0.5"></i>
+                            <span class="text-[10px] font-bold">Biểu đồ</span>
                         </button>
 
                         <button onclick="switchTab('information')" id="tab-mobile-information" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
@@ -494,9 +555,13 @@
 
     </div>
 
-    <!-- JAVASCRIPT XỬ LÝ CHUẨN XÁC CHỐNG LỖI V3/V4/V5 VÀ V2 BLYNK API -->
     <script>
-        const userDatabase = { "AnduongG4": "12345", "BaKietG4": "12345" };
+        // THÊM TÀI KHOẢN MỚI DÀNH CHO GIẢNG VIÊN THẦY TẠ VĂN PHƯƠNG
+        const userDatabase = { 
+            "ThayTaVanPhuong": "UTE26151",
+            "AnduongG4": "12345", 
+            "BaKietG4": "12345" 
+        };
 
         let BLYNK_AUTH_TOKEN = "Tuxm1DXdwSI2AvcSOO4GWGhLhYJg7N_3";
 
@@ -514,6 +579,11 @@
 
         let sliderDebounceTimer = null;
         let lastUserInteractionTime = 0;
+
+        let isChartPaused = false;
+        let realtimeChartObj = null;
+        let tempHistoryData = [];
+        let humHistoryData = [];
 
         const incubatorDevices = [
             { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió (V3)', icon: 'fa-fan', state: false },
@@ -535,7 +605,108 @@
             renderEggSummary();
         }, 2000);
 
-        // HÀM ĐỌC LINH HOẠT TÊN PIN TỪ BLYNK REST API (HỖ TRỢ "v0", "V0", "0")
+        function initRealtimeChart() {
+            const canvas = document.getElementById('realtimeChart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            realtimeChartObj = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'Nhiệt độ (°C)',
+                            data: [],
+                            borderColor: '#d97706',
+                            backgroundColor: 'rgba(217, 119, 6, 0.12)',
+                            borderWidth: 2.5,
+                            tension: 0.35,
+                            fill: true,
+                            yAxisID: 'yTemp'
+                        },
+                        {
+                            label: 'Độ ẩm (%)',
+                            data: [],
+                            borderColor: '#0284c7',
+                            backgroundColor: 'rgba(2, 132, 199, 0.12)',
+                            borderWidth: 2.5,
+                            tension: 0.35,
+                            fill: true,
+                            yAxisID: 'yHum'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    scales: {
+                        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+                        yTemp: {
+                            type: 'linear', position: 'left', min: 25, max: 45,
+                            ticks: { color: '#d97706', font: { weight: 'bold' } },
+                            title: { display: true, text: 'Nhiệt độ (°C)', color: '#d97706' }
+                        },
+                        yHum: {
+                            type: 'linear', position: 'right', min: 30, max: 100,
+                            ticks: { color: '#0284c7', font: { weight: 'bold' } },
+                            grid: { drawOnChartArea: false },
+                            title: { display: true, text: 'Độ ẩm (%)', color: '#0284c7' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChartData(temp, hum) {
+            if (isChartPaused || !realtimeChartObj) return;
+
+            const now = new Date();
+            const timeLabel = now.getHours().toString().padStart(2, '0') + ':' +
+                              now.getMinutes().toString().padStart(2, '0') + ':' +
+                              now.getSeconds().toString().padStart(2, '0');
+
+            if (tempHistoryData.length > 25) {
+                tempHistoryData.shift();
+                humHistoryData.shift();
+                realtimeChartObj.data.labels.shift();
+            }
+
+            tempHistoryData.push(temp);
+            humHistoryData.push(hum);
+
+            realtimeChartObj.data.labels.push(timeLabel);
+            realtimeChartObj.data.datasets[0].data = tempHistoryData;
+            realtimeChartObj.data.datasets[1].data = humHistoryData;
+            realtimeChartObj.update();
+
+            document.getElementById('chart-temp-cur').innerText = temp.toFixed(1) + ' °C';
+            document.getElementById('chart-hum-cur').innerText = hum.toFixed(1) + ' %';
+            
+            const avgT = (tempHistoryData.reduce((a,b)=>a+b, 0) / tempHistoryData.length).toFixed(1);
+            const avgH = (humHistoryData.reduce((a,b)=>a+b, 0) / humHistoryData.length).toFixed(1);
+            document.getElementById('chart-temp-avg').innerText = avgT + ' °C';
+            document.getElementById('chart-hum-avg').innerText = avgH + ' %';
+        }
+
+        function toggleChartPause() {
+            isChartPaused = !isChartPaused;
+            const btn = document.getElementById('btn-chart-pause');
+            btn.innerHTML = isChartPaused ? `<i class="fa-solid fa-play mr-1"></i>Tiếp tục` : `<i class="fa-solid fa-pause mr-1"></i>Tạm dừng`;
+        }
+
+        function clearChartData() {
+            tempHistoryData = [];
+            humHistoryData = [];
+            if (realtimeChartObj) {
+                realtimeChartObj.data.labels = [];
+                realtimeChartObj.data.datasets[0].data = [];
+                realtimeChartObj.data.datasets[1].data = [];
+                realtimeChartObj.update();
+            }
+        }
+
         function getBlynkVal(data, pin) {
             if (!data || typeof data !== 'object') return undefined;
             const lowerKey = pin.toLowerCase();
@@ -557,22 +728,18 @@
             if (isBleConnected && bleRxCharacteristic) {
                 const encoder = new TextEncoder();
                 bleRxCharacteristic.writeValue(encoder.encode(`SET_EMAIL:${email}`)).catch(err => console.error(err));
-                alert(`Đã cập nhật Email nhận báo động qua Bluetooth: ${email}`);
+                alert(`Đã cập nhật Email qua Bluetooth: ${email}`);
                 return;
             }
 
             if (BLYNK_AUTH_TOKEN) {
                 const url = `https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v8=${encodeURIComponent(email)}`;
-                fetch(url)
-                    .then(res => alert(`Đã cấp quyền & cập nhật Email nhận báo động mới: ${email}`))
-                    .catch(err => alert("Lỗi kết nối Blynk Cloud!"));
+                fetch(url).then(res => alert(`Đã cập nhật Email nhận báo động: ${email}`));
             }
         }
 
-        // HÀM ROUTING LỆNH CHUẨN XÁC TÁCH RIÊNG CÁC CHÂN
         function sendToArduino(command) {
-            console.log("[Lệnh gửi]:", command);
-            lastUserInteractionTime = Date.now(); // Khóa polling 5 giây khi người dùng thao tác
+            lastUserInteractionTime = Date.now();
 
             if (isBleConnected && bleRxCharacteristic) {
                 const encoder = new TextEncoder();
@@ -584,9 +751,7 @@
 
             if (command.startsWith("MODE_AUTO:")) {
                 const isAuto = parseInt(command.split(":")[1]);
-                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=${isAuto}`)
-                    .then(() => console.log(`[Blynk Cloud] Đã chuyển Auto V2 = ${isAuto}`))
-                    .catch(err => console.error("[Blynk Lỗi]:", err));
+                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=${isAuto}`);
             } 
             else if (command.startsWith("FAN_EXHAUST:")) {
                 const val = parseInt(command.split(":")[1]);
@@ -617,16 +782,24 @@
             }
         }
 
+        // POLLING DATA BLYNK TỐC ĐỘ CAO (1 GIÂY/LẦN) GIẢM ĐỘ TRỄ KẾT NỐI
         function startBlynkDataPolling() {
             if (blynkFetchInterval) clearInterval(blynkFetchInterval);
 
             blynkFetchInterval = setInterval(() => {
                 if (!BLYNK_AUTH_TOKEN || isBleConnected) return;
 
+                const startTime = Date.now();
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 1200);
+
                 const url = `https://blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&v0&v1&v2&v3&v4&v5&v7&v8&v23`;
-                fetch(url)
+                fetch(url, { signal: controller.signal })
                     .then(response => response.json())
                     .then(data => {
+                        clearTimeout(timeoutId);
+                        const latency = Date.now() - startTime;
+
                         const valV0 = getBlynkVal(data, 'v0');
                         const valV1 = getBlynkVal(data, 'v1');
                         const valV2 = getBlynkVal(data, 'v2');
@@ -636,11 +809,21 @@
                         const valV7 = getBlynkVal(data, 'v7');
                         const valV8 = getBlynkVal(data, 'v8');
 
-                        if (valV0 !== undefined) document.getElementById('temp-ground-val').innerText = parseFloat(valV0).toFixed(1);
-                        if (valV1 !== undefined) document.getElementById('hum-ground-val').innerText = parseFloat(valV1).toFixed(1);
+                        let currentTemp = 0;
+                        let currentHum = 0;
 
-                        // KHÓA THỜI GIAN 5 GIÂY ĐỂ TRÁNH BỊ TIẾN TRÌNH TẢI NGẦM ĐỀ DỮ LIỆU CŨ VỀ GIAO DIỆN
-                        const isUserActive = (Date.now() - lastUserInteractionTime < 5000);
+                        if (valV0 !== undefined) {
+                            currentTemp = parseFloat(valV0);
+                            document.getElementById('temp-ground-val').innerText = currentTemp.toFixed(1);
+                        }
+                        if (valV1 !== undefined) {
+                            currentHum = parseFloat(valV1);
+                            document.getElementById('hum-ground-val').innerText = currentHum.toFixed(1);
+                        }
+
+                        if (currentTemp > 0) updateChartData(currentTemp, currentHum);
+
+                        const isUserActive = (Date.now() - lastUserInteractionTime < 4000);
 
                         if (!isUserActive) {
                             if (valV2 !== undefined) {
@@ -694,24 +877,24 @@
 
                         renderOverviewDevices();
                         renderEggSummary();
-                        updateHardwareStatus(true, "Blynk 4G");
+                        updateHardwareStatus(true, `4G - ${latency}ms`);
                     })
                     .catch(err => updateHardwareStatus(false));
-            }, 2000);
+            }, 1000);
         }
 
         function saveBlynkToken() {
             const tokenInput = document.getElementById('blynk-token-input').value.trim();
             if (tokenInput) {
                 BLYNK_AUTH_TOKEN = tokenInput;
-                alert("Đã lưu Auth Token Blynk thành công!");
+                alert("Đã lưu Auth Token Blynk!");
                 startBlynkDataPolling();
             }
         }
 
         async function connectBluetoothBLE() {
             if (!navigator.bluetooth) {
-                alert("Trình duyệt không hỗ trợ Web Bluetooth! Hãy dùng Google Chrome trên Android/Laptop.");
+                alert("Trình duyệt không hỗ trợ Web Bluetooth! Hãy dùng Google Chrome.");
                 return;
             }
 
@@ -732,8 +915,8 @@
                 bleTxCharacteristic.addEventListener('characteristicvaluechanged', handleBleNotification);
 
                 isBleConnected = true;
-                updateHardwareStatus(true, "Bluetooth");
-                alert("Đã kết nối Bluetooth thành công!");
+                updateHardwareStatus(true, "Bluetooth BLE");
+                alert("Đã kết nối Bluetooth!");
             } catch (error) {
                 console.error(error);
                 alert("Không thể kết nối Bluetooth!");
@@ -744,49 +927,28 @@
             const decoder = new TextDecoder('utf-8');
             const dataStr = decoder.decode(event.target.value);
 
-            if (dataStr.startsWith("DATA:")) {
-                const parts = dataStr.split(":");
-                const temp = parseFloat(parts[1]);
-                const hum = parseFloat(parts[2]);
-                const isAuto = (parseInt(parts[3]) === 1);
-                const fan = parseInt(parts[4]);
-                const heater = parseInt(parts[5]);
-                const pump = parseInt(parts[6]);
-                const eggStr = parts[7];
+            if (dataStr.startsWith("TEMP:")) {
+                const pairs = dataStr.split(",");
+                let temp = 0, hum = 0;
+                pairs.forEach(p => {
+                    const [k, v] = p.split(":");
+                    if (k === "TEMP") temp = parseFloat(v);
+                    if (k === "HUM") hum = parseFloat(v);
+                    if (k === "AUTO") {
+                        const isAuto = (parseInt(v) === 1);
+                        document.getElementById('master-auto-toggle').checked = isAuto;
+                        document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
+                        document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
+                    }
+                });
 
                 document.getElementById('temp-ground-val').innerText = temp.toFixed(1);
                 document.getElementById('hum-ground-val').innerText = hum.toFixed(1);
-
-                document.getElementById('master-auto-toggle').checked = isAuto;
-                document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
-                document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
-
-                const isUserActive = (Date.now() - lastUserInteractionTime < 5000);
-                if (!isUserActive) {
-                    document.getElementById('exhaustFanSlider').value = fan;
-                    document.getElementById('exhaustFanSpeedVal').innerText = fan + "%";
-
-                    document.getElementById('heaterPowerSlider').value = heater;
-                    document.getElementById('heaterPowerVal').innerText = heater + "%";
-
-                    document.getElementById('pumpFlowSlider').value = pump;
-                    document.getElementById('pumpFlowVal').innerText = pump + "%";
-                }
-
-                if (eggStr) {
-                    const eggItems = eggStr.split(";");
-                    eggItems.forEach((item, index) => {
-                        const subParts = item.split(",");
-                        if (subParts.length === 3 && eggsData[index]) {
-                            eggsData[index].day = parseInt(subParts[1]);
-                            eggsData[index].isAlive = (parseInt(subParts[2]) === 1);
-                        }
-                    });
-                }
+                if (temp > 0) updateChartData(temp, hum);
 
                 renderOverviewDevices();
                 renderEggSummary();
-                updateHardwareStatus(true, "Bluetooth");
+                updateHardwareStatus(true, "Bluetooth BLE");
             }
         }
 
@@ -818,7 +980,7 @@
             clearTimeout(sliderDebounceTimer);
             sliderDebounceTimer = setTimeout(() => {
                 sendToArduino(`FAN_EXHAUST:${val}`);
-            }, 300);
+            }, 200);
         }
 
         function updateHeaterPower(val) { 
@@ -835,7 +997,7 @@
             clearTimeout(sliderDebounceTimer);
             sliderDebounceTimer = setTimeout(() => {
                 sendToArduino(`HEATER_MOSFET:${val}`);
-            }, 300);
+            }, 200);
         }
 
         function updatePumpFlow(val) { 
@@ -852,7 +1014,7 @@
             clearTimeout(sliderDebounceTimer);
             sliderDebounceTimer = setTimeout(() => {
                 sendToArduino(`PUMP_FLOW:${val}`);
-            }, 300);
+            }, 200);
         }
 
         function renderEggSummary() {
@@ -870,7 +1032,7 @@
                 let scanBadgeHtml = isScanning ? `<div class="text-[9px] font-black text-sky-600 bg-sky-100 px-1.5 py-0.5 rounded-full animate-pulse mb-1"><i class="fa-solid fa-eye"></i> ĐANG SOI...</div>` : ``;
 
                 if (egg.isAlive) {
-                    card.className = `p-3.5 rounded-2xl cursor-pointer transition-all border ${isScanning ? 'egg-scanning-active' : (isSelected ? 'egg-card-selected' : 'bg-emerald-50/90 border-emerald-200')} text-center space-y-1 shadow-sm relative`;
+                    card.className = `p-3.5 rounded-2xl cursor-pointer transition-all border ${isScanning ? 'egg-scanning-active' : (isSelected ? 'border-amber-400 bg-amber-50' : 'bg-emerald-50/90 border-emerald-200')} text-center space-y-1 shadow-sm relative`;
                     card.innerHTML = `
                         ${scanBadgeHtml}
                         <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center text-lg">
@@ -885,7 +1047,7 @@
                         </div>
                     `;
                 } else {
-                    card.className = `p-3.5 rounded-2xl cursor-pointer transition-all border ${isScanning ? 'egg-scanning-active' : (isSelected ? 'egg-card-selected' : 'bg-rose-50/90 border-rose-200')} text-center space-y-1 shadow-sm relative`;
+                    card.className = `p-3.5 rounded-2xl cursor-pointer transition-all border ${isScanning ? 'egg-scanning-active' : (isSelected ? 'border-amber-400 bg-amber-50' : 'bg-rose-50/90 border-rose-200')} text-center space-y-1 shadow-sm relative`;
                     card.innerHTML = `
                         ${scanBadgeHtml}
                         <div class="w-9 h-9 rounded-full bg-rose-100 text-rose-600 mx-auto flex items-center justify-center text-lg">
@@ -929,7 +1091,7 @@
                     <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
                         <h2 class="text-base font-black text-slate-900">Chi Tiết Trứng Quả #${egg.id}</h2>
                         <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black ${egg.isAlive ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-                            ${egg.isAlive ? 'PHÔI KHỎE MẠNH' : 'TRỨNG HỎNG (ID 10 HUSKYLENS)'}
+                            ${egg.isAlive ? 'PHÔI KHỎE MẠNH' : 'TRỨNG HỎNG (ID 11 HUSKYLENS)'}
                         </span>
                     </div>
                     <div class="grid grid-cols-2 gap-2 text-xs">
@@ -1035,6 +1197,7 @@
                 document.getElementById('subpage-wrapper').classList.remove('hidden');
                 
                 initFluidNav();
+                initRealtimeChart();
                 renderOverviewDevices();
                 renderEggSummary();
                 switchTab('overview');
@@ -1051,7 +1214,7 @@
             const c = document.getElementById('reg-confirm').value.trim();
 
             if (!u || !p || p !== c || userDatabase[u]) {
-                document.getElementById('reg-error').classList.add('hidden');
+                document.getElementById('reg-error').classList.remove('hidden');
                 return;
             }
 
@@ -1064,11 +1227,7 @@
         }
 
         function handleLogout() {
-            document.getElementById('user-badge').classList.add('hidden');
-            document.getElementById('logout-btn').classList.add('hidden');
-            document.getElementById('page-auth').classList.remove('hidden');
-            document.getElementById('subpage-wrapper').classList.add('hidden');
-            if (blynkFetchInterval) clearInterval(blynkFetchInterval);
+            location.reload();
         }
 
         function initFluidNav() {
@@ -1102,6 +1261,7 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
             const activeContent = document.getElementById(`content-${tabId}`);
             if (activeContent) activeContent.classList.remove('hidden');
+            initFluidNav();
         }
 
         window.addEventListener('resize', () => initFluidNav());
