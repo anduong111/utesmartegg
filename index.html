@@ -266,7 +266,7 @@
                                 <span id="hum-ground-val" class="text-2xl sm:text-4xl font-black text-sky-600">0.0</span>
                                 <span class="text-slate-500 text-xs font-bold">%</span>
                             </div>
-                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Mục tiêu: <strong id="target-hum-val" class="text-emerald-600">62.5 %</strong></p>
+                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold"><strong id="target-hum-val" class="text-emerald-600"></strong></p>
                         </div>
 
                         <div class="ultra-glass p-3.5 sm:p-6 space-y-1.5 col-span-2 sm:col-span-1">
@@ -572,6 +572,7 @@
         // HÀM ROUTING LỆNH CHUẨN XÁC TÁCH RIÊNG CÁC CHÂN
         function sendToArduino(command) {
             console.log("[Lệnh gửi]:", command);
+            lastUserInteractionTime = Date.now(); // Khóa polling 5 giây khi người dùng thao tác
 
             if (isBleConnected && bleRxCharacteristic) {
                 const encoder = new TextEncoder();
@@ -583,27 +584,20 @@
 
             if (command.startsWith("MODE_AUTO:")) {
                 const isAuto = parseInt(command.split(":")[1]);
-                // Chỉ gửi duy nhất chân v2
                 fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=${isAuto}`)
                     .then(() => console.log(`[Blynk Cloud] Đã chuyển Auto V2 = ${isAuto}`))
                     .catch(err => console.error("[Blynk Lỗi]:", err));
             } 
             else if (command.startsWith("FAN_EXHAUST:")) {
                 const val = parseInt(command.split(":")[1]);
-                // Tắt Auto (v2=0) và Cập nhật Quạt (v3=val) riêng
-                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0`);
                 fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v3=${val}`);
             } 
             else if (command.startsWith("HEATER_MOSFET:")) {
                 const val = parseInt(command.split(":")[1]);
-                // Tắt Auto (v2=0) và Cập nhật Sưởi (v4=val)
-                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0`);
                 fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v4=${val}`);
             } 
             else if (command.startsWith("PUMP_FLOW:")) {
                 const val = parseInt(command.split(":")[1]);
-                // Tắt Auto (v2=0) và Cập nhật Bơm (v5=val)
-                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0`);
                 fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v5=${val}`);
             } 
             else if (command.startsWith("TOGGLE:")) {
@@ -618,7 +612,6 @@
                 else if (devId === "water_pump") targetPin = "v5";
 
                 if (targetPin) {
-                    fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=0`);
                     fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&${targetPin}=${val}`);
                 }
             }
@@ -630,7 +623,7 @@
             blynkFetchInterval = setInterval(() => {
                 if (!BLYNK_AUTH_TOKEN || isBleConnected) return;
 
-                const url = `https://blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&v0&v1&v2&v3&v4&v5&v7&v8`;
+                const url = `https://blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&v0&v1&v2&v3&v4&v5&v7&v8&v23`;
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
