@@ -10,8 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- CHART.JS DÙNG CHO BIỂU ĐỒ REALTIME -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -209,7 +207,7 @@
             <!-- SUBPAGES WRAPPER -->
             <div id="subpage-wrapper" class="hidden space-y-4 sm:space-y-6">
 
-                <!-- MENU DESKTOP KHÔNG BỊ BẮT DÒNG CÓ THÊM MỤC BIỂU ĐỒ -->
+                <!-- MENU DESKTOP -->
                 <div class="hidden md:flex justify-center w-full">
                     <nav id="fluid-nav-desktop" class="liquid-nav-container inline-flex items-center gap-1 overflow-x-auto max-w-full no-scrollbar">
                         <div id="fluid-pill-desktop" class="liquid-pill"></div>
@@ -220,12 +218,9 @@
                         <button onclick="switchTab('control')" id="tab-desktop-control" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
                             <i class="fa-solid fa-sliders text-emerald-600"></i><span>Điều chỉnh</span>
                         </button>
-                        
-                        <!-- THÊM MỤC BIỂU ĐỒ TRÊN THANH MENU -->
                         <button onclick="switchTab('chart')" id="tab-desktop-chart" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
                             <i class="fa-solid fa-chart-line text-purple-600"></i><span>Biểu đồ RT</span>
                         </button>
-
                         <button onclick="switchTab('information')" id="tab-desktop-information" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
                             <i class="fa-solid fa-egg text-amber-500"></i><span>Soi 6 quả trứng</span>
                         </button>
@@ -372,7 +367,7 @@
                     </div>
                 </div>
 
-                <!-- 3. TAB BIỂU ĐỒ REAL-TIME MỚI -->
+                <!-- 3. REAL-TIME CHART TAB -->
                 <div id="content-chart" class="tab-content hidden space-y-4 sm:space-y-6">
                     <div class="ultra-glass p-4 sm:p-6 space-y-4">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
@@ -394,7 +389,6 @@
                             </div>
                         </div>
 
-                        <!-- THỐNG KÊ NHANH CỦA BIỂU ĐỒ -->
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
                             <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200">
                                 <span class="text-[10px] text-amber-700 uppercase">Nhiệt độ hiện tại</span>
@@ -414,7 +408,6 @@
                             </div>
                         </div>
 
-                        <!-- CANVAS VẼ BIỂU ĐỒ -->
                         <div class="relative w-full h-[320px] sm:h-[400px] bg-white/60 p-2 rounded-2xl border border-slate-200">
                             <canvas id="realtimeChart"></canvas>
                         </div>
@@ -447,7 +440,6 @@
                 <!-- 5. SETTINGS TAB -->
                 <div id="content-settings" class="tab-content hidden space-y-4 sm:space-y-6">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        
                         <div class="ultra-glass p-4 sm:p-6 space-y-4 border-l-4 border-l-emerald-600">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2.5">
@@ -464,7 +456,7 @@
                             <div class="space-y-3 text-xs pt-1">
                                 <div>
                                     <label class="block text-slate-800 font-extrabold mb-1">Blynk Auth Token:</label>
-                                    <input type="text" id="blynk-token-input" value="Tuxm1DXdwSI2AvcSOO4GWGhLhYJg7N_3" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 font-mono font-bold text-slate-800 text-xs sm:text-sm">
+                                    <input type="text" id="blynk-token-input" value="pS3EyMjjinEknHgEUk0WMMRcSAs0r72i" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 font-mono font-bold text-slate-800 text-xs sm:text-sm">
                                 </div>
                                 <button onclick="saveBlynkToken()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs transition shadow-md">
                                     LƯU & KẾT NỐI BLYNK CLOUD 4G
@@ -498,11 +490,10 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- MENU MOBILE THÊM MỤC BIỂU ĐỒ -->
+                <!-- MENU MOBILE -->
                 <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-2 safe-bottom bg-slate-900/80 backdrop-blur-xl border-t border-white/10 shadow-2xl">
                     <nav id="fluid-nav-mobile" class="liquid-nav-container flex items-center justify-between w-full max-w-md mx-auto relative">
                         <div id="fluid-pill-mobile" class="liquid-pill"></div>
@@ -511,22 +502,18 @@
                             <i class="fa-solid fa-chart-pie text-sky-600 text-base mb-0.5"></i>
                             <span class="text-[10px] font-bold">Trạng thái</span>
                         </button>
-
                         <button onclick="switchTab('control')" id="tab-mobile-control" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-sliders text-emerald-600 text-base mb-0.5"></i>
                             <span class="text-[10px] font-bold">Điều chỉnh</span>
                         </button>
-
                         <button onclick="switchTab('chart')" id="tab-mobile-chart" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-chart-line text-purple-600 text-base mb-0.5"></i>
                             <span class="text-[10px] font-bold">Biểu đồ</span>
                         </button>
-
                         <button onclick="switchTab('information')" id="tab-mobile-information" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-egg text-amber-500 text-base mb-0.5"></i>
                             <span class="text-[10px] font-bold">Soi Trứng</span>
                         </button>
-
                         <button onclick="switchTab('settings')" id="tab-mobile-settings" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-gear text-slate-600 text-base mb-0.5"></i>
                             <span class="text-[10px] font-bold">Cài Đặt</span>
@@ -556,14 +543,13 @@
     </div>
 
     <script>
-        // THÊM TÀI KHOẢN MỚI DÀNH CHO GIẢNG VIÊN THẦY TẠ VĂN PHƯƠNG
-        const userDatabase = { 
-            "ThayTaVanPhuong": "UTE26151",
-            "AnduongG4": "12345", 
-            "BaKietG4": "12345" 
+        const rawUserDb = { 
+            "thaytavanphuong": "UTE26151",
+            "anduongg4": "12345", 
+            "bakietg4": "12345" 
         };
 
-        let BLYNK_AUTH_TOKEN = "Tuxm1DXdwSI2AvcSOO4GWGhLhYJg7N_3";
+        let BLYNK_AUTH_TOKEN = "pS3EyMjjinEknHgEUk0WMMRcSAs0r72i";
 
         let currentTab = 'overview';
         let pendingToggleDeviceId = null;
@@ -608,8 +594,9 @@
         function initRealtimeChart() {
             const canvas = document.getElementById('realtimeChart');
             if (!canvas) return;
-            const ctx = canvas.getContext('2d');
+            if (typeof Chart === 'undefined') return;
             
+            const ctx = canvas.getContext('2d');
             realtimeChartObj = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -718,6 +705,22 @@
             return undefined;
         }
 
+        // HÀM GỬI LỆNH BLYNK CLOUD SỬ DỤNG IMAGE BEACON (BYPASS 100% CORS & KHÔNG BỊ CHẶN TRUYỀN TỪ FILE:///)
+        function sendBlynkUpdate(pin, value) {
+            if (!BLYNK_AUTH_TOKEN) return;
+            
+            // Ép tên Datastream thành chữ HOA (V2, V3, V4, V5...)
+            const upperPin = pin.toUpperCase();
+            const token = encodeURIComponent(BLYNK_AUTH_TOKEN);
+            const urlSgp = `https://sgp1.blynk.cloud/external/api/update?token=${token}&${upperPin}=${value}`;
+
+            // Image Beacon bypasses CORS 100% khi mở file:///
+            const beacon = new Image();
+            beacon.src = urlSgp;
+            
+            console.log(`[Blynk 4G Sent] ${upperPin} = ${value}`);
+        }
+
         function saveAlertEmail() {
             const email = document.getElementById('alert-email-input').value.trim();
             if (!email || !email.includes('@')) {
@@ -732,10 +735,8 @@
                 return;
             }
 
-            if (BLYNK_AUTH_TOKEN) {
-                const url = `https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v8=${encodeURIComponent(email)}`;
-                fetch(url).then(res => alert(`Đã cập nhật Email nhận báo động: ${email}`));
-            }
+            sendBlynkUpdate("V8", encodeURIComponent(email));
+            alert(`Đã cập nhật Email nhận báo động: ${email}`);
         }
 
         function sendToArduino(command) {
@@ -751,19 +752,19 @@
 
             if (command.startsWith("MODE_AUTO:")) {
                 const isAuto = parseInt(command.split(":")[1]);
-                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v2=${isAuto}`);
+                sendBlynkUpdate("V2", isAuto);
             } 
             else if (command.startsWith("FAN_EXHAUST:")) {
                 const val = parseInt(command.split(":")[1]);
-                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v3=${val}`);
+                sendBlynkUpdate("V3", val);
             } 
             else if (command.startsWith("HEATER_MOSFET:")) {
                 const val = parseInt(command.split(":")[1]);
-                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v4=${val}`);
+                sendBlynkUpdate("V4", val);
             } 
             else if (command.startsWith("PUMP_FLOW:")) {
                 const val = parseInt(command.split(":")[1]);
-                fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v5=${val}`);
+                sendBlynkUpdate("V5", val);
             } 
             else if (command.startsWith("TOGGLE:")) {
                 const parts = command.split(":");
@@ -772,17 +773,16 @@
                 const val = (state === 1) ? 100 : 0;
                 
                 let targetPin = "";
-                if (devId === "exhaust_fan") targetPin = "v3";
-                else if (devId === "ptc_heater") targetPin = "v4";
-                else if (devId === "water_pump") targetPin = "v5";
+                if (devId === "exhaust_fan") targetPin = "V3";
+                else if (devId === "ptc_heater") targetPin = "V4";
+                else if (devId === "water_pump") targetPin = "V5";
 
                 if (targetPin) {
-                    fetch(`https://blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&${targetPin}=${val}`);
+                    sendBlynkUpdate(targetPin, val);
                 }
             }
         }
 
-        // POLLING DATA BLYNK TỐC ĐỘ CAO (1 GIÂY/LẦN) GIẢM ĐỘ TRỄ KẾT NỐI
         function startBlynkDataPolling() {
             if (blynkFetchInterval) clearInterval(blynkFetchInterval);
 
@@ -791,10 +791,13 @@
 
                 const startTime = Date.now();
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 1200);
+                const timeoutId = setTimeout(() => controller.abort(), 1500);
 
-                const url = `https://blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&v0&v1&v2&v3&v4&v5&v7&v8&v23`;
-                fetch(url, { signal: controller.signal })
+                const uSgp = `https://sgp1.blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&V0&V1&V2&V3&V4&V5&V7&V8&V23`;
+                const uGlobal = `https://blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&V0&V1&V2&V3&V4&V5&V7&V8&V23`;
+
+                fetch(uSgp, { signal: controller.signal })
+                    .catch(() => fetch(uGlobal, { signal: controller.signal }))
                     .then(response => response.json())
                     .then(data => {
                         clearTimeout(timeoutId);
@@ -812,49 +815,55 @@
                         let currentTemp = 0;
                         let currentHum = 0;
 
-                        if (valV0 !== undefined) {
+                        if (valV0 !== undefined && valV0 !== null && !isNaN(parseFloat(valV0))) {
                             currentTemp = parseFloat(valV0);
                             document.getElementById('temp-ground-val').innerText = currentTemp.toFixed(1);
                         }
-                        if (valV1 !== undefined) {
+                        if (valV1 !== undefined && valV1 !== null && !isNaN(parseFloat(valV1))) {
                             currentHum = parseFloat(valV1);
                             document.getElementById('hum-ground-val').innerText = currentHum.toFixed(1);
                         }
 
                         if (currentTemp > 0) updateChartData(currentTemp, currentHum);
 
-                        const isUserActive = (Date.now() - lastUserInteractionTime < 4000);
+                        const isUserActive = (Date.now() - lastUserInteractionTime < 8000);
 
                         if (!isUserActive) {
-                            if (valV2 !== undefined) {
+                            if (valV2 !== undefined && valV2 !== null && valV2 !== "") {
                                 const isAuto = (parseInt(valV2) === 1);
                                 document.getElementById('master-auto-toggle').checked = isAuto;
                                 document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
                                 document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
                             }
 
-                            if (valV3 !== undefined) {
+                            if (valV3 !== undefined && valV3 !== null && valV3 !== "") {
                                 const val = parseInt(valV3);
-                                document.getElementById('exhaustFanSlider').value = val;
-                                document.getElementById('exhaustFanSpeedVal').innerText = val + "%";
-                                const dev = incubatorDevices.find(d => d.id === 'exhaust_fan');
-                                if (dev) dev.state = (val > 0);
+                                if (!isNaN(val)) {
+                                    document.getElementById('exhaustFanSlider').value = val;
+                                    document.getElementById('exhaustFanSpeedVal').innerText = val + "%";
+                                    const dev = incubatorDevices.find(d => d.id === 'exhaust_fan');
+                                    if (dev) dev.state = (val > 0);
+                                }
                             }
 
-                            if (valV4 !== undefined) {
+                            if (valV4 !== undefined && valV4 !== null && valV4 !== "") {
                                 const val = parseInt(valV4);
-                                document.getElementById('heaterPowerSlider').value = val;
-                                document.getElementById('heaterPowerVal').innerText = val + "%";
-                                const dev = incubatorDevices.find(d => d.id === 'ptc_heater');
-                                if (dev) dev.state = (val > 0);
+                                if (!isNaN(val)) {
+                                    document.getElementById('heaterPowerSlider').value = val;
+                                    document.getElementById('heaterPowerVal').innerText = val + "%";
+                                    const dev = incubatorDevices.find(d => d.id === 'ptc_heater');
+                                    if (dev) dev.state = (val > 0);
+                                }
                             }
 
-                            if (valV5 !== undefined) {
+                            if (valV5 !== undefined && valV5 !== null && valV5 !== "") {
                                 const val = parseInt(valV5);
-                                document.getElementById('pumpFlowSlider').value = val;
-                                document.getElementById('pumpFlowVal').innerText = val + "%";
-                                const dev = incubatorDevices.find(d => d.id === 'water_pump');
-                                if (dev) dev.state = (val > 0);
+                                if (!isNaN(val)) {
+                                    document.getElementById('pumpFlowSlider').value = val;
+                                    document.getElementById('pumpFlowVal').innerText = val + "%";
+                                    const dev = incubatorDevices.find(d => d.id === 'water_pump');
+                                    if (dev) dev.state = (val > 0);
+                                }
                             }
                         }
 
@@ -971,7 +980,7 @@
             lastUserInteractionTime = Date.now();
             
             const autoToggle = document.getElementById('master-auto-toggle');
-            if (autoToggle && autoToggle.checked) {
+            if (autoToggle) {
                 autoToggle.checked = false;
                 document.getElementById('master-mode-label').innerText = "THỦ CÔNG";
                 document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
@@ -979,8 +988,9 @@
             
             clearTimeout(sliderDebounceTimer);
             sliderDebounceTimer = setTimeout(() => {
-                sendToArduino(`FAN_EXHAUST:${val}`);
-            }, 200);
+                sendToArduino(`MODE_AUTO:0`);
+                setTimeout(() => sendToArduino(`FAN_EXHAUST:${val}`), 150);
+            }, 300);
         }
 
         function updateHeaterPower(val) { 
@@ -988,7 +998,7 @@
             lastUserInteractionTime = Date.now();
             
             const autoToggle = document.getElementById('master-auto-toggle');
-            if (autoToggle && autoToggle.checked) {
+            if (autoToggle) {
                 autoToggle.checked = false;
                 document.getElementById('master-mode-label').innerText = "THỦ CÔNG";
                 document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
@@ -996,8 +1006,9 @@
             
             clearTimeout(sliderDebounceTimer);
             sliderDebounceTimer = setTimeout(() => {
-                sendToArduino(`HEATER_MOSFET:${val}`);
-            }, 200);
+                sendToArduino(`MODE_AUTO:0`);
+                setTimeout(() => sendToArduino(`HEATER_MOSFET:${val}`), 150);
+            }, 300);
         }
 
         function updatePumpFlow(val) { 
@@ -1005,7 +1016,7 @@
             lastUserInteractionTime = Date.now();
             
             const autoToggle = document.getElementById('master-auto-toggle');
-            if (autoToggle && autoToggle.checked) {
+            if (autoToggle) {
                 autoToggle.checked = false;
                 document.getElementById('master-mode-label').innerText = "THỦ CÔNG";
                 document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
@@ -1013,8 +1024,9 @@
             
             clearTimeout(sliderDebounceTimer);
             sliderDebounceTimer = setTimeout(() => {
-                sendToArduino(`PUMP_FLOW:${val}`);
-            }, 200);
+                sendToArduino(`MODE_AUTO:0`);
+                setTimeout(() => sendToArduino(`PUMP_FLOW:${val}`), 150);
+            }, 300);
         }
 
         function renderEggSummary() {
@@ -1157,7 +1169,14 @@
                 const dev = incubatorDevices.find(d => d.id === pendingToggleDeviceId);
                 if (dev) {
                     dev.state = pendingTargetState;
-                    sendToArduino(`TOGGLE:${dev.id}:${dev.state ? 1 : 0}`);
+                    const autoToggle = document.getElementById('master-auto-toggle');
+                    if (autoToggle) {
+                        autoToggle.checked = false;
+                        document.getElementById('master-mode-label').innerText = "THỦ CÔNG";
+                        document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
+                    }
+                    sendToArduino(`MODE_AUTO:0`);
+                    setTimeout(() => sendToArduino(`TOGGLE:${dev.id}:${dev.state ? 1 : 0}`), 50);
                 }
                 renderOverviewDevices();
             }
@@ -1185,21 +1204,25 @@
         }
 
         function handleLogin(e) {
-            e.preventDefault();
-            const u = document.getElementById('login-username').value.trim();
-            const p = document.getElementById('login-password').value.trim();
+            if (e) e.preventDefault();
+            const uInput = document.getElementById('login-username').value.trim();
+            const pInput = document.getElementById('login-password').value.trim();
+            const uLower = uInput.toLowerCase();
 
-            if (userDatabase[u] && userDatabase[u] === p) {
-                document.getElementById('current-user-display').textContent = u;
+            if (rawUserDb[uLower] && rawUserDb[uLower] === pInput) {
+                document.getElementById('login-error').classList.add('hidden');
+                document.getElementById('current-user-display').textContent = uInput;
                 document.getElementById('user-badge').classList.remove('hidden');
                 document.getElementById('logout-btn').classList.remove('hidden');
+                
                 document.getElementById('page-auth').classList.add('hidden');
                 document.getElementById('subpage-wrapper').classList.remove('hidden');
                 
-                initFluidNav();
-                initRealtimeChart();
-                renderOverviewDevices();
-                renderEggSummary();
+                try { initFluidNav(); } catch(err) {}
+                try { initRealtimeChart(); } catch(err) {}
+                try { renderOverviewDevices(); } catch(err) {}
+                try { renderEggSummary(); } catch(err) {}
+                
                 switchTab('overview');
                 startBlynkDataPolling();
             } else {
@@ -1212,14 +1235,15 @@
             const u = document.getElementById('reg-username').value.trim();
             const p = document.getElementById('reg-password').value.trim();
             const c = document.getElementById('reg-confirm').value.trim();
+            const uLower = u.toLowerCase();
 
-            if (!u || !p || p !== c || userDatabase[u]) {
+            if (!u || !p || p !== c || rawUserDb[uLower]) {
                 document.getElementById('reg-error').classList.remove('hidden');
                 return;
             }
 
             document.getElementById('reg-error').classList.add('hidden');
-            userDatabase[u] = p;
+            rawUserDb[uLower] = p;
             alert(`Đăng ký tài khoản '${u}' thành công!`);
             switchAuthTab('login');
             document.getElementById('login-username').value = u;
