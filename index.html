@@ -122,7 +122,7 @@
                     </div>
                     <div class="min-w-0">
                         <h1 class="font-extrabold text-xs sm:text-base tracking-tight text-white truncate">Group 4 - HCMUTE FAE</h1>
-                        <div class="text-[10px] sm:text-xs text-slate-300 truncate">Tủ Ấp Trứng Thông Minh (4G Control Web)</div>
+                        <div class="text-[10px] sm:text-xs text-slate-300 truncate">Tủ Ấp Trứng Thông Minh (Dual PTC 250W)</div>
                     </div>
                 </div>
 
@@ -154,7 +154,7 @@
                             <i class="fa-solid fa-egg"></i>
                         </div>
                         <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">HỆ THỐNG ẤP TRỨNG</h2>
-                        <p class="text-xs text-slate-600 font-bold">Đăng nhập tài khoản điều khiển tủ ấp qua 4G</p>
+                        <p class="text-xs text-slate-600 font-bold">Đăng nhập tài khoản điều khiển tủ ấp qua Cloud & BLE</p>
                     </div>
 
                     <div class="flex bg-slate-200/80 p-1 rounded-2xl text-xs font-bold">
@@ -291,43 +291,112 @@
                     <div class="ultra-glass p-4 sm:p-6 space-y-3">
                         <div class="flex items-center justify-between border-b border-slate-200/60 pb-3">
                             <div>
-                                <h3 class="font-black text-sm sm:text-lg text-slate-900">Bật / Tắt Nhanh Thiết Bị (4G)</h3>
-                                <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Công tắc nhanh điều khiển trực tiếp qua Blynk Cloud</p>
+                                <h3 class="font-black text-sm sm:text-lg text-slate-900">Trạng Thái & Bật/Tắt Độc Lập 5 Thiết Bị</h3>
+                                <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Bật/tắt riêng lẻ từng thiết bị (tự chuyển sang Manual khi bấm)</p>
                             </div>
                         </div>
 
-                        <div id="quick-devices-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+                        <div id="quick-devices-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
                     </div>
                 </div>
 
                 <!-- 2. CONTROL TAB -->
                 <div id="content-control" class="tab-content hidden space-y-4 sm:space-y-6">
-                    <div class="ultra-glass p-4 sm:p-6 flex items-center justify-between gap-3 border-l-4 border-l-emerald-500">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-robot"></i>
+                    <div class="ultra-glass p-4 sm:p-6 space-y-4 border-l-4 border-l-emerald-500">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm sm:text-lg font-black text-slate-900">Chế Độ Tự Động (Auto) / Thủ Công (Manual)</h3>
+                                    <p class="text-[10px] sm:text-xs text-slate-600 font-semibold">Manual trao 100% quyền kiểm soát độc lập từng thiết bị cho người dùng</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-sm sm:text-lg font-black text-slate-900">Chế Độ Tự Động (Auto Mode)</h3>
-                                <p class="text-[10px] sm:text-xs text-slate-600 font-semibold">Máy tự động điều chỉnh Nhiệt độ & Độ ẩm theo tuổi trứng</p>
+
+                            <div class="flex items-center gap-2 self-end sm:self-auto">
+                                <button onclick="turnOffAllManualDevices()" class="px-3 py-2 rounded-2xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-extrabold text-[11px] transition flex items-center gap-1">
+                                    <i class="fa-solid fa-power-off"></i> Tắt Hết (0%)
+                                </button>
+
+                                <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-2xl border border-slate-200 shadow-sm shrink-0">
+                                    <span id="master-mode-label" class="text-[11px] font-black text-emerald-600 uppercase">TỰ ĐỘNG</span>
+                                    <label class="ios-switch">
+                                        <input type="checkbox" id="master-auto-toggle" checked onchange="toggleMasterAuto(this.checked)">
+                                        <span class="ios-slider"></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-2xl border border-slate-200 shadow-sm shrink-0">
-                            <span id="master-mode-label" class="text-[11px] font-black text-emerald-600 uppercase">TỰ ĐỘNG</span>
-                            <label class="ios-switch">
-                                <input type="checkbox" id="master-auto-toggle" checked onchange="toggleMasterAuto(this.checked)">
-                                <span class="ios-slider"></span>
-                            </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-200/70 text-xs">
+                            <div class="bg-amber-50/90 border border-amber-200 rounded-xl px-3 py-2 flex items-center justify-between">
+                                <span class="font-bold text-amber-800"><i class="fa-solid fa-temperature-half mr-1"></i>Nhiệt độ thực tế:</span>
+                                <span id="control-live-temp" class="font-black text-amber-600 text-sm">-- °C / 37.8 °C</span>
+                            </div>
+                            <div class="bg-sky-50/90 border border-sky-200 rounded-xl px-3 py-2 flex items-center justify-between">
+                                <span class="font-bold text-sky-800"><i class="fa-solid fa-droplet mr-1"></i>Độ ẩm thực tế:</span>
+                                <span id="control-live-hum" class="font-black text-sky-600 text-sm">-- %</span>
+                            </div>
+                            <div class="bg-emerald-50/90 border border-emerald-200 rounded-xl px-3 py-2 flex items-center justify-between">
+                                <span class="font-bold text-emerald-800">Quyền điều khiển:</span>
+                                <span id="control-phase-badge" class="font-black text-emerald-700 text-[11px] uppercase">GIA NHIỆT 100% -> 37.8°C</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
-                        <div class="ultra-glass p-4 sm:p-6 space-y-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+                        <!-- 1. Sưởi Kép PTC -->
+                        <div class="ultra-glass p-4 sm:p-5 space-y-3 border-t-4 border-t-amber-500">
+                            <div class="flex items-center justify-between border-b pb-2">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-fire-burner text-amber-600 text-base"></i>
+                                    <div>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">1. Sưởi Kép PTC (V4)</h4>
+                                        <div class="flex items-center gap-1 mt-0.5">
+                                            <span class="text-[9px] font-extrabold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">2 Cầu H (250W)</span>
+                                            <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span id="heaterPowerVal" class="text-base font-black text-amber-600 block">0%</span>
+                                    <span id="heaterWattVal" class="text-[10px] font-bold text-slate-500">0W / 250W</span>
+                                </div>
+                            </div>
+                            <input type="range" id="heaterPowerSlider" min="0" max="100" value="0" oninput="updateHeaterPower(this.value)">
+                            <div class="flex justify-between text-[10px] text-slate-500 font-bold">
+                                <span>0% (0W)</span><span>50% (125W)</span><span>100% (250W)</span>
+                            </div>
+                        </div>
+
+                        <!-- 2. Quạt Thổi PTC -->
+                        <div class="ultra-glass p-4 sm:p-5 space-y-3 border-t-4 border-t-orange-400">
+                            <div class="flex items-center justify-between border-b pb-2">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-wind text-orange-500 text-base"></i>
+                                    <div>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">2. Quạt Thổi PTC (V24)</h4>
+                                        <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
+                                    </div>
+                                </div>
+                                <span id="ptcFanSpeedVal" class="text-base font-black text-orange-600">0%</span>
+                            </div>
+                            <input type="range" id="ptcFanSlider" min="0" max="100" value="0" oninput="updatePtcFanSpeed(this.value)">
+                            <div class="flex justify-between text-[10px] text-slate-500 font-bold">
+                                <span>Tắt (0%)</span><span>50%</span><span>Max (100%)</span>
+                            </div>
+                        </div>
+
+                        <!-- 3. Quạt Hút Gió -->
+                        <div class="ultra-glass p-4 sm:p-5 space-y-3 border-t-4 border-t-sky-500">
                             <div class="flex items-center justify-between border-b pb-2">
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-fan text-sky-600 text-base"></i>
-                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Quạt Hút Gió (V3)</h4>
+                                    <div>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">3. Quạt Hút Gió (V3)</h4>
+                                        <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
+                                    </div>
                                 </div>
                                 <span id="exhaustFanSpeedVal" class="text-base font-black text-sky-600">0%</span>
                             </div>
@@ -337,29 +406,37 @@
                             </div>
                         </div>
 
-                        <div class="ultra-glass p-4 sm:p-6 space-y-3">
+                        <!-- 4. Bơm Tạo Ẩm -->
+                        <div class="ultra-glass p-4 sm:p-5 space-y-3 border-t-4 border-t-teal-500">
                             <div class="flex items-center justify-between border-b pb-2">
                                 <div class="flex items-center gap-2">
-                                    <i class="fa-solid fa-fire-burner text-amber-600 text-base"></i>
-                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Sưởi PTC IBT-2 (V4)</h4>
+                                    <i class="fa-solid fa-water text-teal-600 text-base"></i>
+                                    <div>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">4. Bơm Tạo Ẩm (V5)</h4>
+                                        <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
+                                    </div>
                                 </div>
-                                <span id="heaterPowerVal" class="text-base font-black text-amber-600">0%</span>
+                                <span id="pumpFlowVal" class="text-base font-black text-teal-600">0%</span>
                             </div>
-                            <input type="range" id="heaterPowerSlider" min="0" max="100" value="0" oninput="updateHeaterPower(this.value)">
+                            <input type="range" id="pumpFlowSlider" min="0" max="100" value="0" oninput="updatePumpFlow(this.value)">
                             <div class="flex justify-between text-[10px] text-slate-500 font-bold">
                                 <span>Tắt (0%)</span><span>50%</span><span>Max (100%)</span>
                             </div>
                         </div>
 
-                        <div class="ultra-glass p-4 sm:p-6 space-y-3">
+                        <!-- 5. Quạt Tản Ẩm -->
+                        <div class="ultra-glass p-4 sm:p-5 space-y-3 border-t-4 border-t-cyan-500">
                             <div class="flex items-center justify-between border-b pb-2">
                                 <div class="flex items-center gap-2">
-                                    <i class="fa-solid fa-water text-teal-600 text-base"></i>
-                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900">Bơm Tạo Ẩm (V5)</h4>
+                                    <i class="fa-solid fa-fan text-cyan-600 text-base"></i>
+                                    <div>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">5. Quạt Tản Ẩm (V23)</h4>
+                                        <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
+                                    </div>
                                 </div>
-                                <span id="pumpFlowVal" class="text-base font-black text-teal-600">0%</span>
+                                <span id="humidityFanSpeedVal" class="text-base font-black text-cyan-600">0%</span>
                             </div>
-                            <input type="range" id="pumpFlowSlider" min="0" max="100" value="0" oninput="updatePumpFlow(this.value)">
+                            <input type="range" id="humidityFanSlider" min="0" max="100" value="0" oninput="updateHumidityFanSpeed(this.value)">
                             <div class="flex justify-between text-[10px] text-slate-500 font-bold">
                                 <span>Tắt (0%)</span><span>50%</span><span>Max (100%)</span>
                             </div>
@@ -376,7 +453,7 @@
                                     <i class="fa-solid fa-chart-line text-purple-600"></i>
                                     <span>Biểu Đồ Thông Số Nhiệt Độ & Độ Ẩm Theo Thời Gian Thực</span>
                                 </h3>
-                                <p class="text-[10px] sm:text-xs text-slate-500">Cập nhật liên tục từ tủ ấp 50x50x50 cm</p>
+                                <p class="text-[10px] sm:text-xs text-slate-500">Cập nhật liên tục mỗi 1 giây từ tủ ấp 50x50x50 cm (Dual PTC 250W)</p>
                             </div>
 
                             <div class="flex items-center gap-2">
@@ -531,7 +608,7 @@
                 <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-circle-question"></i></div>
                 <div>
                     <h3 class="text-base font-black text-slate-900">Xác Nhận Thao Tác?</h3>
-                    <p class="text-xs text-slate-600 mt-1 font-medium">Bạn có chắc muốn thay đổi trạng thái thiết bị này không?</p>
+                    <p class="text-xs text-slate-600 mt-1 font-medium">Thao tác này sẽ chuyển sang chế độ Thủ Công (Manual) để bạn tự kiểm soát thiết bị.</p>
                 </div>
                 <div class="grid grid-cols-2 gap-2.5 pt-1">
                     <button onclick="closeModal(false)" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-extrabold text-xs">HỦY BỎ</button>
@@ -563,8 +640,16 @@
         let bleTxCharacteristic = null;
         let isBleConnected = false;
 
-        let sliderDebounceTimer = null;
-        let lastUserInteractionTime = 0;
+        // Hàng đợi BLE tuần tự chống lỗi "GATT operation already in progress"
+        let bleWriteQueue = [];
+        let isBleWriting = false;
+
+        let sliderDebounceTimers = {};
+        let lastModeToggleTime = 0;
+        let lastManualActionTime = 0;
+        let userManualOverrideLock = false;
+        let initialManualSyncDone = false;
+        let latestMeasuredTemp = 0;
 
         let isChartPaused = false;
         let realtimeChartObj = null;
@@ -572,9 +657,11 @@
         let humHistoryData = [];
 
         const incubatorDevices = [
-            { id: 'exhaust_fan', nameVI: 'Quạt Hút Gió (V3)', icon: 'fa-fan', state: false },
-            { id: 'ptc_heater', nameVI: 'Sưởi PTC IBT-2 (V4)', icon: 'fa-fire-burner', state: false },
-            { id: 'water_pump', nameVI: 'Bơm Tạo Ẩm (V5)', icon: 'fa-water', state: false }
+            { id: 'ptc_heater',   nameVI: 'Sưởi Kép PTC 250W (V4)', icon: 'fa-fire-burner', state: false, pct: 0 },
+            { id: 'ptc_fan',      nameVI: 'Quạt Thổi PTC (V24)',    icon: 'fa-wind',        state: false, pct: 0 },
+            { id: 'exhaust_fan',  nameVI: 'Quạt Hút Gió (V3)',      icon: 'fa-fan',         state: false, pct: 0 },
+            { id: 'water_pump',   nameVI: 'Bơm Tạo Ẩm (V5)',        icon: 'fa-water',       state: false, pct: 0 },
+            { id: 'humidity_fan', nameVI: 'Quạt Tản Ẩm (V23)',      icon: 'fa-fan',         state: false, pct: 0 }
         ];
 
         let eggsData = [
@@ -593,8 +680,7 @@
 
         function initRealtimeChart() {
             const canvas = document.getElementById('realtimeChart');
-            if (!canvas) return;
-            if (typeof Chart === 'undefined') return;
+            if (!canvas || typeof Chart === 'undefined') return;
             
             const ctx = canvas.getContext('2d');
             realtimeChartObj = new Chart(ctx, {
@@ -705,20 +791,85 @@
             return undefined;
         }
 
-        // HÀM GỬI LỆNH BLYNK CLOUD SỬ DỤNG IMAGE BEACON (BYPASS 100% CORS & KHÔNG BỊ CHẶN TRUYỀN TỪ FILE:///)
+        function updateModeBadgesUI(isAuto, statusStr = "") {
+            document.getElementById('master-auto-toggle').checked = isAuto;
+            document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
+            document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL - USER)";
+
+            const phaseBadge = document.getElementById('control-phase-badge');
+            if (phaseBadge) {
+                if (!isAuto) {
+                    phaseBadge.innerText = "TOÀN QUYỀN NGƯỜI DÙNG (MANUAL)";
+                    phaseBadge.className = "font-black text-indigo-700 text-[11px] uppercase";
+                } else if (statusStr.includes("PREHEAT") || (latestMeasuredTemp > 0 && latestMeasuredTemp < 37.8)) {
+                    phaseBadge.innerText = "GIA NHIỆT 100% -> 37.8°C";
+                    phaseBadge.className = "font-black text-amber-600 text-[11px] uppercase";
+                } else {
+                    phaseBadge.innerText = "ĐIỀU KHIỂN PID GIỮ NHIỆT";
+                    phaseBadge.className = "font-black text-emerald-700 text-[11px] uppercase";
+                }
+            }
+
+            document.querySelectorAll('.device-mode-tag').forEach(tag => {
+                if (isAuto) {
+                    tag.innerText = "AUTO LIVE";
+                    tag.className = "device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700";
+                } else {
+                    tag.innerText = "MANUAL USER";
+                    tag.className = "device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700";
+                }
+            });
+        }
+
+        function syncHeaterUI(val) {
+            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            const watts = Math.round((pct / 100) * 250);
+            document.getElementById('heaterPowerSlider').value = pct;
+            document.getElementById('heaterPowerVal').innerText = pct + "%";
+            document.getElementById('heaterWattVal').innerText = watts + "W / 250W";
+            const dev = incubatorDevices.find(d => d.id === 'ptc_heater');
+            if (dev) { dev.state = (pct > 0); dev.pct = pct; }
+        }
+
+        function syncPtcFanUI(val) {
+            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            document.getElementById('ptcFanSlider').value = pct;
+            document.getElementById('ptcFanSpeedVal').innerText = pct + "%";
+            const dev = incubatorDevices.find(d => d.id === 'ptc_fan');
+            if (dev) { dev.state = (pct > 0); dev.pct = pct; }
+        }
+
+        function syncExhaustUI(val) {
+            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            document.getElementById('exhaustFanSlider').value = pct;
+            document.getElementById('exhaustFanSpeedVal').innerText = pct + "%";
+            const dev = incubatorDevices.find(d => d.id === 'exhaust_fan');
+            if (dev) { dev.state = (pct > 0); dev.pct = pct; }
+        }
+
+        function syncPumpUI(val) {
+            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            document.getElementById('pumpFlowSlider').value = pct;
+            document.getElementById('pumpFlowVal').innerText = pct + "%";
+            const dev = incubatorDevices.find(d => d.id === 'water_pump');
+            if (dev) { dev.state = (pct > 0); dev.pct = pct; }
+        }
+
+        function syncHumidityFanUI(val) {
+            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            document.getElementById('humidityFanSlider').value = pct;
+            document.getElementById('humidityFanSpeedVal').innerText = pct + "%";
+            const dev = incubatorDevices.find(d => d.id === 'humidity_fan');
+            if (dev) { dev.state = (pct > 0); dev.pct = pct; }
+        }
+
         function sendBlynkUpdate(pin, value) {
             if (!BLYNK_AUTH_TOKEN) return;
-            
-            // Ép tên Datastream thành chữ HOA (V2, V3, V4, V5...)
             const upperPin = pin.toUpperCase();
             const token = encodeURIComponent(BLYNK_AUTH_TOKEN);
             const urlSgp = `https://sgp1.blynk.cloud/external/api/update?token=${token}&${upperPin}=${value}`;
-
-            // Image Beacon bypasses CORS 100% khi mở file:///
             const beacon = new Image();
             beacon.src = urlSgp;
-            
-            console.log(`[Blynk 4G Sent] ${upperPin} = ${value}`);
         }
 
         function saveAlertEmail() {
@@ -729,8 +880,7 @@
             }
 
             if (isBleConnected && bleRxCharacteristic) {
-                const encoder = new TextEncoder();
-                bleRxCharacteristic.writeValue(encoder.encode(`SET_EMAIL:${email}`)).catch(err => console.error(err));
+                enqueueBleCommand(`SET_EMAIL:${email}`);
                 alert(`Đã cập nhật Email qua Bluetooth: ${email}`);
                 return;
             }
@@ -739,12 +889,51 @@
             alert(`Đã cập nhật Email nhận báo động: ${email}`);
         }
 
-        function sendToArduino(command) {
-            lastUserInteractionTime = Date.now();
+        // Hàng đợi gửi lệnh BLE tuần tự, loại bỏ trùng lặp cùng loại lệnh để phản hồi tức thì
+        function enqueueBleCommand(command) {
+            if (!isBleConnected || !bleRxCharacteristic) return;
 
+            const prefix = command.includes(':') ? command.split(':')[0] + ':' : command;
+            bleWriteQueue = bleWriteQueue.filter(item => !item.startsWith(prefix));
+            bleWriteQueue.push(command);
+            processBleWriteQueue();
+        }
+
+        async function processBleWriteQueue() {
+            if (isBleWriting || bleWriteQueue.length === 0) return;
+            if (!isBleConnected || !bleRxCharacteristic) {
+                bleWriteQueue = [];
+                return;
+            }
+
+            isBleWriting = true;
+            const cmd = bleWriteQueue.shift();
+            const encoder = new TextEncoder();
+            const payload = encoder.encode(cmd);
+
+            try {
+                if (typeof bleRxCharacteristic.writeValueWithoutResponse === 'function') {
+                    await bleRxCharacteristic.writeValueWithoutResponse(payload);
+                } else {
+                    await bleRxCharacteristic.writeValue(payload);
+                }
+            } catch (err) {
+                try {
+                    await bleRxCharacteristic.writeValue(payload);
+                } catch (err2) {
+                    console.error("BLE Write Error:", err2);
+                }
+            } finally {
+                isBleWriting = false;
+                if (bleWriteQueue.length > 0) {
+                    setTimeout(processBleWriteQueue, 15);
+                }
+            }
+        }
+
+        function sendToArduino(command) {
             if (isBleConnected && bleRxCharacteristic) {
-                const encoder = new TextEncoder();
-                bleRxCharacteristic.writeValue(encoder.encode(command)).catch(err => console.error(err));
+                enqueueBleCommand(command);
                 return;
             }
 
@@ -755,30 +944,49 @@
                 sendBlynkUpdate("V2", isAuto);
             } 
             else if (command.startsWith("FAN_EXHAUST:")) {
-                const val = parseInt(command.split(":")[1]);
-                sendBlynkUpdate("V3", val);
+                sendBlynkUpdate("V3", parseInt(command.split(":")[1]));
             } 
             else if (command.startsWith("HEATER_MOSFET:")) {
-                const val = parseInt(command.split(":")[1]);
-                sendBlynkUpdate("V4", val);
-            } 
+                sendBlynkUpdate("V4", parseInt(command.split(":")[1]));
+            }
+            else if (command.startsWith("FAN_PTC:")) {
+                sendBlynkUpdate("V24", parseInt(command.split(":")[1]));
+            }
             else if (command.startsWith("PUMP_FLOW:")) {
-                const val = parseInt(command.split(":")[1]);
-                sendBlynkUpdate("V5", val);
-            } 
+                sendBlynkUpdate("V5", parseInt(command.split(":")[1]));
+            }
+            else if (command.startsWith("FAN_HUMIDITY:")) {
+                sendBlynkUpdate("V23", parseInt(command.split(":")[1]));
+            }
+            else if (command === "MANUAL_ALL_OFF") {
+                sendBlynkUpdate("V2", 0);
+                setTimeout(() => sendBlynkUpdate("V4", 0), 40);
+                setTimeout(() => sendBlynkUpdate("V24", 0), 80);
+                setTimeout(() => sendBlynkUpdate("V3", 0), 120);
+                setTimeout(() => sendBlynkUpdate("V5", 0), 160);
+                setTimeout(() => sendBlynkUpdate("V23", 0), 200);
+            }
             else if (command.startsWith("TOGGLE:")) {
                 const parts = command.split(":");
                 const devId = parts[1];
                 const state = parseInt(parts[2]);
                 const val = (state === 1) ? 100 : 0;
                 
-                let targetPin = "";
-                if (devId === "exhaust_fan") targetPin = "V3";
-                else if (devId === "ptc_heater") targetPin = "V4";
-                else if (devId === "water_pump") targetPin = "V5";
-
-                if (targetPin) {
-                    sendBlynkUpdate(targetPin, val);
+                if (devId === "ptc_heater") {
+                    syncHeaterUI(val);
+                    sendBlynkUpdate("V4", val);
+                } else if (devId === "ptc_fan") {
+                    syncPtcFanUI(val);
+                    sendBlynkUpdate("V24", val);
+                } else if (devId === "exhaust_fan") {
+                    syncExhaustUI(val);
+                    sendBlynkUpdate("V3", val);
+                } else if (devId === "water_pump") {
+                    syncPumpUI(val);
+                    sendBlynkUpdate("V5", val);
+                } else if (devId === "humidity_fan") {
+                    syncHumidityFanUI(val);
+                    sendBlynkUpdate("V23", val);
                 }
             }
         }
@@ -791,10 +999,10 @@
 
                 const startTime = Date.now();
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 1500);
+                const timeoutId = setTimeout(() => controller.abort(), 1400);
 
-                const uSgp = `https://sgp1.blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&V0&V1&V2&V3&V4&V5&V7&V8&V23`;
-                const uGlobal = `https://blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&V0&V1&V2&V3&V4&V5&V7&V8&V23`;
+                const uSgp = `https://sgp1.blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&V0&V1&V2&V3&V4&V5&V7&V8&V18&V23&V24`;
+                const uGlobal = `https://blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&V0&V1&V2&V3&V4&V5&V7&V8&V18&V23&V24`;
 
                 fetch(uSgp, { signal: controller.signal })
                     .catch(() => fetch(uGlobal, { signal: controller.signal }))
@@ -811,60 +1019,42 @@
                         const valV5 = getBlynkVal(data, 'v5');
                         const valV7 = getBlynkVal(data, 'v7');
                         const valV8 = getBlynkVal(data, 'v8');
+                        const valV18 = String(getBlynkVal(data, 'v18') || "");
+                        const valV23 = getBlynkVal(data, 'v23');
+                        const valV24 = getBlynkVal(data, 'v24');
 
                         let currentTemp = 0;
                         let currentHum = 0;
 
                         if (valV0 !== undefined && valV0 !== null && !isNaN(parseFloat(valV0))) {
                             currentTemp = parseFloat(valV0);
+                            latestMeasuredTemp = currentTemp;
                             document.getElementById('temp-ground-val').innerText = currentTemp.toFixed(1);
+                            document.getElementById('control-live-temp').innerText = currentTemp.toFixed(1) + ' °C / 37.8 °C';
                         }
                         if (valV1 !== undefined && valV1 !== null && !isNaN(parseFloat(valV1))) {
                             currentHum = parseFloat(valV1);
                             document.getElementById('hum-ground-val').innerText = currentHum.toFixed(1);
+                            document.getElementById('control-live-hum').innerText = currentHum.toFixed(1) + ' %';
                         }
 
                         if (currentTemp > 0) updateChartData(currentTemp, currentHum);
 
-                        const isUserActive = (Date.now() - lastUserInteractionTime < 8000);
+                        const isModeRecentlyToggled = (Date.now() - lastModeToggleTime < 2500);
+                        let isAutoActive = document.getElementById('master-auto-toggle').checked;
 
-                        if (!isUserActive) {
-                            if (valV2 !== undefined && valV2 !== null && valV2 !== "") {
-                                const isAuto = (parseInt(valV2) === 1);
-                                document.getElementById('master-auto-toggle').checked = isAuto;
-                                document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
-                                document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
-                            }
+                        if (!isModeRecentlyToggled && !userManualOverrideLock && valV2 !== undefined && valV2 !== null && valV2 !== "") {
+                            isAutoActive = (parseInt(valV2) === 1);
+                        }
+                        updateModeBadgesUI(isAutoActive, valV18);
 
-                            if (valV3 !== undefined && valV3 !== null && valV3 !== "") {
-                                const val = parseInt(valV3);
-                                if (!isNaN(val)) {
-                                    document.getElementById('exhaustFanSlider').value = val;
-                                    document.getElementById('exhaustFanSpeedVal').innerText = val + "%";
-                                    const dev = incubatorDevices.find(d => d.id === 'exhaust_fan');
-                                    if (dev) dev.state = (val > 0);
-                                }
-                            }
-
-                            if (valV4 !== undefined && valV4 !== null && valV4 !== "") {
-                                const val = parseInt(valV4);
-                                if (!isNaN(val)) {
-                                    document.getElementById('heaterPowerSlider').value = val;
-                                    document.getElementById('heaterPowerVal').innerText = val + "%";
-                                    const dev = incubatorDevices.find(d => d.id === 'ptc_heater');
-                                    if (dev) dev.state = (val > 0);
-                                }
-                            }
-
-                            if (valV5 !== undefined && valV5 !== null && valV5 !== "") {
-                                const val = parseInt(valV5);
-                                if (!isNaN(val)) {
-                                    document.getElementById('pumpFlowSlider').value = val;
-                                    document.getElementById('pumpFlowVal').innerText = val + "%";
-                                    const dev = incubatorDevices.find(d => d.id === 'water_pump');
-                                    if (dev) dev.state = (val > 0);
-                                }
-                            }
+                        if (isAutoActive || (!userManualOverrideLock && !initialManualSyncDone)) {
+                            if (valV3 !== undefined && valV3 !== null && !isNaN(parseInt(valV3))) syncExhaustUI(parseInt(valV3));
+                            if (valV4 !== undefined && valV4 !== null && !isNaN(parseInt(valV4))) syncHeaterUI(parseInt(valV4));
+                            if (valV24 !== undefined && valV24 !== null && !isNaN(parseInt(valV24))) syncPtcFanUI(parseInt(valV24));
+                            if (valV5 !== undefined && valV5 !== null && !isNaN(parseInt(valV5))) syncPumpUI(parseInt(valV5));
+                            if (valV23 !== undefined && valV23 !== null && !isNaN(parseInt(valV23))) syncHumidityFanUI(parseInt(valV23));
+                            if (!isAutoActive) initialManualSyncDone = true;
                         }
 
                         if (valV7 !== undefined && typeof valV7 === 'string') {
@@ -909,7 +1099,10 @@
 
             try {
                 bleDevice = await navigator.bluetooth.requestDevice({
-                    filters: [{ name: 'TuApTrung_ESP32' }],
+                    filters: [
+                        { name: 'Smart Incubator ESP32-S3' },
+                        { name: 'TuApTrung_ESP32' }
+                    ],
                     optionalServices: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']
                 });
 
@@ -923,9 +1116,11 @@
                 await bleTxCharacteristic.startNotifications();
                 bleTxCharacteristic.addEventListener('characteristicvaluechanged', handleBleNotification);
 
+                bleWriteQueue = [];
+                isBleWriting = false;
                 isBleConnected = true;
                 updateHardwareStatus(true, "Bluetooth BLE");
-                alert("Đã kết nối Bluetooth!");
+                alert("Đã kết nối Bluetooth thành công!");
             } catch (error) {
                 console.error(error);
                 alert("Không thể kết nối Bluetooth!");
@@ -938,21 +1133,37 @@
 
             if (dataStr.startsWith("TEMP:")) {
                 const pairs = dataStr.split(",");
-                let temp = 0, hum = 0;
+                let temp = 0, hum = 0, phaseStr = "";
+                let isAuto = document.getElementById('master-auto-toggle').checked;
+                const isUserInteracting = (Date.now() - lastManualActionTime < 1200);
+
                 pairs.forEach(p => {
                     const [k, v] = p.split(":");
                     if (k === "TEMP") temp = parseFloat(v);
                     if (k === "HUM") hum = parseFloat(v);
-                    if (k === "AUTO") {
-                        const isAuto = (parseInt(v) === 1);
-                        document.getElementById('master-auto-toggle').checked = isAuto;
-                        document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
-                        document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
-                    }
+                    if (k === "PHASE") phaseStr = v;
+                    if (k === "AUTO" && !isUserInteracting) isAuto = (parseInt(v) === 1);
                 });
 
+                latestMeasuredTemp = temp;
                 document.getElementById('temp-ground-val').innerText = temp.toFixed(1);
                 document.getElementById('hum-ground-val').innerText = hum.toFixed(1);
+                document.getElementById('control-live-temp').innerText = temp.toFixed(1) + ' °C / 37.8 °C';
+                document.getElementById('control-live-hum').innerText = hum.toFixed(1) + ' %';
+                updateModeBadgesUI(isAuto, phaseStr);
+
+                // Cập nhật đúng giá trị thực tế từ ESP32 khi người dùng không đang kéo thanh trượt
+                if (!isUserInteracting) {
+                    pairs.forEach(p => {
+                        const [k, v] = p.split(":");
+                        if (k === "HEATER") syncHeaterUI(parseInt(v));
+                        if (k === "PTCFAN") syncPtcFanUI(parseInt(v));
+                        if (k === "EXHAUST") syncExhaustUI(parseInt(v));
+                        if (k === "PUMP") syncPumpUI(parseInt(v));
+                        if (k === "HFAN") syncHumidityFanUI(parseInt(v));
+                    });
+                }
+
                 if (temp > 0) updateChartData(temp, hum);
 
                 renderOverviewDevices();
@@ -963,70 +1174,90 @@
 
         function onBleDisconnected() {
             isBleConnected = false;
+            bleWriteQueue = [];
+            isBleWriting = false;
             updateHardwareStatus(false);
             alert("Đã ngắt kết nối Bluetooth!");
             startBlynkDataPolling();
         }
 
+        function switchToManualAndLock() {
+            userManualOverrideLock = true;
+            lastModeToggleTime = Date.now();
+            lastManualActionTime = Date.now();
+            updateModeBadgesUI(false, "MANUAL");
+        }
+
         function toggleMasterAuto(checked) {
-            lastUserInteractionTime = Date.now();
-            document.getElementById('master-mode-label').innerText = checked ? "TỰ ĐỘNG" : "THỦ CÔNG";
-            document.getElementById('overview-auto-status-text').innerText = checked ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL)";
-            sendToArduino(`MODE_AUTO:${checked ? 1 : 0}`);
+            lastModeToggleTime = Date.now();
+            lastManualActionTime = Date.now();
+
+            if (checked) {
+                userManualOverrideLock = false;
+                if (latestMeasuredTemp === 0 || latestMeasuredTemp < 37.8) {
+                    syncHeaterUI(100);
+                    syncPtcFanUI(100);
+                    syncExhaustUI(0);
+                    syncPumpUI(0);
+                    syncHumidityFanUI(0);
+                    updateModeBadgesUI(true, "AUTO_PREHEAT");
+                } else {
+                    updateModeBadgesUI(true, "AUTO_PID");
+                }
+                renderOverviewDevices();
+                sendToArduino(`MODE_AUTO:1`);
+            } else {
+                switchToManualAndLock();
+                renderOverviewDevices();
+                sendToArduino(`MODE_AUTO:0`);
+            }
+        }
+
+        function turnOffAllManualDevices() {
+            switchToManualAndLock();
+            syncHeaterUI(0);
+            syncPtcFanUI(0);
+            syncExhaustUI(0);
+            syncPumpUI(0);
+            syncHumidityFanUI(0);
+            renderOverviewDevices();
+            sendToArduino("MANUAL_ALL_OFF");
+        }
+
+        function queueManualSliderCommand(key, cmdPrefix, val) {
+            switchToManualAndLock();
+            renderOverviewDevices();
+            clearTimeout(sliderDebounceTimers[key]);
+            sliderDebounceTimers[key] = setTimeout(() => {
+                lastManualActionTime = Date.now();
+                // ESP32 tự động chuyển sang MANUAL khi nhận lệnh thiết bị, không cần gửi 2 lệnh chồng nhau
+                sendToArduino(`${cmdPrefix}:${val}`);
+            }, 90);
+        }
+
+        function updateHeaterPower(val) {
+            syncHeaterUI(val);
+            queueManualSliderCommand('heater', 'HEATER_MOSFET', val);
+        }
+
+        function updatePtcFanSpeed(val) {
+            syncPtcFanUI(val);
+            queueManualSliderCommand('ptcfan', 'FAN_PTC', val);
         }
 
         function updateExhaustFanSpeed(val) {
-            document.getElementById('exhaustFanSpeedVal').innerText = val + "%";
-            lastUserInteractionTime = Date.now();
-            
-            const autoToggle = document.getElementById('master-auto-toggle');
-            if (autoToggle) {
-                autoToggle.checked = false;
-                document.getElementById('master-mode-label').innerText = "THỦ CÔNG";
-                document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
-            }
-            
-            clearTimeout(sliderDebounceTimer);
-            sliderDebounceTimer = setTimeout(() => {
-                sendToArduino(`MODE_AUTO:0`);
-                setTimeout(() => sendToArduino(`FAN_EXHAUST:${val}`), 150);
-            }, 300);
+            syncExhaustUI(val);
+            queueManualSliderCommand('exhaust', 'FAN_EXHAUST', val);
         }
 
-        function updateHeaterPower(val) { 
-            document.getElementById('heaterPowerVal').innerText = val + "%";
-            lastUserInteractionTime = Date.now();
-            
-            const autoToggle = document.getElementById('master-auto-toggle');
-            if (autoToggle) {
-                autoToggle.checked = false;
-                document.getElementById('master-mode-label').innerText = "THỦ CÔNG";
-                document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
-            }
-            
-            clearTimeout(sliderDebounceTimer);
-            sliderDebounceTimer = setTimeout(() => {
-                sendToArduino(`MODE_AUTO:0`);
-                setTimeout(() => sendToArduino(`HEATER_MOSFET:${val}`), 150);
-            }, 300);
+        function updatePumpFlow(val) {
+            syncPumpUI(val);
+            queueManualSliderCommand('pump', 'PUMP_FLOW', val);
         }
 
-        function updatePumpFlow(val) { 
-            document.getElementById('pumpFlowVal').innerText = val + "%";
-            lastUserInteractionTime = Date.now();
-            
-            const autoToggle = document.getElementById('master-auto-toggle');
-            if (autoToggle) {
-                autoToggle.checked = false;
-                document.getElementById('master-mode-label').innerText = "THỦ CÔNG";
-                document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
-            }
-            
-            clearTimeout(sliderDebounceTimer);
-            sliderDebounceTimer = setTimeout(() => {
-                sendToArduino(`MODE_AUTO:0`);
-                setTimeout(() => sendToArduino(`PUMP_FLOW:${val}`), 150);
-            }, 300);
+        function updateHumidityFanSpeed(val) {
+            syncHumidityFanUI(val);
+            queueManualSliderCommand('hfan', 'FAN_HUMIDITY', val);
         }
 
         function renderEggSummary() {
@@ -1124,6 +1355,10 @@
             incubatorDevices.forEach(dev => {
                 const card = document.createElement('div');
                 card.className = `p-3.5 rounded-2xl border transition-all ${dev.state ? 'bg-emerald-50/90 border-emerald-300 shadow-sm' : 'bg-white/80 border-slate-200'}`;
+                const watts = Math.round((dev.pct / 100) * 250);
+                const statusLabel = dev.state 
+                    ? (dev.id === 'ptc_heater' ? `● ĐANG BẬT - ${dev.pct}% (${watts}W)` : `● ĐANG BẬT - ${dev.pct}%`) 
+                    : '● ĐÃ TẮT (0%)';
                 
                 card.innerHTML = `
                     <div class="flex items-center justify-between mb-1">
@@ -1134,7 +1369,7 @@
                         </label>
                     </div>
                     <div class="font-bold text-xs text-slate-900 truncate">${dev.nameVI}</div>
-                    <div class="text-[10px] ${dev.state ? 'text-emerald-600' : 'text-slate-400'} font-extrabold mt-0.5">${dev.state ? '● ĐANG BẬT' : '● ĐÃ TẮT'}</div>
+                    <div class="text-[10px] ${dev.state ? 'text-emerald-600' : 'text-slate-400'} font-extrabold mt-0.5">${statusLabel}</div>
                 `;
                 grid.appendChild(card);
             });
@@ -1168,15 +1403,18 @@
             if (confirmed && pendingToggleDeviceId !== null) {
                 const dev = incubatorDevices.find(d => d.id === pendingToggleDeviceId);
                 if (dev) {
+                    const val = pendingTargetState ? 100 : 0;
                     dev.state = pendingTargetState;
-                    const autoToggle = document.getElementById('master-auto-toggle');
-                    if (autoToggle) {
-                        autoToggle.checked = false;
-                        document.getElementById('master-mode-label').innerText = "THỦ CÔNG";
-                        document.getElementById('overview-auto-status-text').innerText = "THỦ CÔNG (MANUAL)";
-                    }
-                    sendToArduino(`MODE_AUTO:0`);
-                    setTimeout(() => sendToArduino(`TOGGLE:${dev.id}:${dev.state ? 1 : 0}`), 50);
+                    dev.pct = val;
+                    switchToManualAndLock();
+
+                    if (dev.id === 'ptc_heater') syncHeaterUI(val);
+                    else if (dev.id === 'ptc_fan') syncPtcFanUI(val);
+                    else if (dev.id === 'exhaust_fan') syncExhaustUI(val);
+                    else if (dev.id === 'water_pump') syncPumpUI(val);
+                    else if (dev.id === 'humidity_fan') syncHumidityFanUI(val);
+
+                    sendToArduino(`TOGGLE:${dev.id}:${dev.state ? 1 : 0}`);
                 }
                 renderOverviewDevices();
             }
