@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Hệ Thống Ấp Trứng Thông Minh - HCMUTE FAE</title>
-    
+    <meta name="blynk-template-id" content="TMPL63IgAjV9A">
+    <meta name="blynk-template-name" content="TuApTrung">
+    <title>TuApTrung - Hệ Thống Ấp Trứng Thông Minh (HCMUTE FAE)</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,18 +124,23 @@
                     </div>
                     <div class="min-w-0">
                         <h1 class="font-extrabold text-xs sm:text-base tracking-tight text-white truncate">Group 4 - HCMUTE FAE</h1>
-                        <div class="text-[10px] sm:text-xs text-slate-300 truncate">Tủ Ấp Trứng Thông Minh (Dual PTC 250W)</div>
+                        <div class="text-[10px] sm:text-xs text-slate-300 truncate" data-i18n="header_subtitle">TuApTrung • Dual PTC 250W</div>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+                <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+                    <button id="lang-toggle-btn" onclick="toggleLanguage()" class="px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/20 text-[10px] sm:text-xs font-extrabold transition flex items-center gap-1" title="Switch Language / Đổi ngôn ngữ">
+                        <i class="fa-solid fa-globe text-emerald-300"></i>
+                        <span id="lang-label">VI | EN</span>
+                    </button>
+
                     <div id="user-badge" class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold">
                         <i class="fa-solid fa-user-check"></i><span id="current-user-display">User</span>
                     </div>
 
                     <div id="connection-status-badge" class="flex items-center gap-1.5 bg-rose-950/80 text-rose-300 border border-rose-500/30 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold whitespace-nowrap">
                         <span id="connection-dot" class="w-2 h-2 rounded-full bg-rose-500"></span>
-                        <span id="connection-text">Chưa kết nối</span>
+                        <span id="connection-text" data-i18n="conn_disconnected">Chưa kết nối</span>
                     </div>
 
                     <button id="logout-btn" onclick="handleLogout()" class="hidden px-2.5 py-1 rounded-full bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold transition">
@@ -153,53 +160,53 @@
                         <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-emerald-500 text-white flex items-center justify-center text-2xl shadow-lg mx-auto mb-2">
                             <i class="fa-solid fa-egg"></i>
                         </div>
-                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">HỆ THỐNG ẤP TRỨNG</h2>
-                        <p class="text-xs text-slate-600 font-bold">Đăng nhập tài khoản điều khiển tủ ấp qua Cloud & BLE</p>
+                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight" data-i18n="auth_title">HỆ THỐNG ẤP TRỨNG</h2>
+                        <p class="text-xs text-slate-600 font-bold" data-i18n="auth_subtitle">Đăng nhập tài khoản điều khiển tủ ấp qua Cloud & BLE</p>
                     </div>
 
                     <div class="flex bg-slate-200/80 p-1 rounded-2xl text-xs font-bold">
-                        <button id="auth-tab-login" onclick="switchAuthTab('login')" class="flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow transition">Đăng Nhập</button>
-                        <button id="auth-tab-register" onclick="switchAuthTab('register')" class="flex-1 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition">Đăng Ký Mới</button>
+                        <button id="auth-tab-login" onclick="switchAuthTab('login')" class="flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow transition" data-i18n="tab_login">Đăng Nhập</button>
+                        <button id="auth-tab-register" onclick="switchAuthTab('register')" class="flex-1 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition" data-i18n="tab_register">Đăng Ký Mới</button>
                     </div>
 
                     <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4 text-xs">
                         <div>
-                            <label class="block font-bold text-slate-700 mb-1">Tên Đăng Nhập</label>
+                            <label class="block font-bold text-slate-700 mb-1" data-i18n="lbl_username">Tên Đăng Nhập</label>
                             <input type="text" id="login-username" required placeholder="Nhập tên..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 font-bold text-sm focus:outline-none focus:border-emerald-500">
                         </div>
                         <div>
-                            <label class="block font-bold text-slate-700 mb-1">Mật Khẩu</label>
+                            <label class="block font-bold text-slate-700 mb-1" data-i18n="lbl_password">Mật Khẩu</label>
                             <input type="password" id="login-password" required placeholder="Nhập mật khẩu..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 font-bold text-sm focus:outline-none focus:border-emerald-500">
                         </div>
-                        <div id="login-error" class="hidden text-red-600 font-bold text-[11px]">Tên đăng nhập hoặc mật khẩu chưa đúng!</div>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-extrabold text-sm shadow-md transition">
+                        <div id="login-error" class="hidden text-red-600 font-bold text-[11px]" data-i18n="err_login">Tên đăng nhập hoặc mật khẩu chưa đúng!</div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-extrabold text-sm shadow-md transition" data-i18n="btn_login">
                             VÀO BẢNG ĐIỀU KHIỂN CLOUD
                         </button>
                     </form>
 
                     <form id="form-register" onsubmit="handleRegister(event)" class="hidden space-y-4 text-xs">
                         <div>
-                            <label class="block font-bold text-slate-700 mb-1">Tên Đăng Nhập Mới</label>
+                            <label class="block font-bold text-slate-700 mb-1" data-i18n="lbl_reg_username">Tên Đăng Nhập Mới</label>
                             <input type="text" id="reg-username" required placeholder="Nhập tên mới..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 font-bold text-sm focus:outline-none focus:border-emerald-500">
                         </div>
                         <div>
-                            <label class="block font-bold text-slate-700 mb-1">Mật Khẩu</label>
+                            <label class="block font-bold text-slate-700 mb-1" data-i18n="lbl_password">Mật Khẩu</label>
                             <input type="password" id="reg-password" required placeholder="Nhập mật khẩu..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 font-bold text-sm focus:outline-none focus:border-emerald-500">
                         </div>
                         <div>
-                            <label class="block font-bold text-slate-700 mb-1">Xác Nhận Mật Khẩu</label>
+                            <label class="block font-bold text-slate-700 mb-1" data-i18n="lbl_confirm_password">Xác Nhận Mật Khẩu</label>
                             <input type="password" id="reg-confirm" required placeholder="Nhập lại mật khẩu..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 font-bold text-sm focus:outline-none focus:border-emerald-500">
                         </div>
-                        <div id="reg-error" class="hidden text-red-600 font-bold text-[11px]">Mật khẩu không khớp hoặc tên đã tồn tại!</div>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:scale-95 text-white font-extrabold text-sm shadow-md transition">
+                        <div id="reg-error" class="hidden text-red-600 font-bold text-[11px]" data-i18n="err_reg">Mật khẩu không khớp hoặc tên đã tồn tại!</div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:scale-95 text-white font-extrabold text-sm shadow-md transition" data-i18n="btn_register">
                             TẠO TÀI KHOẢN MỚI
                         </button>
                     </form>
 
                     <div class="pt-2 border-t border-slate-200/60 text-[11px] text-slate-600 text-center space-y-1">
-                        <p class="font-bold text-slate-800">Tài khoản truy cập:</p>
-                        <p>Giảng viên: <span class="font-mono font-bold text-indigo-600">ThayTaVanPhuong</span> | Pass: <span class="font-mono font-bold">UTE26151</span></p>
-                        <p>Sinh viên: <span class="font-mono font-bold text-emerald-600">AnduongG4</span> | Pass: <span class="font-mono font-bold">12345</span></p>
+                        <p class="font-bold text-slate-800" data-i18n="demo_accounts">Tài khoản truy cập:</p>
+                        <p><span data-i18n="lecturer_acc">Giảng viên</span>: <span class="font-mono font-bold text-indigo-600">ThayTaVanPhuong</span> | Pass: <span class="font-mono font-bold">UTE26151</span></p>
+                        <p><span data-i18n="student_acc">Sinh viên</span>: <span class="font-mono font-bold text-emerald-600">AnduongG4</span> | Pass: <span class="font-mono font-bold">12345</span></p>
                     </div>
                 </div>
             </section>
@@ -207,25 +214,48 @@
             <!-- SUBPAGES WRAPPER -->
             <div id="subpage-wrapper" class="hidden space-y-4 sm:space-y-6">
 
+                <!-- THANH TRẠNG THÁI ĐANG NHẬN ĐƯỢC ID MẤY TỪ HUSKYLENS -->
+                <div id="husky-live-status-bar" class="bg-slate-900 text-white rounded-2xl px-4 py-3 shadow-md border border-slate-700/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span id="live-id-dot" class="w-3 h-3 rounded-full bg-amber-400 animate-pulse shrink-0"></span>
+                        <div class="min-w-0">
+                            <div class="text-[11px] uppercase tracking-wider text-slate-300 font-bold" data-i18n="live_id_bar_title">
+                                Trạng Thái Nhận HuskyLens ID
+                            </div>
+                            <div class="text-xs sm:text-sm font-black flex flex-wrap items-center gap-1">
+                                <span id="live-received-id-pill" class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-black mr-1">ID 1</span>
+                                <span id="live-received-stage-text" class="text-emerald-300">Phase 1 (Ngày 1–3)</span>
+                                <span class="text-slate-400 mx-1">•</span>
+                                <span id="live-scanning-egg-text" class="text-sky-300">Đang soi Quả #1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between sm:justify-end gap-2 text-[11px] font-mono bg-slate-800/90 px-3 py-1.5 rounded-xl border border-slate-700 shrink-0">
+                        <span class="text-slate-400">V7/BLE:</span>
+                        <span id="live-raw-payload-text" class="text-amber-300 font-bold truncate max-w-[200px] sm:max-w-[260px]">Chưa có dữ liệu</span>
+                    </div>
+                </div>
+
                 <!-- MENU DESKTOP -->
                 <div class="hidden md:flex justify-center w-full">
                     <nav id="fluid-nav-desktop" class="liquid-nav-container inline-flex items-center gap-1 overflow-x-auto max-w-full no-scrollbar">
                         <div id="fluid-pill-desktop" class="liquid-pill"></div>
 
                         <button onclick="switchTab('overview')" id="tab-desktop-overview" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold text-slate-900 transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-chart-pie text-sky-600"></i><span>Trạng thái</span>
+                            <i class="fa-solid fa-chart-pie text-sky-600"></i><span data-i18n="nav_overview">Trạng thái</span>
                         </button>
                         <button onclick="switchTab('control')" id="tab-desktop-control" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-sliders text-emerald-600"></i><span>Điều chỉnh</span>
+                            <i class="fa-solid fa-sliders text-emerald-600"></i><span data-i18n="nav_control">Điều chỉnh</span>
                         </button>
                         <button onclick="switchTab('chart')" id="tab-desktop-chart" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-chart-line text-purple-600"></i><span>Biểu đồ RT</span>
+                            <i class="fa-solid fa-chart-line text-purple-600"></i><span data-i18n="nav_chart">Biểu đồ & Thống kê</span>
                         </button>
                         <button onclick="switchTab('information')" id="tab-desktop-information" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-egg text-amber-500"></i><span>Soi 6 quả trứng</span>
+                            <i class="fa-solid fa-egg text-amber-500"></i><span data-i18n="nav_eggs">Soi 6 quả trứng</span>
                         </button>
                         <button onclick="switchTab('settings')" id="tab-desktop-settings" class="liquid-nav-item px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-gear text-slate-600"></i><span>Cài đặt Cloud & BLE</span>
+                            <i class="fa-solid fa-gear text-slate-600"></i><span data-i18n="nav_settings">Cài đặt Cloud & BLE</span>
                         </button>
                     </nav>
                 </div>
@@ -235,15 +265,22 @@
                     <div class="ultra-glass p-4 sm:p-5 bg-gradient-to-r from-emerald-50 via-teal-50 to-sky-50 border-emerald-200 shadow-sm">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                             <div>
-                                <span class="text-[10px] font-black uppercase text-emerald-800 bg-emerald-200 px-2.5 py-0.5 rounded-full">
-                                    <i class="fa-solid fa-camera mr-1"></i> HuskyLens Nhận Diện Tự Động
+                                <span class="text-[10px] font-black uppercase text-emerald-800 bg-emerald-200 px-2.5 py-0.5 rounded-full" data-i18n="husky_banner_badge">
+                                    <i class="fa-solid fa-camera mr-1"></i> HuskyLens Live ID (BLE & Blynk) • ID 1–10
                                 </span>
-                                <h2 class="text-base sm:text-xl font-black text-slate-900 mt-1">Giai Đoạn Ấp Trứng: <span id="stage-name-display" class="text-emerald-600">Giai đoạn 1 (Ngày 1–10)</span></h2>
-                                <p class="text-xs text-slate-600 font-bold mt-0.5">Ngày phát triển cao nhất: <strong id="current-day-display" class="text-amber-600">Ngày 1</strong></p>
+                                <h2 class="text-base sm:text-xl font-black text-slate-900 mt-1">
+                                    <span data-i18n="current_stage_label">Giai Đoạn / ID Hiện Tại:</span>
+                                    <span id="stage-name-display" class="text-emerald-600">ID 1 • Phase 1 (Ngày 1–3)</span>
+                                </h2>
+                                <p class="text-xs text-slate-600 font-bold mt-0.5">
+                                    <span data-i18n="esp_returned_label">ESP32 trả về:</span>
+                                    <strong id="current-day-display" class="text-amber-600">Quả #1 • ID 1 (Ngày 1–3)</strong>
+                                </p>
                             </div>
 
                             <div class="bg-white/90 p-2.5 rounded-2xl border border-emerald-200 text-xs font-bold text-slate-700 w-full sm:w-auto text-center">
-                                Trạng thái chế độ: <span id="overview-auto-status-text" class="text-emerald-600 font-black">TỰ ĐỘNG (AUTO)</span>
+                                <span data-i18n="mode_status_label">Trạng thái chế độ:</span>
+                                <span id="overview-auto-status-text" class="text-emerald-600 font-black">TỰ ĐỘNG (AUTO)</span>
                             </div>
                         </div>
                     </div>
@@ -251,38 +288,44 @@
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5">
                         <div class="ultra-glass p-3.5 sm:p-6 space-y-1.5">
                             <div class="flex items-center justify-between">
-                                <span class="text-[10px] sm:text-xs font-extrabold text-slate-500 uppercase">Nhiệt Độ (S14)</span>
+                                <span class="text-[10px] sm:text-xs font-extrabold text-slate-500 uppercase" data-i18n="card_temp">Nhiệt Độ (S14)</span>
                                 <i class="fa-solid fa-temperature-half text-amber-600 text-base sm:text-xl"></i>
                             </div>
                             <div class="flex items-baseline gap-1">
                                 <span id="temp-ground-val" class="text-2xl sm:text-4xl font-black text-slate-900">0.0</span>
                                 <span class="text-slate-500 text-xs font-bold">°C</span>
                             </div>
-                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Mục tiêu: <strong id="target-temp-val" class="text-emerald-600">37.8 °C</strong></p>
+                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">
+                                <span data-i18n="target_label">Mục tiêu:</span>
+                                <strong id="target-temp-val" class="text-emerald-600">37.8 °C</strong>
+                            </p>
                         </div>
 
                         <div class="ultra-glass p-3.5 sm:p-6 space-y-1.5">
                             <div class="flex items-center justify-between">
-                                <span class="text-[10px] sm:text-xs font-extrabold text-slate-500 uppercase">Độ Ẩm (S14)</span>
+                                <span class="text-[10px] sm:text-xs font-extrabold text-slate-500 uppercase" data-i18n="card_hum">Độ Ẩm (S14)</span>
                                 <i class="fa-solid fa-droplet text-sky-600 text-base sm:text-xl"></i>
                             </div>
                             <div class="flex items-baseline gap-1">
                                 <span id="hum-ground-val" class="text-2xl sm:text-4xl font-black text-sky-600">0.0</span>
                                 <span class="text-slate-500 text-xs font-bold">%</span>
                             </div>
-                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Mục tiêu: <strong class="text-emerald-600">50 - 55%</strong></p>
+                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">
+                                <span data-i18n="target_label">Mục tiêu:</span>
+                                <strong class="text-emerald-600">50 - 55%</strong>
+                            </p>
                         </div>
 
                         <div class="ultra-glass p-3.5 sm:p-6 space-y-1.5 col-span-2 sm:col-span-1">
                             <div class="flex items-center justify-between">
-                                <span class="text-[10px] sm:text-xs font-extrabold text-slate-500 uppercase">Khay Đảo Trứng</span>
+                                <span class="text-[10px] sm:text-xs font-extrabold text-slate-500 uppercase" data-i18n="card_carousel">Khay Đảo Trứng</span>
                                 <i class="fa-solid fa-rotate text-emerald-600 text-base sm:text-xl"></i>
                             </div>
                             <div class="flex items-baseline gap-1">
                                 <span id="carousel-angle-val" class="text-2xl sm:text-4xl font-black text-slate-900">60.0</span>
-                                <span class="text-slate-500 text-xs font-bold">Độ</span>
+                                <span class="text-slate-500 text-xs font-bold" data-i18n="unit_deg">Độ</span>
                             </div>
-                            <p class="text-[10px] text-emerald-600 font-extrabold flex items-center gap-1">
+                            <p class="text-[10px] text-emerald-600 font-extrabold flex items-center gap-1" data-i18n="auto_rotating">
                                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Tự động xoay
                             </p>
                         </div>
@@ -291,12 +334,31 @@
                     <div class="ultra-glass p-4 sm:p-6 space-y-3">
                         <div class="flex items-center justify-between border-b border-slate-200/60 pb-3">
                             <div>
-                                <h3 class="font-black text-sm sm:text-lg text-slate-900">Trạng Thái & Bật/Tắt Độc Lập 5 Thiết Bị</h3>
-                                <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Bật/tắt riêng lẻ từng thiết bị (tự chuyển sang Manual khi bấm)</p>
+                                <h3 class="font-black text-sm sm:text-lg text-slate-900" data-i18n="quick_devices_title">Trạng Thái & Bật/Tắt Độc Lập 5 Thiết Bị</h3>
+                                <p class="text-[10px] sm:text-xs text-slate-500 font-semibold" data-i18n="quick_devices_sub">Bật/tắt riêng lẻ từng thiết bị (tự chuyển sang Manual khi bấm)</p>
                             </div>
                         </div>
 
                         <div id="quick-devices-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+                    </div>
+
+                    <!-- BẢNG MÀU HUSKYLENS ID 1-10 -->
+                    <div class="ultra-glass p-4 sm:p-6 space-y-4">
+                        <div class="border-b border-slate-200/60 pb-3">
+                            <h3 class="font-black text-sm sm:text-lg text-slate-900" data-i18n="husky_table_title">Bảng Màu HuskyLens (ID 1–6: Mỗi ID 3 Ngày | ID 7–10: Bất Thường)</h3>
+                            <p class="text-[10px] sm:text-xs text-slate-500 font-semibold" data-i18n="husky_table_sub">ID 1–6 chia khung 3 ngày liên tiếp (1–3, 3–6, 6–9, 9–12, 12–15, 15–18); ID 7–10 theo bảng màu tối ưu</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
+                            <div class="space-y-2">
+                                <div class="font-extrabold text-slate-800 uppercase text-[11px]" data-i18n="husky_group_1">1) ID 1–6: Giai Đoạn Ấp (Mỗi ID = 3 Ngày)</div>
+                                <div id="husky-stage-map-list" class="space-y-1.5"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="font-extrabold text-slate-800 uppercase text-[11px]" data-i18n="husky_group_2">2) ID 7–10: Bất Thường & Đặc Biệt</div>
+                                <div id="husky-abnormal-map-list" class="space-y-1.5"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -309,13 +371,13 @@
                                     <i class="fa-solid fa-robot"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-sm sm:text-lg font-black text-slate-900">Chế Độ Tự Động (Auto) / Thủ Công (Manual)</h3>
-                                    <p class="text-[10px] sm:text-xs text-slate-600 font-semibold">Manual trao 100% quyền kiểm soát độc lập từng thiết bị cho người dùng</p>
+                                    <h3 class="text-sm sm:text-lg font-black text-slate-900" data-i18n="mode_card_title">Chế Độ Tự Động (Auto) / Thủ Công (Manual)</h3>
+                                    <p class="text-[10px] sm:text-xs text-slate-600 font-semibold" data-i18n="mode_card_sub">Manual trao 100% quyền kiểm soát độc lập từng thiết bị cho người dùng (kể cả PTC & Quạt PTC)</p>
                                 </div>
                             </div>
 
                             <div class="flex items-center gap-2 self-end sm:self-auto">
-                                <button onclick="turnOffAllManualDevices()" class="px-3 py-2 rounded-2xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-extrabold text-[11px] transition flex items-center gap-1">
+                                <button onclick="turnOffAllManualDevices()" class="px-3 py-2 rounded-2xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-extrabold text-[11px] transition flex items-center gap-1" data-i18n="btn_all_off">
                                     <i class="fa-solid fa-power-off"></i> Tắt Hết (0%)
                                 </button>
 
@@ -331,15 +393,15 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-200/70 text-xs">
                             <div class="bg-amber-50/90 border border-amber-200 rounded-xl px-3 py-2 flex items-center justify-between">
-                                <span class="font-bold text-amber-800"><i class="fa-solid fa-temperature-half mr-1"></i>Nhiệt độ thực tế:</span>
+                                <span class="font-bold text-amber-800" data-i18n="live_temp_lbl"><i class="fa-solid fa-temperature-half mr-1"></i>Nhiệt độ thực tế:</span>
                                 <span id="control-live-temp" class="font-black text-amber-600 text-sm">-- °C / 37.8 °C</span>
                             </div>
                             <div class="bg-sky-50/90 border border-sky-200 rounded-xl px-3 py-2 flex items-center justify-between">
-                                <span class="font-bold text-sky-800"><i class="fa-solid fa-droplet mr-1"></i>Độ ẩm thực tế:</span>
+                                <span class="font-bold text-sky-800" data-i18n="live_hum_lbl"><i class="fa-solid fa-droplet mr-1"></i>Độ ẩm thực tế:</span>
                                 <span id="control-live-hum" class="font-black text-sky-600 text-sm">-- %</span>
                             </div>
                             <div class="bg-emerald-50/90 border border-emerald-200 rounded-xl px-3 py-2 flex items-center justify-between">
-                                <span class="font-bold text-emerald-800">Quyền điều khiển:</span>
+                                <span class="font-bold text-emerald-800" data-i18n="authority_lbl">Quyền điều khiển:</span>
                                 <span id="control-phase-badge" class="font-black text-emerald-700 text-[11px] uppercase">GIA NHIỆT 100% -> 37.8°C</span>
                             </div>
                         </div>
@@ -352,9 +414,9 @@
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-fire-burner text-amber-600 text-base"></i>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">1. Sưởi Kép PTC (V4)</h4>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900" data-i18n="dev_heater_title">1. Sưởi Kép PTC (V4)</h4>
                                         <div class="flex items-center gap-1 mt-0.5">
-                                            <span class="text-[9px] font-extrabold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">2 Cầu H (250W)</span>
+                                            <span class="text-[9px] font-extrabold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded" data-i18n="dev_heater_badge">2 Cầu H (250W)</span>
                                             <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
                                         </div>
                                     </div>
@@ -376,7 +438,7 @@
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-wind text-orange-500 text-base"></i>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">2. Quạt Thổi PTC (V24)</h4>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900" data-i18n="dev_ptcfan_title">2. Quạt Thổi PTC (V24)</h4>
                                         <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
                                     </div>
                                 </div>
@@ -384,7 +446,7 @@
                             </div>
                             <input type="range" id="ptcFanSlider" min="0" max="100" value="0" oninput="updatePtcFanSpeed(this.value)">
                             <div class="flex justify-between text-[10px] text-slate-500 font-bold">
-                                <span>Tắt (0%)</span><span>50%</span><span>Max (100%)</span>
+                                <span data-i18n="lbl_off_0">Tắt (0%)</span><span>50%</span><span data-i18n="lbl_max_100">Max (100%)</span>
                             </div>
                         </div>
 
@@ -394,7 +456,7 @@
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-fan text-sky-600 text-base"></i>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">3. Quạt Hút Gió (V3)</h4>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900" data-i18n="dev_exhaust_title">3. Quạt Hút Gió (V3)</h4>
                                         <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
                                     </div>
                                 </div>
@@ -402,7 +464,7 @@
                             </div>
                             <input type="range" id="exhaustFanSlider" min="0" max="100" value="0" oninput="updateExhaustFanSpeed(this.value)">
                             <div class="flex justify-between text-[10px] text-slate-500 font-bold">
-                                <span>Tắt (0%)</span><span>50%</span><span>Max (100%)</span>
+                                <span data-i18n="lbl_off_0">Tắt (0%)</span><span>50%</span><span data-i18n="lbl_max_100">Max (100%)</span>
                             </div>
                         </div>
 
@@ -412,7 +474,7 @@
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-water text-teal-600 text-base"></i>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">4. Bơm Tạo Ẩm (V5)</h4>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900" data-i18n="dev_pump_title">4. Bơm Tạo Ẩm (V5)</h4>
                                         <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
                                     </div>
                                 </div>
@@ -420,7 +482,7 @@
                             </div>
                             <input type="range" id="pumpFlowSlider" min="0" max="100" value="0" oninput="updatePumpFlow(this.value)">
                             <div class="flex justify-between text-[10px] text-slate-500 font-bold">
-                                <span>Tắt (0%)</span><span>50%</span><span>Max (100%)</span>
+                                <span data-i18n="lbl_off_0">Tắt (0%)</span><span>50%</span><span data-i18n="lbl_max_100">Max (100%)</span>
                             </div>
                         </div>
 
@@ -430,7 +492,7 @@
                                 <div class="flex items-center gap-2">
                                     <i class="fa-solid fa-fan text-cyan-600 text-base"></i>
                                     <div>
-                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">5. Quạt Tản Ẩm (V23)</h4>
+                                        <h4 class="font-bold text-xs sm:text-sm text-slate-900" data-i18n="dev_humfan_title">5. Quạt Tản Ẩm (V23)</h4>
                                         <span class="device-mode-tag text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">AUTO LIVE</span>
                                     </div>
                                 </div>
@@ -438,55 +500,147 @@
                             </div>
                             <input type="range" id="humidityFanSlider" min="0" max="100" value="0" oninput="updateHumidityFanSpeed(this.value)">
                             <div class="flex justify-between text-[10px] text-slate-500 font-bold">
-                                <span>Tắt (0%)</span><span>50%</span><span>Max (100%)</span>
+                                <span data-i18n="lbl_off_0">Tắt (0%)</span><span>50%</span><span data-i18n="lbl_max_100">Max (100%)</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 3. REAL-TIME CHART TAB -->
+                <!-- 3. REAL-TIME CHART & SYSTEM ACCURACY STATISTICS TAB -->
                 <div id="content-chart" class="tab-content hidden space-y-4 sm:space-y-6">
+                    <!-- BIỂU ĐỒ TOÀN PHIÊN TỪ LÚC BẮT ĐẦU ĐẾN KẾT THÚC -->
                     <div class="ultra-glass p-4 sm:p-6 space-y-4">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
+                        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
                             <div>
-                                <h3 class="font-extrabold text-sm sm:text-base text-slate-900 flex items-center gap-2">
+                                <h3 class="font-extrabold text-sm sm:text-base text-slate-900 flex items-center gap-2" data-i18n="chart_title">
                                     <i class="fa-solid fa-chart-line text-purple-600"></i>
-                                    <span>Biểu Đồ Thông Số Nhiệt Độ & Độ Ẩm Theo Thời Gian Thực</span>
+                                    <span>Biểu Đồ Nhiệt Độ & Độ Ẩm Toàn Phiên (Từ Bắt Đầu Đến Kết Thúc)</span>
                                 </h3>
-                                <p class="text-[10px] sm:text-xs text-slate-500">Cập nhật liên tục mỗi 1 giây từ tủ ấp 50x50x50 cm (Dual PTC 250W)</p>
+                                <p class="text-[10px] sm:text-xs text-slate-500 font-medium">
+                                    <span data-i18n="chart_sub">Ghi toàn bộ dữ liệu liên tục từ lúc bắt đầu phiên để theo dõi thời gian đạt mục tiêu 37.8 °C</span>
+                                    • <strong id="chart-sample-count" class="text-purple-700">0 mẫu (00:00)</strong>
+                                </p>
                             </div>
 
-                            <div class="flex items-center gap-2">
+                            <div class="flex flex-wrap items-center gap-2">
                                 <button onclick="toggleChartPause()" id="btn-chart-pause" class="px-3 py-1.5 rounded-xl bg-purple-100 text-purple-700 text-xs font-bold hover:bg-purple-200 transition">
-                                    <i class="fa-solid fa-pause mr-1"></i>Tạm dừng
+                                    <i class="fa-solid fa-pause mr-1"></i><span data-i18n="btn_pause">Tạm dừng</span>
+                                </button>
+                                <button onclick="exportSessionCSV()" class="px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-700 text-xs font-bold hover:bg-emerald-200 transition">
+                                    <i class="fa-solid fa-file-csv mr-1"></i><span data-i18n="btn_export_csv">Xuất CSV</span>
                                 </button>
                                 <button onclick="clearChartData()" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200 transition">
-                                    <i class="fa-solid fa-rotate-right mr-1"></i>Xóa dữ liệu
+                                    <i class="fa-solid fa-rotate-right mr-1"></i><span data-i18n="btn_clear">Phiên mới</span>
                                 </button>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
-                            <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200">
-                                <span class="text-[10px] text-amber-700 uppercase">Nhiệt độ hiện tại</span>
-                                <div id="chart-temp-cur" class="text-lg font-black text-amber-600">-- °C</div>
+                        <!-- BANNER THỜI GIAN ĐẠT NHIỆT ĐỘ MỤC TIÊU -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-bold">
+                            <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-3.5 rounded-2xl border border-emerald-200 shadow-sm">
+                                <span class="text-[10px] text-emerald-800 uppercase flex items-center gap-1" data-i18n="stat_time_to_target">
+                                    <i class="fa-solid fa-stopwatch"></i> Thời gian đạt mục tiêu (37.8°C)
+                                </span>
+                                <div id="stat-time-to-target-val" class="text-lg sm:text-xl font-black text-emerald-700 mt-0.5">Đang gia nhiệt... (00:00)</div>
+                                <div id="stat-start-to-target-sub" class="text-[10px] text-emerald-700/80 font-semibold mt-0.5">Bắt đầu: -- °C → Mục tiêu: 37.8 °C</div>
                             </div>
-                            <div class="bg-sky-50/80 p-3 rounded-xl border border-sky-200">
-                                <span class="text-[10px] text-sky-700 uppercase">Độ ẩm hiện tại</span>
-                                <div id="chart-hum-cur" class="text-lg font-black text-sky-600">-- %</div>
+
+                            <div class="bg-amber-50/80 p-3.5 rounded-2xl border border-amber-200">
+                                <span class="text-[10px] text-amber-700 uppercase" data-i18n="chart_cur_temp">Nhiệt độ hiện tại / Mục tiêu</span>
+                                <div id="chart-temp-cur" class="text-lg sm:text-xl font-black text-amber-600 mt-0.5">-- °C</div>
+                                <div id="chart-temp-err-cur" class="text-[10px] text-amber-700/80 font-semibold mt-0.5">Sai số tức thời: -- °C</div>
                             </div>
-                            <div class="bg-purple-50/80 p-3 rounded-xl border border-purple-200">
-                                <span class="text-[10px] text-purple-700 uppercase">Nhiệt độ TB</span>
-                                <div id="chart-temp-avg" class="text-lg font-black text-purple-600">-- °C</div>
+
+                            <div class="bg-sky-50/80 p-3.5 rounded-2xl border border-sky-200">
+                                <span class="text-[10px] text-sky-700 uppercase" data-i18n="chart_cur_hum">Độ ẩm hiện tại / Mục tiêu</span>
+                                <div id="chart-hum-cur" class="text-lg sm:text-xl font-black text-sky-600 mt-0.5">-- %</div>
+                                <div id="chart-hum-range-sub" class="text-[10px] text-sky-700/80 font-semibold mt-0.5">Dải chuẩn: 50.0% – 55.0%</div>
                             </div>
-                            <div class="bg-emerald-50/80 p-3 rounded-xl border border-emerald-200">
-                                <span class="text-[10px] text-emerald-700 uppercase">Độ ẩm TB</span>
-                                <div id="chart-hum-avg" class="text-lg font-black text-emerald-600">-- %</div>
+
+                            <div class="bg-purple-50/80 p-3.5 rounded-2xl border border-purple-200">
+                                <span class="text-[10px] text-purple-700 uppercase" data-i18n="stat_accuracy_score">Độ chính xác ổn định (PID)</span>
+                                <div id="stat-accuracy-pct" class="text-lg sm:text-xl font-black text-purple-700 mt-0.5">-- %</div>
+                                <div id="stat-accuracy-grade" class="text-[10px] text-purple-700/80 font-semibold mt-0.5">Chờ đạt nhiệt độ mục tiêu</div>
                             </div>
                         </div>
 
-                        <div class="relative w-full h-[320px] sm:h-[400px] bg-white/60 p-2 rounded-2xl border border-slate-200">
+                        <div class="relative w-full h-[330px] sm:h-[420px] bg-white/75 p-2.5 rounded-2xl border border-slate-200">
                             <canvas id="realtimeChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- BẢNG THỐNG KÊ ĐÁNH GIÁ TÍNH CHÍNH XÁC CỦA HỆ THỐNG -->
+                    <div class="ultra-glass p-4 sm:p-6 space-y-4 border-t-4 border-t-indigo-600">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/60 pb-3">
+                            <div>
+                                <h3 class="font-extrabold text-sm sm:text-base text-slate-900 flex items-center gap-2" data-i18n="acc_table_title">
+                                    <i class="fa-solid fa-table-list text-indigo-600"></i>
+                                    <span>Bảng Thống Kê Đánh Giá Tính Chính Xác Của Hệ Thống</span>
+                                </h3>
+                                <p class="text-[10px] sm:text-xs text-slate-500 font-semibold" data-i18n="acc_table_sub">
+                                    Phân tích toàn bộ phiên đo (Giai đoạn gia nhiệt ban đầu & Giai đoạn giữ ổn định PID tại nhiệt độ mục tiêu)
+                                </p>
+                            </div>
+                            <span id="acc-session-status-badge" class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-[11px] font-black self-start sm:self-auto">
+                                GIAI ĐOẠN 1: ĐANG GIA NHIỆT LÊN MỤC TIÊU
+                            </span>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white/90">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-slate-900 text-white text-[11px] uppercase tracking-wider">
+                                        <th class="py-3 px-4 font-extrabold" data-i18n="th_metric">Chỉ Số Đánh Giá</th>
+                                        <th class="py-3 px-4 font-extrabold" data-i18n="th_temp">Nhiệt Độ (°C)</th>
+                                        <th class="py-3 px-4 font-extrabold" data-i18n="th_hum">Độ Ẩm (%RH)</th>
+                                        <th class="py-3 px-4 font-extrabold" data-i18n="th_standard">Tiêu Chuẩn / Đánh Giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 font-semibold text-slate-700">
+                                    <tr class="hover:bg-slate-50/80">
+                                        <td class="py-2.5 px-4 font-bold text-slate-900" data-i18n="row_start_val">Giá trị lúc bắt đầu phiên (t = 0s)</td>
+                                        <td id="tbl-temp-start" class="py-2.5 px-4 font-mono font-bold text-slate-800">-- °C</td>
+                                        <td id="tbl-hum-start" class="py-2.5 px-4 font-mono font-bold text-slate-800">-- %</td>
+                                        <td id="tbl-start-time" class="py-2.5 px-4 text-slate-500">Bắt đầu lúc --:--:--</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/80 bg-emerald-50/40">
+                                        <td class="py-2.5 px-4 font-bold text-emerald-900" data-i18n="row_rise_time">Thời gian đạt giá trị mục tiêu (Rise Time)</td>
+                                        <td id="tbl-temp-risetime" class="py-2.5 px-4 font-mono font-black text-emerald-700">Đang gia nhiệt...</td>
+                                        <td id="tbl-hum-risetime" class="py-2.5 px-4 font-mono font-bold text-sky-700">--</td>
+                                        <td id="tbl-risetime-note" class="py-2.5 px-4 text-emerald-700 font-bold">Mục tiêu: 37.8 °C | 50–55%</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/80">
+                                        <td class="py-2.5 px-4 font-bold text-slate-900" data-i18n="row_steady_avg">Giá trị trung bình giai đoạn ổn định</td>
+                                        <td id="tbl-temp-steady-avg" class="py-2.5 px-4 font-mono font-bold text-amber-700">-- °C</td>
+                                        <td id="tbl-hum-steady-avg" class="py-2.5 px-4 font-mono font-bold text-sky-700">-- %</td>
+                                        <td class="py-2.5 px-4 text-slate-600">Tính từ lúc chạm mốc mục tiêu</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/80">
+                                        <td class="py-2.5 px-4 font-bold text-slate-900" data-i18n="row_minmax">Biên độ dao động (Min – Max ổn định)</td>
+                                        <td id="tbl-temp-minmax" class="py-2.5 px-4 font-mono font-bold text-slate-800">-- ~ -- °C</td>
+                                        <td id="tbl-hum-minmax" class="py-2.5 px-4 font-mono font-bold text-slate-800">-- ~ -- %</td>
+                                        <td id="tbl-temp-overshoot" class="py-2.5 px-4 text-slate-600">Vọt lố tối đa: -- °C</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/80">
+                                        <td class="py-2.5 px-4 font-bold text-slate-900" data-i18n="row_mae">Sai số tuyệt đối trung bình (MAE)</td>
+                                        <td id="tbl-temp-mae" class="py-2.5 px-4 font-mono font-black text-indigo-700">-- °C</td>
+                                        <td id="tbl-hum-mae" class="py-2.5 px-4 font-mono font-bold text-indigo-700">-- %</td>
+                                        <td class="py-2.5 px-4 text-slate-600">Chuẩn tủ ấp: ≤ 0.20 °C</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/80">
+                                        <td class="py-2.5 px-4 font-bold text-slate-900" data-i18n="row_stddev">Độ lệch chuẩn (Standard Deviation σ)</td>
+                                        <td id="tbl-temp-std" class="py-2.5 px-4 font-mono font-bold text-slate-800">-- °C</td>
+                                        <td id="tbl-hum-std" class="py-2.5 px-4 font-mono font-bold text-slate-800">-- %</td>
+                                        <td class="py-2.5 px-4 text-slate-600">Đo độ ổn định & chống nhiễu</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/80 bg-purple-50/40">
+                                        <td class="py-2.5 px-4 font-bold text-purple-900" data-i18n="row_inband">Tỷ lệ mẫu đạt chuẩn (±0.2°C / 50–55%)</td>
+                                        <td id="tbl-temp-inband" class="py-2.5 px-4 font-mono font-black text-purple-700">-- %</td>
+                                        <td id="tbl-hum-inband" class="py-2.5 px-4 font-mono font-black text-purple-700">-- %</td>
+                                        <td id="tbl-overall-verdict" class="py-2.5 px-4 font-extrabold text-purple-800">Đang thu thập mẫu...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -498,13 +652,15 @@
                             <div>
                                 <h3 class="font-extrabold text-sm sm:text-base text-slate-900 flex items-center gap-2">
                                     <i class="fa-solid fa-egg text-amber-500"></i>
-                                    <span>Theo Dõi Tình Trạng 6 Quả Trứng</span>
+                                    <span data-i18n="egg_section_title">Theo Dõi Tình Trạng 6 Quả Trứng & Đồng Bộ ID HuskyLens</span>
                                 </h3>
-                                <p class="text-[10px] sm:text-xs text-slate-500">Cứ 2 giây HuskyLens tự động chuyển sang soi 1 quả trứng</p>
+                                <p id="live-sync-indicator" class="text-[10px] sm:text-xs text-sky-700 font-bold">
+                                    Đang soi Quả #1 • ID 1 (Phase 1 • Ngày 1–3)
+                                </p>
                             </div>
 
-                            <button id="btn-back-overview" onclick="selectEgg(null)" class="hidden px-3 py-1 rounded-full bg-white text-slate-700 text-xs font-bold border shadow-sm">
-                                Xem Tất Cả
+                            <button id="btn-back-overview" onclick="resumeAutoFollowEspId()" class="px-3 py-1.5 rounded-full bg-white text-slate-700 text-xs font-bold border shadow-sm hover:bg-slate-50 transition" data-i18n="btn_follow_esp">
+                                Bám Theo ESP32
                             </button>
                         </div>
 
@@ -524,25 +680,25 @@
                                         <i class="fa-solid fa-cloud"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-bold text-sm text-slate-900">Cấu Hình Blynk Cloud 4G & Báo Động</h3>
-                                        <p class="text-[10px] text-slate-500 font-semibold">Kết nối Internet & cài đặt Email nhận thông báo</p>
+                                        <h3 class="font-bold text-sm text-slate-900" data-i18n="blynk_card_title">Cấu Hình Blynk Cloud 4G & Báo Động</h3>
+                                        <p class="text-[10px] text-slate-500 font-semibold">Template: TuApTrung (TMPL63IgAjV9A)</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="space-y-3 text-xs pt-1">
                                 <div>
-                                    <label class="block text-slate-800 font-extrabold mb-1">Blynk Auth Token:</label>
-                                    <input type="text" id="blynk-token-input" value="pS3EyMjjinEknHgEUk0WMMRcSAs0r72i" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 font-mono font-bold text-slate-800 text-xs sm:text-sm">
+                                    <label class="block text-slate-800 font-extrabold mb-1" data-i18n="lbl_blynk_token">Blynk Auth Token:</label>
+                                    <input type="text" id="blynk-token-input" value="e2IJZLAfsLgH5VId58WwAudiGsferaTC" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 font-mono font-bold text-slate-800 text-xs sm:text-sm">
                                 </div>
-                                <button onclick="saveBlynkToken()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs transition shadow-md">
+                                <button onclick="saveBlynkToken()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs transition shadow-md" data-i18n="btn_save_blynk">
                                     LƯU & KẾT NỐI BLYNK CLOUD 4G
                                 </button>
 
                                 <div class="pt-3 border-t border-slate-200/80">
-                                    <label class="block text-slate-800 font-extrabold mb-1"><i class="fa-solid fa-envelope text-rose-500 mr-1"></i> Email Nhận Cảnh Báo Báo Động:</label>
+                                    <label class="block text-slate-800 font-extrabold mb-1" data-i18n="lbl_alert_email"><i class="fa-solid fa-envelope text-rose-500 mr-1"></i> Email Nhận Cảnh Báo Báo Động:</label>
                                     <input type="email" id="alert-email-input" value="anlete1222008@gmail.com" placeholder="Nhập Gmail người nhận..." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 font-bold text-slate-800 text-xs sm:text-sm">
-                                    <button onclick="saveAlertEmail()" class="w-full mt-2 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs transition shadow-md">
+                                    <button onclick="saveAlertEmail()" class="w-full mt-2 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs transition shadow-md" data-i18n="btn_save_email">
                                         CẬP NHẬT EMAIL CẢNH BÁO
                                     </button>
                                 </div>
@@ -555,14 +711,14 @@
                                     <i class="fa-brands fa-bluetooth-b"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-sm text-slate-900">Kết Nối Bluetooth Trực Tiếp</h3>
-                                    <p class="text-[10px] text-slate-500 font-semibold">Không cần Wi-Fi / IP / Router</p>
+                                    <h3 class="font-bold text-sm text-slate-900" data-i18n="ble_card_title">Kết Nối Bluetooth Trực Tiếp</h3>
+                                    <p class="text-[10px] text-slate-500 font-semibold" data-i18n="ble_card_sub">Không cần Wi-Fi / IP / Router</p>
                                 </div>
                             </div>
 
                             <div class="space-y-3 text-xs pt-1">
-                                <p class="text-slate-600 text-[11px]">Bật Bluetooth trên điện thoại/máy tính và bấm nút kết nối trực tiếp với ESP32.</p>
-                                <button onclick="connectBluetoothBLE()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-extrabold transition shadow-md text-xs sm:text-sm flex items-center justify-center gap-2">
+                                <p class="text-slate-600 text-[11px]" data-i18n="ble_desc">Bật Bluetooth trên điện thoại/máy tính và bấm nút kết nối trực tiếp với ESP32.</p>
+                                <button onclick="connectBluetoothBLE()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-extrabold transition shadow-md text-xs sm:text-sm flex items-center justify-center gap-2" data-i18n="btn_connect_ble">
                                     <i class="fa-brands fa-bluetooth"></i> KẾT NỐI BLUETOOTH BLE
                                 </button>
                             </div>
@@ -577,23 +733,23 @@
 
                         <button onclick="switchTab('overview')" id="tab-mobile-overview" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-chart-pie text-sky-600 text-base mb-0.5"></i>
-                            <span class="text-[10px] font-bold">Trạng thái</span>
+                            <span class="text-[10px] font-bold" data-i18n="nav_overview">Trạng thái</span>
                         </button>
                         <button onclick="switchTab('control')" id="tab-mobile-control" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-sliders text-emerald-600 text-base mb-0.5"></i>
-                            <span class="text-[10px] font-bold">Điều chỉnh</span>
+                            <span class="text-[10px] font-bold" data-i18n="nav_control">Điều chỉnh</span>
                         </button>
                         <button onclick="switchTab('chart')" id="tab-mobile-chart" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-chart-line text-purple-600 text-base mb-0.5"></i>
-                            <span class="text-[10px] font-bold">Biểu đồ</span>
+                            <span class="text-[10px] font-bold" data-i18n="nav_chart_short">Biểu đồ</span>
                         </button>
                         <button onclick="switchTab('information')" id="tab-mobile-information" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-egg text-amber-500 text-base mb-0.5"></i>
-                            <span class="text-[10px] font-bold">Soi Trứng</span>
+                            <span class="text-[10px] font-bold" data-i18n="nav_eggs_short">Soi Trứng</span>
                         </button>
                         <button onclick="switchTab('settings')" id="tab-mobile-settings" class="liquid-nav-item flex-1 py-1.5 text-center flex flex-col items-center justify-center">
                             <i class="fa-solid fa-gear text-slate-600 text-base mb-0.5"></i>
-                            <span class="text-[10px] font-bold">Cài Đặt</span>
+                            <span class="text-[10px] font-bold" data-i18n="nav_settings_short">Cài Đặt</span>
                         </button>
                     </nav>
                 </div>
@@ -607,12 +763,12 @@
             <div class="bg-white p-5 rounded-3xl max-w-xs sm:max-w-sm w-full text-center space-y-3 shadow-2xl">
                 <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-circle-question"></i></div>
                 <div>
-                    <h3 class="text-base font-black text-slate-900">Xác Nhận Thao Tác?</h3>
-                    <p class="text-xs text-slate-600 mt-1 font-medium">Thao tác này sẽ chuyển sang chế độ Thủ Công (Manual) để bạn tự kiểm soát thiết bị.</p>
+                    <h3 class="text-base font-black text-slate-900" data-i18n="modal_title">Xác Nhận Thao Tác?</h3>
+                    <p class="text-xs text-slate-600 mt-1 font-medium" data-i18n="modal_desc">Thao tác này sẽ chuyển sang chế độ Thủ Công (Manual) để bạn tự kiểm soát thiết bị.</p>
                 </div>
                 <div class="grid grid-cols-2 gap-2.5 pt-1">
-                    <button onclick="closeModal(false)" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-extrabold text-xs">HỦY BỎ</button>
-                    <button onclick="closeModal(true)" class="py-2.5 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shadow-md">XÁC NHẬN</button>
+                    <button onclick="closeModal(false)" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-extrabold text-xs" data-i18n="btn_cancel">HỦY BỎ</button>
+                    <button onclick="closeModal(true)" class="py-2.5 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shadow-md" data-i18n="btn_confirm">XÁC NHẬN</button>
                 </div>
             </div>
         </div>
@@ -620,27 +776,318 @@
     </div>
 
     <script>
-        const rawUserDb = { 
+        const rawUserDb = {
             "thaytavanphuong": "UTE26151",
-            "anduongg4": "12345", 
-            "bakietg4": "12345" 
+            "anduongg4": "12345",
+            "bakietg4": "12345"
         };
 
-        let BLYNK_AUTH_TOKEN = "pS3EyMjjinEknHgEUk0WMMRcSAs0r72i";
+        const BLYNK_TEMPLATE_ID = "TMPL63IgAjV9A";
+        const BLYNK_TEMPLATE_NAME = "TuApTrung";
+        let BLYNK_AUTH_TOKEN = "e2IJZLAfsLgH5VId58WwAudiGsferaTC";
+
+        let currentLang = 'vi';
+
+        const I18N = {
+            vi: {
+                header_subtitle: "TuApTrung • Dual PTC 250W",
+                conn_disconnected: "Chưa kết nối",
+                conn_connected: "Đã Kết Nối",
+                auth_title: "HỆ THỐNG ẤP TRỨNG",
+                auth_subtitle: "Đăng nhập tài khoản điều khiển tủ ấp qua Cloud & BLE",
+                tab_login: "Đăng Nhập",
+                tab_register: "Đăng Ký Mới",
+                lbl_username: "Tên Đăng Nhập",
+                lbl_reg_username: "Tên Đăng Nhập Mới",
+                lbl_password: "Mật Khẩu",
+                lbl_confirm_password: "Xác Nhận Mật Khẩu",
+                err_login: "Tên đăng nhập hoặc mật khẩu chưa đúng!",
+                err_reg: "Mật khẩu không khớp hoặc tên đã tồn tại!",
+                btn_login: "VÀO BẢNG ĐIỀU KHIỂN CLOUD",
+                btn_register: "TẠO TÀI KHOẢN MỚI",
+                demo_accounts: "Tài khoản truy cập:",
+                lecturer_acc: "Giảng viên",
+                student_acc: "Sinh viên",
+                nav_overview: "Trạng thái",
+                nav_control: "Điều chỉnh",
+                nav_chart: "Biểu đồ & Thống kê",
+                nav_chart_short: "Biểu đồ",
+                nav_eggs: "Soi 6 quả trứng",
+                nav_eggs_short: "Soi Trứng",
+                nav_settings: "Cài đặt Cloud & BLE",
+                nav_settings_short: "Cài Đặt",
+                live_id_bar_title: "Trạng Thái Nhận HuskyLens ID",
+                scanning_egg_prefix: "Đang soi Quả",
+                no_raw_data: "Chưa có dữ liệu",
+                husky_banner_badge: "HuskyLens Live ID (BLE & Blynk) • ID 1–10",
+                current_stage_label: "Giai Đoạn / ID Hiện Tại:",
+                esp_returned_label: "ESP32 trả về:",
+                mode_status_label: "Trạng thái chế độ:",
+                mode_auto_text: "TỰ ĐỘNG (AUTO)",
+                mode_manual_text: "THỦ CÔNG (MANUAL - USER)",
+                mode_label_auto: "TỰ ĐỘNG",
+                mode_label_manual: "THỦ CÔNG",
+                card_temp: "Nhiệt Độ (S14)",
+                card_hum: "Độ Ẩm (S14)",
+                card_carousel: "Khay Đảo Trứng",
+                unit_deg: "Độ",
+                target_label: "Mục tiêu:",
+                auto_rotating: "Tự động xoay",
+                quick_devices_title: "Trạng Thái & Bật/Tắt Độc Lập 5 Thiết Bị",
+                quick_devices_sub: "Bật/tắt riêng lẻ từng thiết bị (tự chuyển sang Manual khi bấm)",
+                husky_table_title: "Bảng Màu HuskyLens (ID 1–6: Mỗi ID 3 Ngày | ID 7–10: Bất Thường)",
+                husky_table_sub: "ID 1–6 chia khung 3 ngày liên tiếp (1–3, 3–6, 6–9, 9–12, 12–15, 15–18); ID 7–10 theo bảng màu tối ưu",
+                husky_group_1: "1) ID 1–6: Giai Đoạn Ấp (Mỗi ID = 3 Ngày)",
+                husky_group_2: "2) ID 7–10: Bất Thường & Đặc Biệt",
+                mode_card_title: "Chế Độ Tự Động (Auto) / Thủ Công (Manual)",
+                mode_card_sub: "Manual trao 100% quyền kiểm soát độc lập từng thiết bị cho người dùng (kể cả PTC & Quạt PTC)",
+                btn_all_off: "Tắt Hết (0%)",
+                live_temp_lbl: "Nhiệt độ thực tế:",
+                live_hum_lbl: "Độ ẩm thực tế:",
+                authority_lbl: "Quyền điều khiển:",
+                auth_manual: "TOÀN QUYỀN NGƯỜI DÙNG (MANUAL)",
+                auth_preheat: "GIA NHIỆT 100% -> 37.8°C",
+                auth_pid: "ĐIỀU KHIỂN PID GIỮ NHIỆT",
+                dev_heater_title: "1. Sưởi Kép PTC (V4)",
+                dev_heater_badge: "2 Cầu H (250W)",
+                dev_ptcfan_title: "2. Quạt Thổi PTC (V24)",
+                dev_exhaust_title: "3. Quạt Hút Gió (V3)",
+                dev_pump_title: "4. Bơm Tạo Ẩm (V5)",
+                dev_humfan_title: "5. Quạt Tản Ẩm (V23)",
+                lbl_off_0: "Tắt (0%)",
+                lbl_max_100: "Max (100%)",
+                chart_title: "Biểu Đồ Nhiệt Độ & Độ Ẩm Toàn Phiên (Từ Bắt Đầu Đến Kết Thúc)",
+                chart_sub: "Ghi toàn bộ dữ liệu liên tục từ lúc bắt đầu phiên để theo dõi thời gian đạt mục tiêu 37.8 °C",
+                btn_pause: "Tạm dừng",
+                btn_resume: "Tiếp tục",
+                btn_export_csv: "Xuất CSV",
+                btn_clear: "Phiên mới",
+                stat_time_to_target: "Thời gian đạt mục tiêu (37.8°C)",
+                chart_cur_temp: "Nhiệt độ hiện tại / Mục tiêu",
+                chart_cur_hum: "Độ ẩm hiện tại / Mục tiêu",
+                stat_accuracy_score: "Độ chính xác ổn định (PID)",
+                acc_table_title: "Bảng Thống Kê Đánh Giá Tính Chính Xác Của Hệ Thống",
+                acc_table_sub: "Phân tích toàn bộ phiên đo (Giai đoạn gia nhiệt ban đầu & Giai đoạn giữ ổn định PID tại nhiệt độ mục tiêu)",
+                th_metric: "Chỉ Số Đánh Giá",
+                th_temp: "Nhiệt Độ (°C)",
+                th_hum: "Độ Ẩm (%RH)",
+                th_standard: "Tiêu Chuẩn / Đánh Giá",
+                row_start_val: "Giá trị lúc bắt đầu phiên (t = 0s)",
+                row_rise_time: "Thời gian đạt giá trị mục tiêu (Rise Time)",
+                row_steady_avg: "Giá trị trung bình giai đoạn ổn định",
+                row_minmax: "Biên độ dao động (Min – Max ổn định)",
+                row_mae: "Sai số tuyệt đối trung bình (MAE)",
+                row_stddev: "Độ lệch chuẩn (Standard Deviation σ)",
+                row_inband: "Tỷ lệ mẫu đạt chuẩn (±0.2°C / 50–55%)",
+                egg_section_title: "Theo Dõi Tình Trạng 6 Quả Trứng & Đồng Bộ ID HuskyLens",
+                btn_follow_esp: "Bám Theo ESP32",
+                blynk_card_title: "Cấu Hình Blynk Cloud 4G & Báo Động",
+                lbl_blynk_token: "Blynk Auth Token:",
+                btn_save_blynk: "LƯU & KẾT NỐI BLYNK CLOUD 4G",
+                lbl_alert_email: "Email Nhận Cảnh Báo Báo Động:",
+                btn_save_email: "CẬP NHẬT EMAIL CẢNH BÁO",
+                ble_card_title: "Kết Nối Bluetooth Trực Tiếp",
+                ble_card_sub: "Không cần Wi-Fi / IP / Router",
+                ble_desc: "Bật Bluetooth trên điện thoại/máy tính và bấm nút kết nối trực tiếp với ESP32.",
+                btn_connect_ble: "KẾT NỐI BLUETOOTH BLE",
+                modal_title: "Xác Nhận Thao Tác?",
+                modal_desc: "Thao tác này sẽ chuyển sang chế độ Thủ Công (Manual) để bạn tự kiểm soát thiết bị.",
+                btn_cancel: "HỦY BỎ",
+                btn_confirm: "XÁC NHẬN",
+                egg_card_name: "Trứng Quả",
+                scanning_badge: "ĐANG SOI",
+                esp_scanning_text: "ESP32 đang soi",
+                stage_word: "Giai đoạn",
+                days_word: "Ngày",
+                color_word: "Màu chuẩn",
+                note_word: "Ghi chú",
+                id_word: "ID HuskyLens",
+                type_word: "Khung ngày / Loại"
+            },
+            en: {
+                header_subtitle: "TuApTrung • Dual PTC 250W",
+                conn_disconnected: "Disconnected",
+                conn_connected: "Connected",
+                auth_title: "SMART INCUBATOR SYSTEM",
+                auth_subtitle: "Sign in to control the incubator via Cloud & BLE",
+                tab_login: "Sign In",
+                tab_register: "Register",
+                lbl_username: "Username",
+                lbl_reg_username: "New Username",
+                lbl_password: "Password",
+                lbl_confirm_password: "Confirm Password",
+                err_login: "Invalid username or password!",
+                err_reg: "Passwords do not match or username already exists!",
+                btn_login: "ENTER CLOUD DASHBOARD",
+                btn_register: "CREATE ACCOUNT",
+                demo_accounts: "Demo / Access Accounts:",
+                lecturer_acc: "Lecturer",
+                student_acc: "Student",
+                nav_overview: "Overview",
+                nav_control: "Control",
+                nav_chart: "Chart & Stats",
+                nav_chart_short: "Chart",
+                nav_eggs: "6 Eggs Scan",
+                nav_eggs_short: "Eggs",
+                nav_settings: "Cloud & BLE",
+                nav_settings_short: "Settings",
+                live_id_bar_title: "Live HuskyLens ID Receiver Status",
+                scanning_egg_prefix: "Scanning Egg",
+                no_raw_data: "No data yet",
+                husky_banner_badge: "HuskyLens Live ID (BLE & Blynk) • ID 1–10",
+                current_stage_label: "Current Stage / ID:",
+                esp_returned_label: "ESP32 returned:",
+                mode_status_label: "Mode status:",
+                mode_auto_text: "AUTOMATIC (AUTO)",
+                mode_manual_text: "MANUAL (USER OVERRIDE)",
+                mode_label_auto: "AUTO",
+                mode_label_manual: "MANUAL",
+                card_temp: "Temperature (S14)",
+                card_hum: "Humidity (S14)",
+                card_carousel: "Egg Turner Tray",
+                unit_deg: "Deg",
+                target_label: "Target:",
+                auto_rotating: "Auto turning",
+                quick_devices_title: "Status & Independent Toggle for 5 Actuators",
+                quick_devices_sub: "Toggle each actuator independently (switches to Manual on click)",
+                husky_table_title: "HuskyLens Color Table (ID 1–6: 3 Days/ID | ID 7–10: Abnormal)",
+                husky_table_sub: "ID 1–6 covers 3-day windows (1–3, 3–6, 6–9, 9–12, 12–15, 15–18); ID 7–10 covers special/abnormal cases",
+                husky_group_1: "1) ID 1–6: Incubation Phases (3 Days Each)",
+                husky_group_2: "2) ID 7–10: Abnormal & Special Cases",
+                mode_card_title: "Automatic (Auto) / Manual Mode",
+                mode_card_sub: "Manual gives 100% independent user control over all 5 actuators (including PTC & PTC Fan)",
+                btn_all_off: "All Off (0%)",
+                live_temp_lbl: "Live temperature:",
+                live_hum_lbl: "Live humidity:",
+                authority_lbl: "Control authority:",
+                auth_manual: "FULL USER AUTHORITY (MANUAL)",
+                auth_preheat: "PREHEAT 100% -> 37.8°C",
+                auth_pid: "PID TEMPERATURE HOLD",
+                dev_heater_title: "1. Dual PTC Heater (V4)",
+                dev_heater_badge: "2 H-Bridges (250W)",
+                dev_ptcfan_title: "2. PTC Blower Fan (V24)",
+                dev_exhaust_title: "3. Exhaust Fan (V3)",
+                dev_pump_title: "4. Humidifier Pump (V5)",
+                dev_humfan_title: "5. Humidity Fan (V23)",
+                lbl_off_0: "Off (0%)",
+                lbl_max_100: "Max (100%)",
+                chart_title: "Full-Session Temperature & Humidity Chart (Start to End)",
+                chart_sub: "Logs continuous data from session start to measure time-to-target (37.8 °C)",
+                btn_pause: "Pause",
+                btn_resume: "Resume",
+                btn_export_csv: "Export CSV",
+                btn_clear: "New Session",
+                stat_time_to_target: "Time to Target (37.8°C)",
+                chart_cur_temp: "Current Temp / Target",
+                chart_cur_hum: "Current Hum / Target",
+                stat_accuracy_score: "Steady-State Accuracy (PID)",
+                acc_table_title: "System Accuracy & Performance Statistics Table",
+                acc_table_sub: "Full session analysis (Initial preheat phase & PID steady-state regulation at target)",
+                th_metric: "Evaluation Metric",
+                th_temp: "Temperature (°C)",
+                th_hum: "Humidity (%RH)",
+                th_standard: "Standard / Evaluation",
+                row_start_val: "Session Start Value (t = 0s)",
+                row_rise_time: "Time to Reach Target (Rise Time)",
+                row_steady_avg: "Steady-State Mean Value",
+                row_minmax: "Steady-State Range (Min – Max)",
+                row_mae: "Mean Absolute Error (MAE)",
+                row_stddev: "Standard Deviation (σ)",
+                row_inband: "In-Band Accuracy (±0.2°C / 50–55%)",
+                egg_section_title: "6-Egg Candling Monitor & Sync HuskyLens ID",
+                btn_follow_esp: "Follow ESP32",
+                blynk_card_title: "Blynk Cloud 4G & Alert Settings",
+                lbl_blynk_token: "Blynk Auth Token:",
+                btn_save_blynk: "SAVE & CONNECT BLYNK CLOUD 4G",
+                lbl_alert_email: "Alert Notification Email:",
+                btn_save_email: "UPDATE ALERT EMAIL",
+                ble_card_title: "Direct Bluetooth BLE",
+                ble_card_sub: "No Wi-Fi / IP / Router required",
+                ble_desc: "Enable Bluetooth on your phone/PC and connect directly to ESP32.",
+                btn_connect_ble: "CONNECT BLUETOOTH BLE",
+                modal_title: "Confirm Action?",
+                modal_desc: "This switches to Manual mode so you control the actuator directly.",
+                btn_cancel: "CANCEL",
+                btn_confirm: "CONFIRM",
+                egg_card_name: "Egg",
+                scanning_badge: "SCANNING",
+                esp_scanning_text: "ESP32 scanning",
+                stage_word: "Stage",
+                days_word: "Days",
+                color_word: "Color",
+                note_word: "Note",
+                id_word: "HuskyLens ID",
+                type_word: "Day Range / Type"
+            }
+        };
+
+        function t(key) {
+            return (I18N[currentLang] && I18N[currentLang][key]) || I18N['vi'][key] || key;
+        }
+
+        function applyLanguage() {
+            document.documentElement.lang = currentLang;
+            document.getElementById('lang-label').innerText = currentLang === 'vi' ? 'VI | EN' : 'EN | VI';
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (!key) return;
+                if (el.querySelector('i')) {
+                    const iconHtml = el.querySelector('i').outerHTML;
+                    el.innerHTML = `${iconHtml} ${t(key)}`;
+                } else {
+                    el.innerText = t(key);
+                }
+            });
+
+            renderHuskyColorReference();
+            renderOverviewDevices();
+            renderEggSummary();
+            if (selectedEggId !== null) renderEggDetail(selectedEggId);
+            applyEspScanReturn(currentScanningEggId, currentReturnedHuskyId, null, false, lastRawHuskyPayload);
+            recomputeSessionAccuracyStats();
+        }
+
+        function toggleLanguage() {
+            currentLang = (currentLang === 'vi') ? 'en' : 'vi';
+            applyLanguage();
+        }
+
+        const HUSKY_STAGE_IDS = {
+            1: { id: 1, phase: 'Phase 1', dayStart: 1,  dayEnd: 3,  dayLabel: '1-3',   colorVi: 'Xanh dương đậm siêu', colorEn: 'Deep Royal Blue',  hex: '#0033FF', noteVi: 'Giữ nguyên',    noteEn: 'Keep original' },
+            2: { id: 2, phase: 'Phase 2', dayStart: 3,  dayEnd: 6,  dayLabel: '3-6',   colorVi: 'Vàng chanh tươi',     colorEn: 'Bright Lemon',     hex: '#FFD600', noteVi: 'Giữ nguyên',    noteEn: 'Keep original' },
+            3: { id: 3, phase: 'Phase 3', dayStart: 6,  dayEnd: 9,  dayLabel: '6-9',   colorVi: 'Xanh lá chuối/sáng',  colorEn: 'Bright Leaf Green',hex: '#00E676', noteVi: 'Sáng hơn',      noteEn: 'Brighter tone' },
+            4: { id: 4, phase: 'Phase 4', dayStart: 9,  dayEnd: 12, dayLabel: '9-12',  colorVi: 'Xanh ngọc đậm',       colorEn: 'Deep Cyan/Teal',   hex: '#00ACC1', noteVi: 'Thay thế',      noteEn: 'Replacement' },
+            5: { id: 5, phase: 'Phase 5', dayStart: 12, dayEnd: 15, dayLabel: '12-15', colorVi: 'Đỏ hồng/Hồng đậm',    colorEn: 'Crimson/Deep Pink',hex: '#FF1744', noteVi: 'Đổi tông đậm', noteEn: 'Deeper shade' },
+            6: { id: 6, phase: 'Phase 6', dayStart: 15, dayEnd: 18, dayLabel: '15-18', colorVi: 'Tím sẫm',             colorEn: 'Deep Violet',      hex: '#651FFF', noteVi: 'Đổi tông tối',  noteEn: 'Darker shade' }
+        };
+
+        const HUSKY_ABNORMAL_IDS = {
+            7:  { id: 7,  label: 'Shelled egg',           colorVi: 'Xám Slate rõ',      colorEn: 'Clear Slate Gray', hex: '#607D8B', noteVi: 'Tránh lóa nền trắng', noteEn: 'Avoid white glare' },
+            8:  { id: 8,  label: 'Bacterial Infection',   colorVi: 'Cam rực',           colorEn: 'Vivid Orange',     hex: '#FF6D00', noteVi: 'Thay thế',            noteEn: 'Replacement' },
+            9:  { id: 9,  label: 'Dead in Shell',         colorVi: 'Nâu đất bão hòa',   colorEn: 'Saturated Earth',   hex: '#5D4037', noteVi: 'Rõ nét hơn',          noteEn: 'Higher contrast' },
+            10: { id: 10, label: 'Early Embryonic Death', colorVi: 'Tím sáng/Hồng tím', colorEn: 'Bright Magenta',   hex: '#AA00FF', noteVi: 'Đổi màu rực',         noteEn: 'Vivid hue shift' }
+        };
 
         let currentTab = 'overview';
         let pendingToggleDeviceId = null;
         let pendingTargetState = null;
-        let selectedEggId = null;
-        let currentScanningEggId = 1;
-        let blynkFetchInterval = null;
 
+        let currentScanningEggId = 1;
+        let currentReturnedHuskyId = 1;
+        let selectedEggId = 1;
+        let manualSelectionLockUntil = 0;
+        let lastLiveHuskyUpdateTime = 0;
+        let lastRawHuskyPayload = "";
+        let lastV7CountMap = {};
+        let eggCycleInterval = null;
+
+        let blynkFetchInterval = null;
         let bleDevice = null;
         let bleRxCharacteristic = null;
         let bleTxCharacteristic = null;
         let isBleConnected = false;
 
-        // Hàng đợi BLE tuần tự chống lỗi "GATT operation already in progress"
         let bleWriteQueue = [];
         let isBleWriting = false;
 
@@ -651,37 +1098,280 @@
         let initialManualSyncDone = false;
         let latestMeasuredTemp = 0;
 
+        // =========================================================================
+        // BIẾN LƯU TRỮ TOÀN PHIÊN (TỪ LÚC BẮT ĐẦU ĐẾN KẾT THÚC) & THỐNG KÊ CHÍNH XÁC
+        // =========================================================================
         let isChartPaused = false;
         let realtimeChartObj = null;
-        let tempHistoryData = [];
-        let humHistoryData = [];
+        let sessionRecords = []; // { index, timestampStr, elapsedSec, temp, hum, targetTemp, tempErr }
+        let sessionStartTimestampMs = null;
+        let sessionStartClockStr = "--:--:--";
+        let startTempVal = null;
+        let startHumVal = null;
+        let targetTempReachedSec = null;
+        let targetTempReachedIndex = null;
+        let targetHumReachedSec = null;
+        let currentTargetTemp = 37.8;
+        let currentTargetHumLow = 50.0;
+        let currentTargetHumHigh = 55.0;
 
         const incubatorDevices = [
-            { id: 'ptc_heater',   nameVI: 'Sưởi Kép PTC 250W (V4)', icon: 'fa-fire-burner', state: false, pct: 0 },
-            { id: 'ptc_fan',      nameVI: 'Quạt Thổi PTC (V24)',    icon: 'fa-wind',        state: false, pct: 0 },
-            { id: 'exhaust_fan',  nameVI: 'Quạt Hút Gió (V3)',      icon: 'fa-fan',         state: false, pct: 0 },
-            { id: 'water_pump',   nameVI: 'Bơm Tạo Ẩm (V5)',        icon: 'fa-water',       state: false, pct: 0 },
-            { id: 'humidity_fan', nameVI: 'Quạt Tản Ẩm (V23)',      icon: 'fa-fan',         state: false, pct: 0 }
+            { id: 'ptc_heater',   nameVi: 'Sưởi Kép PTC 250W (V4)', nameEn: 'Dual PTC Heater 250W (V4)', icon: 'fa-fire-burner', state: false, pct: 0 },
+            { id: 'ptc_fan',      nameVi: 'Quạt Thổi PTC (V24)',    nameEn: 'PTC Blower Fan (V24)',      icon: 'fa-wind',        state: false, pct: 0 },
+            { id: 'exhaust_fan',  nameVi: 'Quạt Hút Gió (V3)',      nameEn: 'Exhaust Fan (V3)',          icon: 'fa-fan',         state: false, pct: 0 },
+            { id: 'water_pump',   nameVi: 'Bơm Tạo Ẩm (V5)',        nameEn: 'Humidifier Pump (V5)',      icon: 'fa-water',       state: false, pct: 0 },
+            { id: 'humidity_fan', nameVi: 'Quạt Tản Ẩm (V23)',      nameEn: 'Humidity Fan (V23)',        icon: 'fa-fan',         state: false, pct: 0 }
         ];
 
         let eggsData = [
-            { id: 1, day: 1, isAlive: true },
-            { id: 2, day: 1, isAlive: true },
-            { id: 3, day: 1, isAlive: true },
-            { id: 4, day: 1, isAlive: true },
-            { id: 5, day: 1, isAlive: true },
-            { id: 6, day: 1, isAlive: true }
+            { id: 1, huskyId: 1, day: 2,  isAlive: true },
+            { id: 2, huskyId: 2, day: 4,  isAlive: true },
+            { id: 3, huskyId: 3, day: 7,  isAlive: true },
+            { id: 4, huskyId: 4, day: 10, isAlive: true },
+            { id: 5, huskyId: 5, day: 13, isAlive: true },
+            { id: 6, huskyId: 6, day: 16, isAlive: true }
         ];
 
-        setInterval(() => {
-            currentScanningEggId = (currentScanningEggId % 6) + 1;
-            renderEggSummary();
-        }, 2000);
+        function formatDurationViEn(totalSeconds) {
+            const sec = Math.max(0, Math.round(totalSeconds));
+            const h = Math.floor(sec / 3600);
+            const m = Math.floor((sec % 3600) / 60);
+            const s = sec % 60;
+            if (currentLang === 'vi') {
+                if (h > 0) return `${h} giờ ${String(m).padStart(2, '0')} phút ${String(s).padStart(2, '0')} giây`;
+                return `${String(m).padStart(2, '0')} phút ${String(s).padStart(2, '0')} giây`;
+            } else {
+                if (h > 0) return `${h}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+                return `${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+            }
+        }
 
+        function formatElapsedShort(totalSeconds) {
+            const sec = Math.max(0, Math.round(totalSeconds));
+            const h = Math.floor(sec / 3600);
+            const m = Math.floor((sec % 3600) / 60);
+            const s = sec % 60;
+            if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        function parseValidHuskyId(rawVal) {
+            if (rawVal === undefined || rawVal === null || rawVal === '') return null;
+            if (typeof rawVal === 'number' && Number.isInteger(rawVal) && rawVal >= 1 && rawVal <= 10) {
+                return rawVal;
+            }
+            const str = String(rawVal).trim();
+            const parsed = parseInt(str, 10);
+            if (!isNaN(parsed) && parsed >= 1 && parsed <= 10 && String(parsed) === str) {
+                return parsed;
+            }
+            const match = str.match(/(?:HUSKY_ID|ID)\s*[:=]\s*(\d{1,2})/i);
+            if (match) {
+                const mVal = parseInt(match[1], 10);
+                if (mVal >= 1 && mVal <= 10) return mVal;
+            }
+            return null;
+        }
+
+        function parseValidEggId(rawVal) {
+            if (rawVal === undefined || rawVal === null || rawVal === '') return null;
+            const parsed = parseInt(String(rawVal).trim(), 10);
+            if (!isNaN(parsed) && parsed >= 1 && parsed <= 6) {
+                return parsed;
+            }
+            return null;
+        }
+
+        function getIdDescriptor(huskyId) {
+            const idNum = parseValidHuskyId(huskyId) || 1;
+            if (HUSKY_ABNORMAL_IDS[idNum]) {
+                const ab = HUSKY_ABNORMAL_IDS[idNum];
+                const colorName = currentLang === 'vi' ? ab.colorVi : ab.colorEn;
+                const note = currentLang === 'vi' ? ab.noteVi : ab.noteEn;
+                return {
+                    isAbnormal: true,
+                    id: ab.id,
+                    title: `ID ${ab.id} • ${ab.label}`,
+                    stageLabel: ab.label,
+                    shortTag: `ID ${ab.id} • ${ab.label}`,
+                    colorName,
+                    hex: ab.hex,
+                    note,
+                    dayLabel: currentLang === 'vi' ? 'Bất thường' : 'Abnormal'
+                };
+            }
+            const st = HUSKY_STAGE_IDS[idNum] || HUSKY_STAGE_IDS[1];
+            const colorName = currentLang === 'vi' ? st.colorVi : st.colorEn;
+            const note = currentLang === 'vi' ? st.noteVi : st.noteEn;
+            return {
+                isAbnormal: false,
+                id: st.id,
+                title: `ID ${st.id} • ${st.phase} (${t('days_word')} ${st.dayLabel})`,
+                stageLabel: `${st.phase} (${t('days_word')} ${st.dayLabel})`,
+                shortTag: `ID ${st.id} • ${t('days_word')} ${st.dayLabel}`,
+                colorName,
+                hex: st.hex,
+                note,
+                dayLabel: st.dayLabel
+            };
+        }
+
+        function updateLiveIdStatusBar(eggIdx, huskyId, rawPayload = "") {
+            const pillEl = document.getElementById('live-received-id-pill');
+            const stageTextEl = document.getElementById('live-received-stage-text');
+            const scanningEggEl = document.getElementById('live-scanning-egg-text');
+            const rawEl = document.getElementById('live-raw-payload-text');
+            const dotEl = document.getElementById('live-id-dot');
+
+            const desc = getIdDescriptor(huskyId);
+            if (pillEl) {
+                pillEl.innerText = `ID ${desc.id}`;
+                pillEl.style.backgroundColor = desc.hex;
+                pillEl.style.color = (desc.id === 2 || desc.id === 3) ? '#0f172a' : '#ffffff';
+            }
+            if (stageTextEl) {
+                stageTextEl.innerText = `${desc.stageLabel} • ${desc.colorName}`;
+            }
+            if (scanningEggEl) {
+                scanningEggEl.innerText = `${t('scanning_egg_prefix')} #${eggIdx}`;
+            }
+            if (rawEl) {
+                rawEl.innerText = rawPayload ? String(rawPayload) : t('no_raw_data');
+            }
+            if (dotEl) {
+                dotEl.className = desc.isAbnormal
+                    ? "w-3 h-3 rounded-full bg-rose-400 animate-ping shrink-0"
+                    : "w-3 h-3 rounded-full bg-emerald-400 animate-pulse shrink-0";
+            }
+        }
+
+        function applyEspScanReturn(eggIdx, huskyId, explicitDay = null, isFromHardware = false, rawPayload = "") {
+            const parsedEgg = parseValidEggId(eggIdx);
+            const parsedId = parseValidHuskyId(huskyId);
+
+            const validEgg = parsedEgg || currentScanningEggId || 1;
+            const validId = parsedId || currentReturnedHuskyId || 1;
+
+            if (rawPayload) {
+                lastRawHuskyPayload = rawPayload;
+            }
+
+            if (isFromHardware) {
+                lastLiveHuskyUpdateTime = Date.now();
+            }
+
+            currentScanningEggId = validEgg;
+            currentReturnedHuskyId = validId;
+
+            const desc = getIdDescriptor(validId);
+            const targetEgg = eggsData[validEgg - 1];
+            if (targetEgg) {
+                targetEgg.huskyId = validId;
+                if (explicitDay !== null && !isNaN(parseInt(explicitDay, 10))) {
+                    targetEgg.day = parseInt(explicitDay, 10);
+                } else if (!desc.isAbnormal && HUSKY_STAGE_IDS[validId]) {
+                    targetEgg.day = HUSKY_STAGE_IDS[validId].dayStart;
+                }
+                targetEgg.isAlive = !desc.isAbnormal;
+            }
+
+            if (Date.now() > manualSelectionLockUntil) {
+                selectedEggId = validEgg;
+            }
+
+            const stageEl = document.getElementById('stage-name-display');
+            const dayEl = document.getElementById('current-day-display');
+            const syncEl = document.getElementById('live-sync-indicator');
+
+            if (stageEl) {
+                stageEl.innerText = desc.title;
+                stageEl.style.color = desc.hex === '#FFD600' ? '#ca8a04' : desc.hex;
+            }
+            if (dayEl) {
+                dayEl.innerText = `${t('egg_card_name')} #${validEgg} • ${desc.shortTag}`;
+            }
+            if (syncEl) {
+                syncEl.innerText = `${t('egg_card_name')} #${validEgg} → ${desc.title} (${desc.colorName})`;
+            }
+
+            updateLiveIdStatusBar(validEgg, validId, lastRawHuskyPayload);
+
+            renderEggSummary();
+            if (selectedEggId !== null) {
+                renderEggDetail(selectedEggId);
+            }
+        }
+
+        function startEggTwoSecondCycle() {
+            if (eggCycleInterval) clearInterval(eggCycleInterval);
+            eggCycleInterval = setInterval(() => {
+                if (document.getElementById('subpage-wrapper')?.classList.contains('hidden')) return;
+                const nextEgg = (currentScanningEggId % 6) + 1;
+                const activeId = (Date.now() - lastLiveHuskyUpdateTime < 15000)
+                    ? currentReturnedHuskyId
+                    : (eggsData[nextEgg - 1]?.huskyId || nextEgg);
+                applyEspScanReturn(nextEgg, activeId, null, false, lastRawHuskyPayload);
+            }, 2000);
+        }
+
+        function resumeAutoFollowEspId() {
+            manualSelectionLockUntil = 0;
+            selectedEggId = currentScanningEggId;
+            renderEggSummary();
+            renderEggDetail(selectedEggId);
+        }
+
+        function renderHuskyColorReference() {
+            const stageList = document.getElementById('husky-stage-map-list');
+            const abList = document.getElementById('husky-abnormal-map-list');
+
+            if (stageList) {
+                stageList.innerHTML = Object.values(HUSKY_STAGE_IDS).map(item => {
+                    const colorName = currentLang === 'vi' ? item.colorVi : item.colorEn;
+                    const note = currentLang === 'vi' ? item.noteVi : item.noteEn;
+                    return `
+                        <div class="flex items-center justify-between bg-white/85 border border-slate-200/80 rounded-xl px-3 py-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <span class="w-5 h-5 rounded-md shrink-0 border border-black/15 shadow-sm" style="background-color:${item.hex}"></span>
+                                <div class="truncate">
+                                    <span class="font-black text-slate-900">ID ${item.id} (${item.phase})</span>
+                                    <span class="text-slate-600 font-bold"> • ${t('days_word')} ${item.dayLabel}</span>
+                                    <div class="text-[10px] text-slate-500 truncate">${colorName} (${item.hex}) • ${note}</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 shrink-0">${item.hex}</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            if (abList) {
+                abList.innerHTML = Object.values(HUSKY_ABNORMAL_IDS).map(item => {
+                    const colorName = currentLang === 'vi' ? item.colorVi : item.colorEn;
+                    const note = currentLang === 'vi' ? item.noteVi : item.noteEn;
+                    return `
+                        <div class="flex items-center justify-between bg-white/85 border border-slate-200/80 rounded-xl px-3 py-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <span class="w-5 h-5 rounded-md shrink-0 border border-black/15 shadow-sm" style="background-color:${item.hex}"></span>
+                                <div class="truncate">
+                                    <span class="font-black text-slate-900">ID ${item.id}: ${item.label}</span>
+                                    <div class="text-[10px] text-slate-500 truncate">${colorName} (${item.hex}) • ${note}</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 shrink-0">${item.hex}</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // =========================================================================
+        // BIỂU ĐỒ TOÀN PHIÊN (START -> END) & BẢNG THỐNG KÊ TÍNH CHÍNH XÁC
+        // =========================================================================
         function initRealtimeChart() {
             const canvas = document.getElementById('realtimeChart');
             if (!canvas || typeof Chart === 'undefined') return;
-            
+
             const ctx = canvas.getContext('2d');
             realtimeChartObj = new Chart(ctx, {
                 type: 'line',
@@ -689,23 +1379,37 @@
                     labels: [],
                     datasets: [
                         {
-                            label: 'Nhiệt độ (°C)',
+                            label: currentLang === 'vi' ? 'Nhiệt độ đo (°C)' : 'Measured Temp (°C)',
                             data: [],
                             borderColor: '#d97706',
                             backgroundColor: 'rgba(217, 119, 6, 0.12)',
-                            borderWidth: 2.5,
-                            tension: 0.35,
+                            borderWidth: 2.2,
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            tension: 0.25,
                             fill: true,
                             yAxisID: 'yTemp'
                         },
                         {
-                            label: 'Độ ẩm (%)',
+                            label: currentLang === 'vi' ? 'Mục tiêu nhiệt (37.8°C)' : 'Target Temp (37.8°C)',
+                            data: [],
+                            borderColor: '#ef4444',
+                            borderWidth: 1.6,
+                            borderDash: [6, 4],
+                            pointRadius: 0,
+                            fill: false,
+                            yAxisID: 'yTemp'
+                        },
+                        {
+                            label: currentLang === 'vi' ? 'Độ ẩm đo (%)' : 'Measured Humidity (%)',
                             data: [],
                             borderColor: '#0284c7',
-                            backgroundColor: 'rgba(2, 132, 199, 0.12)',
-                            borderWidth: 2.5,
-                            tension: 0.35,
-                            fill: true,
+                            backgroundColor: 'rgba(2, 132, 199, 0.08)',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            tension: 0.25,
+                            fill: false,
                             yAxisID: 'yHum'
                         }
                     ]
@@ -714,18 +1418,31 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     animation: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { size: 11, weight: 'bold' }, usePointStyle: true }
+                        }
+                    },
                     scales: {
-                        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 10 }, maxTicksLimit: 12 }
+                        },
                         yTemp: {
-                            type: 'linear', position: 'left', min: 25, max: 45,
+                            type: 'linear', position: 'left', min: 24, max: 42,
                             ticks: { color: '#d97706', font: { weight: 'bold' } },
-                            title: { display: true, text: 'Nhiệt độ (°C)', color: '#d97706' }
+                            title: { display: true, text: currentLang === 'vi' ? 'Nhiệt độ (°C)' : 'Temperature (°C)', color: '#d97706', font: { weight: 'bold' } }
                         },
                         yHum: {
-                            type: 'linear', position: 'right', min: 30, max: 100,
+                            type: 'linear', position: 'right', min: 25, max: 95,
                             ticks: { color: '#0284c7', font: { weight: 'bold' } },
                             grid: { drawOnChartArea: false },
-                            title: { display: true, text: 'Độ ẩm (%)', color: '#0284c7' }
+                            title: { display: true, text: currentLang === 'vi' ? 'Độ ẩm (%)' : 'Humidity (%)', color: '#0284c7', font: { weight: 'bold' } }
                         }
                     }
                 }
@@ -734,50 +1451,283 @@
 
         function updateChartData(temp, hum) {
             if (isChartPaused || !realtimeChartObj) return;
+            if (isNaN(temp) || temp <= 0) return;
 
-            const now = new Date();
-            const timeLabel = now.getHours().toString().padStart(2, '0') + ':' +
-                              now.getMinutes().toString().padStart(2, '0') + ':' +
-                              now.getSeconds().toString().padStart(2, '0');
+            const nowMs = Date.now();
+            const nowDate = new Date(nowMs);
+            const clockStr = nowDate.getHours().toString().padStart(2, '0') + ':' +
+                             nowDate.getMinutes().toString().padStart(2, '0') + ':' +
+                             nowDate.getSeconds().toString().padStart(2, '0');
 
-            if (tempHistoryData.length > 25) {
-                tempHistoryData.shift();
-                humHistoryData.shift();
-                realtimeChartObj.data.labels.shift();
+            if (sessionStartTimestampMs === null) {
+                sessionStartTimestampMs = nowMs;
+                sessionStartClockStr = clockStr;
+                startTempVal = temp;
+                startHumVal = hum;
             }
 
-            tempHistoryData.push(temp);
-            humHistoryData.push(hum);
+            const elapsedSec = Math.round((nowMs - sessionStartTimestampMs) / 1000);
+            const xAxisLabel = `${formatElapsedShort(elapsedSec)} (${clockStr})`;
+            const tempErr = temp - currentTargetTemp;
 
-            realtimeChartObj.data.labels.push(timeLabel);
-            realtimeChartObj.data.datasets[0].data = tempHistoryData;
-            realtimeChartObj.data.datasets[1].data = humHistoryData;
-            realtimeChartObj.update();
+            // Ghi nhận mốc thời gian đạt nhiệt độ mục tiêu lần đầu tiên
+            if (targetTempReachedSec === null && temp >= currentTargetTemp) {
+                targetTempReachedSec = elapsedSec;
+                targetTempReachedIndex = sessionRecords.length;
+            }
 
-            document.getElementById('chart-temp-cur').innerText = temp.toFixed(1) + ' °C';
-            document.getElementById('chart-hum-cur').innerText = hum.toFixed(1) + ' %';
-            
-            const avgT = (tempHistoryData.reduce((a,b)=>a+b, 0) / tempHistoryData.length).toFixed(1);
-            const avgH = (humHistoryData.reduce((a,b)=>a+b, 0) / humHistoryData.length).toFixed(1);
-            document.getElementById('chart-temp-avg').innerText = avgT + ' °C';
-            document.getElementById('chart-hum-avg').innerText = avgH + ' %';
+            // Ghi nhận mốc đạt độ ẩm mục tiêu lần đầu tiên
+            if (targetHumReachedSec === null && hum >= currentTargetHumLow && hum <= currentTargetHumHigh) {
+                targetHumReachedSec = elapsedSec;
+            }
+
+            sessionRecords.push({
+                index: sessionRecords.length + 1,
+                clockStr,
+                elapsedSec,
+                temp,
+                hum,
+                targetTemp: currentTargetTemp,
+                tempErr
+            });
+
+            // Không xóa điểm cũ — giữ toàn bộ hành trình từ đầu phiên đến kết thúc
+            realtimeChartObj.data.labels.push(xAxisLabel);
+            realtimeChartObj.data.datasets[0].data.push(temp);
+            realtimeChartObj.data.datasets[1].data.push(currentTargetTemp);
+            realtimeChartObj.data.datasets[2].data.push(hum);
+            realtimeChartObj.update('none');
+
+            // Cập nhật thẻ tóm tắt trên biểu đồ
+            document.getElementById('chart-temp-cur').innerText = `${temp.toFixed(2)} °C / ${currentTargetTemp.toFixed(1)} °C`;
+            const errSign = tempErr >= 0 ? '+' : '';
+            document.getElementById('chart-temp-err-cur').innerText = currentLang === 'vi'
+                ? `Sai số tức thời: ${errSign}${tempErr.toFixed(2)} °C`
+                : `Instant error: ${errSign}${tempErr.toFixed(2)} °C`;
+
+            document.getElementById('chart-hum-cur').innerText = `${hum.toFixed(1)} %`;
+            document.getElementById('chart-sample-count').innerText = currentLang === 'vi'
+                ? `${sessionRecords.length} mẫu (${formatElapsedShort(elapsedSec)})`
+                : `${sessionRecords.length} samples (${formatElapsedShort(elapsedSec)})`;
+
+            recomputeSessionAccuracyStats();
+        }
+
+        function recomputeSessionAccuracyStats() {
+            const totalSamples = sessionRecords.length;
+            const timeToTargetEl = document.getElementById('stat-time-to-target-val');
+            const startToTargetSubEl = document.getElementById('stat-start-to-target-sub');
+            const accPctEl = document.getElementById('stat-accuracy-pct');
+            const accGradeEl = document.getElementById('stat-accuracy-grade');
+            const statusBadgeEl = document.getElementById('acc-session-status-badge');
+
+            if (totalSamples === 0) return;
+
+            const latestRec = sessionRecords[totalSamples - 1];
+
+            // Bảng hàng 1: Lúc bắt đầu phiên
+            document.getElementById('tbl-temp-start').innerText = `${startTempVal.toFixed(2)} °C`;
+            document.getElementById('tbl-hum-start').innerText = `${startHumVal.toFixed(1)} %`;
+            document.getElementById('tbl-start-time').innerText = currentLang === 'vi'
+                ? `Bắt đầu lúc ${sessionStartClockStr}`
+                : `Started at ${sessionStartClockStr}`;
+
+            // Kiểm tra đã đạt nhiệt độ mục tiêu chưa
+            if (targetTempReachedSec === null) {
+                const elapsedStr = formatDurationViEn(latestRec.elapsedSec);
+                const remainTemp = Math.max(0, currentTargetTemp - latestRec.temp).toFixed(2);
+                timeToTargetEl.innerText = currentLang === 'vi'
+                    ? `Đang gia nhiệt... (${formatElapsedShort(latestRec.elapsedSec)})`
+                    : `Preheating... (${formatElapsedShort(latestRec.elapsedSec)})`;
+                startToTargetSubEl.innerText = currentLang === 'vi'
+                    ? `Đầu: ${startTempVal.toFixed(1)}°C • Còn thiếu ${remainTemp}°C tới ${currentTargetTemp}°C`
+                    : `Start: ${startTempVal.toFixed(1)}°C • ${remainTemp}°C left to ${currentTargetTemp}°C`;
+
+                document.getElementById('tbl-temp-risetime').innerText = currentLang === 'vi'
+                    ? `Đang lên nhiệt (${elapsedStr})`
+                    : `Heating (${elapsedStr})`;
+                if (statusBadgeEl) {
+                    statusBadgeEl.innerText = currentLang === 'vi'
+                        ? "GIAI ĐOẠN 1: ĐANG GIA NHIỆT LÊN MỤC TIÊU"
+                        : "PHASE 1: PREHEATING TO TARGET";
+                    statusBadgeEl.className = "px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-[11px] font-black self-start sm:self-auto";
+                }
+            } else {
+                const riseDurationStr = formatDurationViEn(targetTempReachedSec);
+                timeToTargetEl.innerText = riseDurationStr;
+                startToTargetSubEl.innerText = currentLang === 'vi'
+                    ? `Từ ${startTempVal.toFixed(1)}°C → ${currentTargetTemp}°C sau ${targetTempReachedSec}s`
+                    : `From ${startTempVal.toFixed(1)}°C → ${currentTargetTemp}°C in ${targetTempReachedSec}s`;
+
+                document.getElementById('tbl-temp-risetime').innerText = `${riseDurationStr} (${targetTempReachedSec}s)`;
+                if (statusBadgeEl) {
+                    statusBadgeEl.innerText = currentLang === 'vi'
+                        ? "GIAI ĐOẠN 2: ĐÃ ĐẠT MỤC TIÊU • PID GIỮ NHIỆT ỔN ĐỊNH"
+                        : "PHASE 2: TARGET REACHED • PID STEADY-STATE";
+                    statusBadgeEl.className = "px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-black self-start sm:self-auto";
+                }
+            }
+
+            document.getElementById('tbl-hum-risetime').innerText = targetHumReachedSec !== null
+                ? `${formatDurationViEn(targetHumReachedSec)} (${targetHumReachedSec}s)`
+                : (currentLang === 'vi' ? 'Đang cân bằng ẩm...' : 'Balancing...');
+
+            // Lấy tập mẫu ổn định (từ lúc đạt nhiệt độ mục tiêu; nếu chưa đạt thì lấy toàn phiên để theo dõi tạm)
+            const steadySlice = targetTempReachedIndex !== null
+                ? sessionRecords.slice(targetTempReachedIndex)
+                : sessionRecords;
+
+            const n = steadySlice.length;
+            let sumT = 0, sumH = 0, sumAbsErrT = 0, sumAbsErrH = 0;
+            let minT = Infinity, maxT = -Infinity, minH = Infinity, maxH = -Infinity;
+            let inBandTempCount = 0, inBandHumCount = 0;
+            const targetHumMid = (currentTargetHumLow + currentTargetHumHigh) / 2.0;
+
+            steadySlice.forEach(r => {
+                sumT += r.temp;
+                sumH += r.hum;
+                sumAbsErrT += Math.abs(r.temp - r.targetTemp);
+                sumAbsErrH += Math.abs(r.hum - targetHumMid);
+                if (r.temp < minT) minT = r.temp;
+                if (r.temp > maxT) maxT = r.temp;
+                if (r.hum < minH) minH = r.hum;
+                if (r.hum > maxH) maxH = r.hum;
+                if (Math.abs(r.temp - r.targetTemp) <= 0.25) inBandTempCount++;
+                if (r.hum >= currentTargetHumLow - 2.0 && r.hum <= currentTargetHumHigh + 2.0) inBandHumCount++;
+            });
+
+            const avgT = sumT / n;
+            const avgH = sumH / n;
+            const maeT = sumAbsErrT / n;
+            const maeH = sumAbsErrH / n;
+
+            let varT = 0, varH = 0;
+            steadySlice.forEach(r => {
+                varT += Math.pow(r.temp - avgT, 2);
+                varH += Math.pow(r.hum - avgH, 2);
+            });
+            const stdT = Math.sqrt(varT / n);
+            const stdH = Math.sqrt(varH / n);
+
+            const overshootT = Math.max(0, maxT - currentTargetTemp);
+            const inBandTempPct = (inBandTempCount / n) * 100;
+            const inBandHumPct = (inBandHumCount / n) * 100;
+
+            // Điểm chính xác tổng hợp (%) dựa trên MAE nhiệt độ
+            const precisionScore = targetTempReachedIndex !== null
+                ? Math.max(0, Math.min(100, 100 - (maeT / currentTargetTemp) * 100))
+                : null;
+
+            if (precisionScore !== null) {
+                accPctEl.innerText = `${precisionScore.toFixed(2)} %`;
+                let gradeText = "";
+                if (maeT <= 0.20) {
+                    gradeText = currentLang === 'vi' ? `Xuất sắc (MAE ±${maeT.toFixed(2)}°C)` : `Excellent (MAE ±${maeT.toFixed(2)}°C)`;
+                } else if (maeT <= 0.40) {
+                    gradeText = currentLang === 'vi' ? `Tốt (MAE ±${maeT.toFixed(2)}°C)` : `Good (MAE ±${maeT.toFixed(2)}°C)`;
+                } else {
+                    gradeText = currentLang === 'vi' ? `Đang hội tụ (MAE ±${maeT.toFixed(2)}°C)` : `Converging (MAE ±${maeT.toFixed(2)}°C)`;
+                }
+                accGradeEl.innerText = gradeText;
+            } else {
+                accPctEl.innerText = "-- %";
+                accGradeEl.innerText = currentLang === 'vi' ? "Tính sau khi chạm 37.8 °C" : "Computed once 37.8 °C reached";
+            }
+
+            // Điền các dòng của Bảng Thống Kê
+            document.getElementById('tbl-temp-steady-avg').innerText = `${avgT.toFixed(2)} °C`;
+            document.getElementById('tbl-hum-steady-avg').innerText = `${avgH.toFixed(1)} %`;
+
+            document.getElementById('tbl-temp-minmax').innerText = `${minT.toFixed(2)} ~ ${maxT.toFixed(2)} °C`;
+            document.getElementById('tbl-hum-minmax').innerText = `${minH.toFixed(1)} ~ ${maxH.toFixed(1)} %`;
+            document.getElementById('tbl-temp-overshoot').innerText = currentLang === 'vi'
+                ? `Vọt lố tối đa: +${overshootT.toFixed(2)} °C`
+                : `Max overshoot: +${overshootT.toFixed(2)} °C`;
+
+            document.getElementById('tbl-temp-mae').innerText = `±${maeT.toFixed(3)} °C`;
+            document.getElementById('tbl-hum-mae').innerText = `±${maeH.toFixed(2)} %`;
+
+            document.getElementById('tbl-temp-std').innerText = `±${stdT.toFixed(3)} °C`;
+            document.getElementById('tbl-hum-std').innerText = `±${stdH.toFixed(2)} %`;
+
+            document.getElementById('tbl-temp-inband').innerText = `${inBandTempPct.toFixed(1)} % (${inBandTempCount}/${n})`;
+            document.getElementById('tbl-hum-inband').innerText = `${inBandHumPct.toFixed(1)} % (${inBandHumCount}/${n})`;
+
+            const verdictEl = document.getElementById('tbl-overall-verdict');
+            if (targetTempReachedIndex === null) {
+                verdictEl.innerText = currentLang === 'vi' ? "Đang gia nhiệt lên mục tiêu..." : "Preheating to target...";
+                verdictEl.className = "py-2.5 px-4 font-extrabold text-amber-700";
+            } else if (maeT <= 0.25 && inBandTempPct >= 80) {
+                verdictEl.innerText = currentLang === 'vi' ? "ĐẠT CHUẨN CAO (Ổn định tốt)" : "HIGH PRECISION (Stable)";
+                verdictEl.className = "py-2.5 px-4 font-extrabold text-emerald-700";
+            } else {
+                verdictEl.innerText = currentLang === 'vi' ? "ĐANG ỔN ĐỊNH PID" : "PID STABILIZING";
+                verdictEl.className = "py-2.5 px-4 font-extrabold text-indigo-700";
+            }
+        }
+
+        function exportSessionCSV() {
+            if (sessionRecords.length === 0) {
+                alert(currentLang === 'vi' ? "Chưa có dữ liệu phiên đo để xuất!" : "No session data to export yet!");
+                return;
+            }
+            let csv = "STT,Thoi_Gian_Thuc,Thoi_Gian_Troi_Qua_Giay,Nhiet_Do_Do_C,Nhiet_Do_Muc_Tieu_C,Sai_So_Nhiet_C,Do_Am_RH\n";
+            sessionRecords.forEach(r => {
+                csv += `${r.index},${r.clockStr},${r.elapsedSec},${r.temp.toFixed(2)},${r.targetTemp.toFixed(2)},${r.tempErr.toFixed(2)},${r.hum.toFixed(1)}\n`;
+            });
+            const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `TuApTrung_Session_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         function toggleChartPause() {
             isChartPaused = !isChartPaused;
             const btn = document.getElementById('btn-chart-pause');
-            btn.innerHTML = isChartPaused ? `<i class="fa-solid fa-play mr-1"></i>Tiếp tục` : `<i class="fa-solid fa-pause mr-1"></i>Tạm dừng`;
+            btn.innerHTML = isChartPaused
+                ? `<i class="fa-solid fa-play mr-1"></i><span>${t('btn_resume')}</span>`
+                : `<i class="fa-solid fa-pause mr-1"></i><span>${t('btn_pause')}</span>`;
         }
 
         function clearChartData() {
-            tempHistoryData = [];
-            humHistoryData = [];
+            sessionRecords = [];
+            sessionStartTimestampMs = null;
+            sessionStartClockStr = "--:--:--";
+            startTempVal = null;
+            startHumVal = null;
+            targetTempReachedSec = null;
+            targetTempReachedIndex = null;
+            targetHumReachedSec = null;
+
             if (realtimeChartObj) {
                 realtimeChartObj.data.labels = [];
                 realtimeChartObj.data.datasets[0].data = [];
                 realtimeChartObj.data.datasets[1].data = [];
+                realtimeChartObj.data.datasets[2].data = [];
                 realtimeChartObj.update();
             }
+
+            document.getElementById('chart-sample-count').innerText = "0 mẫu (00:00)";
+            document.getElementById('stat-time-to-target-val').innerText = currentLang === 'vi' ? "Đang gia nhiệt... (00:00)" : "Preheating... (00:00)";
+            document.getElementById('stat-accuracy-pct').innerText = "-- %";
+            document.getElementById('tbl-temp-start').innerText = "-- °C";
+            document.getElementById('tbl-hum-start').innerText = "-- %";
+            document.getElementById('tbl-temp-risetime').innerText = currentLang === 'vi' ? "Đang gia nhiệt..." : "Preheating...";
+            document.getElementById('tbl-temp-steady-avg').innerText = "-- °C";
+            document.getElementById('tbl-hum-steady-avg').innerText = "-- %";
+            document.getElementById('tbl-temp-minmax').innerText = "-- ~ -- °C";
+            document.getElementById('tbl-hum-minmax').innerText = "-- ~ -- %";
+            document.getElementById('tbl-temp-mae').innerText = "-- °C";
+            document.getElementById('tbl-hum-mae').innerText = "-- %";
+            document.getElementById('tbl-temp-std').innerText = "-- °C";
+            document.getElementById('tbl-hum-std').innerText = "-- %";
+            document.getElementById('tbl-temp-inband').innerText = "-- %";
+            document.getElementById('tbl-hum-inband').innerText = "-- %";
         }
 
         function getBlynkVal(data, pin) {
@@ -793,19 +1743,19 @@
 
         function updateModeBadgesUI(isAuto, statusStr = "") {
             document.getElementById('master-auto-toggle').checked = isAuto;
-            document.getElementById('master-mode-label').innerText = isAuto ? "TỰ ĐỘNG" : "THỦ CÔNG";
-            document.getElementById('overview-auto-status-text').innerText = isAuto ? "TỰ ĐỘNG (AUTO)" : "THỦ CÔNG (MANUAL - USER)";
+            document.getElementById('master-mode-label').innerText = isAuto ? t('mode_label_auto') : t('mode_label_manual');
+            document.getElementById('overview-auto-status-text').innerText = isAuto ? t('mode_auto_text') : t('mode_manual_text');
 
             const phaseBadge = document.getElementById('control-phase-badge');
             if (phaseBadge) {
                 if (!isAuto) {
-                    phaseBadge.innerText = "TOÀN QUYỀN NGƯỜI DÙNG (MANUAL)";
+                    phaseBadge.innerText = t('auth_manual');
                     phaseBadge.className = "font-black text-indigo-700 text-[11px] uppercase";
-                } else if (statusStr.includes("PREHEAT") || (latestMeasuredTemp > 0 && latestMeasuredTemp < 37.8)) {
-                    phaseBadge.innerText = "GIA NHIỆT 100% -> 37.8°C";
+                } else if (statusStr.includes("PREHEAT") || (latestMeasuredTemp > 0 && latestMeasuredTemp < currentTargetTemp)) {
+                    phaseBadge.innerText = t('auth_preheat');
                     phaseBadge.className = "font-black text-amber-600 text-[11px] uppercase";
                 } else {
-                    phaseBadge.innerText = "ĐIỀU KHIỂN PID GIỮ NHIỆT";
+                    phaseBadge.innerText = t('auth_pid');
                     phaseBadge.className = "font-black text-emerald-700 text-[11px] uppercase";
                 }
             }
@@ -822,7 +1772,7 @@
         }
 
         function syncHeaterUI(val) {
-            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            const pct = Math.max(0, Math.min(100, parseInt(val, 10) || 0));
             const watts = Math.round((pct / 100) * 250);
             document.getElementById('heaterPowerSlider').value = pct;
             document.getElementById('heaterPowerVal').innerText = pct + "%";
@@ -832,7 +1782,7 @@
         }
 
         function syncPtcFanUI(val) {
-            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            const pct = Math.max(0, Math.min(100, parseInt(val, 10) || 0));
             document.getElementById('ptcFanSlider').value = pct;
             document.getElementById('ptcFanSpeedVal').innerText = pct + "%";
             const dev = incubatorDevices.find(d => d.id === 'ptc_fan');
@@ -840,7 +1790,7 @@
         }
 
         function syncExhaustUI(val) {
-            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            const pct = Math.max(0, Math.min(100, parseInt(val, 10) || 0));
             document.getElementById('exhaustFanSlider').value = pct;
             document.getElementById('exhaustFanSpeedVal').innerText = pct + "%";
             const dev = incubatorDevices.find(d => d.id === 'exhaust_fan');
@@ -848,7 +1798,7 @@
         }
 
         function syncPumpUI(val) {
-            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            const pct = Math.max(0, Math.min(100, parseInt(val, 10) || 0));
             document.getElementById('pumpFlowSlider').value = pct;
             document.getElementById('pumpFlowVal').innerText = pct + "%";
             const dev = incubatorDevices.find(d => d.id === 'water_pump');
@@ -856,7 +1806,7 @@
         }
 
         function syncHumidityFanUI(val) {
-            const pct = Math.max(0, Math.min(100, parseInt(val) || 0));
+            const pct = Math.max(0, Math.min(100, parseInt(val, 10) || 0));
             document.getElementById('humidityFanSlider').value = pct;
             document.getElementById('humidityFanSpeedVal').innerText = pct + "%";
             const dev = incubatorDevices.find(d => d.id === 'humidity_fan');
@@ -875,21 +1825,20 @@
         function saveAlertEmail() {
             const email = document.getElementById('alert-email-input').value.trim();
             if (!email || !email.includes('@')) {
-                alert("Vui lòng nhập địa chỉ Email hợp lệ!");
+                alert(currentLang === 'vi' ? "Vui lòng nhập địa chỉ Email hợp lệ!" : "Please enter a valid email address!");
                 return;
             }
 
             if (isBleConnected && bleRxCharacteristic) {
                 enqueueBleCommand(`SET_EMAIL:${email}`);
-                alert(`Đã cập nhật Email qua Bluetooth: ${email}`);
+                alert(currentLang === 'vi' ? `Đã cập nhật Email qua Bluetooth: ${email}` : `Alert email updated via BLE: ${email}`);
                 return;
             }
 
             sendBlynkUpdate("V8", encodeURIComponent(email));
-            alert(`Đã cập nhật Email nhận báo động: ${email}`);
+            alert(currentLang === 'vi' ? `Đã cập nhật Email nhận báo động: ${email}` : `Alert email updated: ${email}`);
         }
 
-        // Hàng đợi gửi lệnh BLE tuần tự, loại bỏ trùng lặp cùng loại lệnh để phản hồi tức thì
         function enqueueBleCommand(command) {
             if (!isBleConnected || !bleRxCharacteristic) return;
 
@@ -940,23 +1889,23 @@
             if (!BLYNK_AUTH_TOKEN) return;
 
             if (command.startsWith("MODE_AUTO:")) {
-                const isAuto = parseInt(command.split(":")[1]);
+                const isAuto = parseInt(command.split(":")[1], 10);
                 sendBlynkUpdate("V2", isAuto);
-            } 
+            }
             else if (command.startsWith("FAN_EXHAUST:")) {
-                sendBlynkUpdate("V3", parseInt(command.split(":")[1]));
-            } 
+                sendBlynkUpdate("V3", parseInt(command.split(":")[1], 10));
+            }
             else if (command.startsWith("HEATER_MOSFET:")) {
-                sendBlynkUpdate("V4", parseInt(command.split(":")[1]));
+                sendBlynkUpdate("V4", parseInt(command.split(":")[1], 10));
             }
             else if (command.startsWith("FAN_PTC:")) {
-                sendBlynkUpdate("V24", parseInt(command.split(":")[1]));
+                sendBlynkUpdate("V24", parseInt(command.split(":")[1], 10));
             }
             else if (command.startsWith("PUMP_FLOW:")) {
-                sendBlynkUpdate("V5", parseInt(command.split(":")[1]));
+                sendBlynkUpdate("V5", parseInt(command.split(":")[1], 10));
             }
             else if (command.startsWith("FAN_HUMIDITY:")) {
-                sendBlynkUpdate("V23", parseInt(command.split(":")[1]));
+                sendBlynkUpdate("V23", parseInt(command.split(":")[1], 10));
             }
             else if (command === "MANUAL_ALL_OFF") {
                 sendBlynkUpdate("V2", 0);
@@ -969,9 +1918,9 @@
             else if (command.startsWith("TOGGLE:")) {
                 const parts = command.split(":");
                 const devId = parts[1];
-                const state = parseInt(parts[2]);
+                const state = parseInt(parts[2], 10);
                 const val = (state === 1) ? 100 : 0;
-                
+
                 if (devId === "ptc_heater") {
                     syncHeaterUI(val);
                     sendBlynkUpdate("V4", val);
@@ -991,6 +1940,112 @@
             }
         }
 
+        function processIncomingHuskyPayload(valRaw, sourcePrefix = "V7") {
+            if (valRaw === undefined || valRaw === null || String(valRaw).trim() === '') return false;
+            const rawStr = String(valRaw).trim();
+
+            if (/^\d+\s*:\s*\d+(?:\s*,\s*\d+\s*:\s*\d+)+$/.test(rawStr)) {
+                const currentMap = {};
+                const activePairs = [];
+                let newlyIncreasedId = null;
+                let maxDelta = 0;
+                let fallbackPositiveId = null;
+
+                rawStr.split(',').forEach(pair => {
+                    const [kStr, vStr] = pair.split(':');
+                    const idNum = parseInt(kStr.trim(), 10);
+                    const countNum = parseInt(vStr.trim(), 10);
+                    if (!isNaN(idNum) && idNum >= 1 && idNum <= 10 && !isNaN(countNum)) {
+                        currentMap[idNum] = countNum;
+                        if (countNum > 0) {
+                            activePairs.push(`${idNum}:${countNum}`);
+                            fallbackPositiveId = idNum;
+                        }
+                        const prevCount = lastV7CountMap[idNum] || 0;
+                        const delta = countNum - prevCount;
+                        if (delta > maxDelta) {
+                            maxDelta = delta;
+                            newlyIncreasedId = idNum;
+                        }
+                    }
+                });
+
+                lastV7CountMap = currentMap;
+                const chosenId = newlyIncreasedId !== null ? newlyIncreasedId : fallbackPositiveId;
+                if (chosenId !== null) {
+                    applyEspScanReturn(currentScanningEggId, chosenId, null, true, `${sourcePrefix}: ${activePairs.join(', ')}`);
+                } else {
+                    lastRawHuskyPayload = `${sourcePrefix}: 0 ID (>0)`;
+                    updateLiveIdStatusBar(currentScanningEggId, currentReturnedHuskyId, lastRawHuskyPayload);
+                }
+                return true;
+            }
+
+            const directId = parseValidHuskyId(valRaw);
+            if (directId !== null) {
+                applyEspScanReturn(currentScanningEggId, directId, null, true, `${sourcePrefix}: ${rawStr}`);
+                return true;
+            }
+
+            if (rawStr.includes('SCAN_EGG') || rawStr.includes('HUSKY_ID') || rawStr.includes('EGG:') || rawStr.includes('ID:')) {
+                let eggNum = currentScanningEggId;
+                let hId = null;
+                rawStr.split(',').forEach(part => {
+                    const idxColon = part.indexOf(':');
+                    if (idxColon === -1) return;
+                    const key = part.slice(0, idxColon).trim().toUpperCase();
+                    const val = part.slice(idxColon + 1).trim();
+                    if (key === 'SCAN_EGG' || key === 'EGG' || key === 'SLOT') {
+                        const eVal = parseValidEggId(val);
+                        if (eVal !== null) eggNum = eVal;
+                    }
+                    if (key === 'HUSKY_ID' || key === 'ID') {
+                        const idVal = parseValidHuskyId(val);
+                        if (idVal !== null) hId = idVal;
+                    }
+                });
+                if (hId !== null) {
+                    applyEspScanReturn(eggNum, hId, null, true, `${sourcePrefix}: ${rawStr}`);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function fetchDedicatedV7Fallback(encToken, cacheBust) {
+            const v7Sgp = `https://sgp1.blynk.cloud/external/api/get?token=${encToken}&V7&_t=${cacheBust}`;
+
+            fetch(v7Sgp, { cache: 'no-store' })
+                .then(async res => {
+                    const txt = (await res.text()).trim();
+                    if (!res.ok) {
+                        updateLiveIdStatusBar(currentScanningEggId, currentReturnedHuskyId, `HTTP ${res.status}`);
+                        return;
+                    }
+                    const cleaned = txt.replace(/^["'\s]+|["'\s]+$/g, '');
+                    if (!cleaned) {
+                        updateLiveIdStatusBar(currentScanningEggId, currentReturnedHuskyId, `V7 rỗng trên Blynk`);
+                        return;
+                    }
+                    let extracted = cleaned;
+                    try {
+                        const parsedJson = JSON.parse(cleaned);
+                        if (typeof parsedJson === 'object' && parsedJson !== null) {
+                            extracted = getBlynkVal(parsedJson, 'v7') ?? cleaned;
+                        }
+                    } catch (_) {}
+
+                    const handled = processIncomingHuskyPayload(extracted, "V7");
+                    if (!handled) {
+                        updateLiveIdStatusBar(currentScanningEggId, currentReturnedHuskyId, `V7: ${extracted}`);
+                    }
+                })
+                .catch(() => {
+                    updateLiveIdStatusBar(currentScanningEggId, currentReturnedHuskyId, `Lỗi đọc V7`);
+                });
+        }
+
         function startBlynkDataPolling() {
             if (blynkFetchInterval) clearInterval(blynkFetchInterval);
 
@@ -1001,11 +2056,13 @@
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 1400);
 
-                const uSgp = `https://sgp1.blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&V0&V1&V2&V3&V4&V5&V7&V8&V18&V23&V24`;
-                const uGlobal = `https://blynk.cloud/external/api/get?token=${BLYNK_AUTH_TOKEN}&V0&V1&V2&V3&V4&V5&V7&V8&V18&V23&V24`;
+                const encToken = encodeURIComponent(BLYNK_AUTH_TOKEN.trim());
+                const cacheBust = Date.now();
+                const uSgp = `https://sgp1.blynk.cloud/external/api/get?token=${encToken}&V0&V1&V2&V3&V4&V5&V7&V8&V9&V17&V18&V22&V23&V24&_t=${cacheBust}`;
+                const uGlobal = `https://blynk.cloud/external/api/get?token=${encToken}&V0&V1&V2&V3&V4&V5&V7&V8&V9&V17&V18&V22&V23&V24&_t=${cacheBust}`;
 
-                fetch(uSgp, { signal: controller.signal })
-                    .catch(() => fetch(uGlobal, { signal: controller.signal }))
+                fetch(uSgp, { signal: controller.signal, cache: 'no-store' })
+                    .catch(() => fetch(uGlobal, { signal: controller.signal, cache: 'no-store' }))
                     .then(response => response.json())
                     .then(data => {
                         clearTimeout(timeoutId);
@@ -1019,6 +2076,7 @@
                         const valV5 = getBlynkVal(data, 'v5');
                         const valV7 = getBlynkVal(data, 'v7');
                         const valV8 = getBlynkVal(data, 'v8');
+                        const valV17 = getBlynkVal(data, 'v17');
                         const valV18 = String(getBlynkVal(data, 'v18') || "");
                         const valV23 = getBlynkVal(data, 'v23');
                         const valV24 = getBlynkVal(data, 'v24');
@@ -1030,7 +2088,7 @@
                             currentTemp = parseFloat(valV0);
                             latestMeasuredTemp = currentTemp;
                             document.getElementById('temp-ground-val').innerText = currentTemp.toFixed(1);
-                            document.getElementById('control-live-temp').innerText = currentTemp.toFixed(1) + ' °C / 37.8 °C';
+                            document.getElementById('control-live-temp').innerText = `${currentTemp.toFixed(1)} °C / ${currentTargetTemp.toFixed(1)} °C`;
                         }
                         if (valV1 !== undefined && valV1 !== null && !isNaN(parseFloat(valV1))) {
                             currentHum = parseFloat(valV1);
@@ -1044,28 +2102,26 @@
                         let isAutoActive = document.getElementById('master-auto-toggle').checked;
 
                         if (!isModeRecentlyToggled && !userManualOverrideLock && valV2 !== undefined && valV2 !== null && valV2 !== "") {
-                            isAutoActive = (parseInt(valV2) === 1);
+                            isAutoActive = (parseInt(valV2, 10) === 1);
                         }
                         updateModeBadgesUI(isAutoActive, valV18);
 
                         if (isAutoActive || (!userManualOverrideLock && !initialManualSyncDone)) {
-                            if (valV3 !== undefined && valV3 !== null && !isNaN(parseInt(valV3))) syncExhaustUI(parseInt(valV3));
-                            if (valV4 !== undefined && valV4 !== null && !isNaN(parseInt(valV4))) syncHeaterUI(parseInt(valV4));
-                            if (valV24 !== undefined && valV24 !== null && !isNaN(parseInt(valV24))) syncPtcFanUI(parseInt(valV24));
-                            if (valV5 !== undefined && valV5 !== null && !isNaN(parseInt(valV5))) syncPumpUI(parseInt(valV5));
-                            if (valV23 !== undefined && valV23 !== null && !isNaN(parseInt(valV23))) syncHumidityFanUI(parseInt(valV23));
+                            if (valV3 !== undefined && valV3 !== null && !isNaN(parseInt(valV3, 10))) syncExhaustUI(parseInt(valV3, 10));
+                            if (valV4 !== undefined && valV4 !== null && !isNaN(parseInt(valV4, 10))) syncHeaterUI(parseInt(valV4, 10));
+                            if (valV24 !== undefined && valV24 !== null && !isNaN(parseInt(valV24, 10))) syncPtcFanUI(parseInt(valV24, 10));
+                            if (valV5 !== undefined && valV5 !== null && !isNaN(parseInt(valV5, 10))) syncPumpUI(parseInt(valV5, 10));
+                            if (valV23 !== undefined && valV23 !== null && !isNaN(parseInt(valV23, 10))) syncHumidityFanUI(parseInt(valV23, 10));
                             if (!isAutoActive) initialManualSyncDone = true;
                         }
 
-                        if (valV7 !== undefined && typeof valV7 === 'string') {
-                            const eggItems = valV7.split(";");
-                            eggItems.forEach((item, index) => {
-                                const parts = item.split(",");
-                                if (parts.length === 3 && eggsData[index]) {
-                                    eggsData[index].day = parseInt(parts[1]);
-                                    eggsData[index].isAlive = (parseInt(parts[2]) === 1);
-                                }
-                            });
+                        const gotV7 = processIncomingHuskyPayload(valV7, "V7");
+                        if (!gotV7) {
+                            if (valV17 !== undefined && valV17 !== null && String(valV17).trim() !== '') {
+                                processIncomingHuskyPayload(valV17, "V17");
+                            } else {
+                                fetchDedicatedV7Fallback(encToken, cacheBust);
+                            }
                         }
 
                         if (valV8 !== undefined && typeof valV8 === 'string' && valV8.trim() !== "") {
@@ -1075,10 +2131,12 @@
                         }
 
                         renderOverviewDevices();
-                        renderEggSummary();
                         updateHardwareStatus(true, `4G - ${latency}ms`);
                     })
-                    .catch(err => updateHardwareStatus(false));
+                    .catch(() => {
+                        updateHardwareStatus(false);
+                        fetchDedicatedV7Fallback(encToken, cacheBust);
+                    });
             }, 1000);
         }
 
@@ -1086,14 +2144,14 @@
             const tokenInput = document.getElementById('blynk-token-input').value.trim();
             if (tokenInput) {
                 BLYNK_AUTH_TOKEN = tokenInput;
-                alert("Đã lưu Auth Token Blynk!");
+                alert(currentLang === 'vi' ? "Đã lưu Auth Token Blynk (TuApTrung)!" : "Saved Blynk Auth Token (TuApTrung)!");
                 startBlynkDataPolling();
             }
         }
 
         async function connectBluetoothBLE() {
             if (!navigator.bluetooth) {
-                alert("Trình duyệt không hỗ trợ Web Bluetooth! Hãy dùng Google Chrome.");
+                alert(currentLang === 'vi' ? "Trình duyệt không hỗ trợ Web Bluetooth! Hãy dùng Google Chrome." : "Browser does not support Web Bluetooth! Please use Google Chrome.");
                 return;
             }
 
@@ -1109,7 +2167,7 @@
                 bleDevice.addEventListener('gattserverdisconnected', onBleDisconnected);
                 const server = await bleDevice.gatt.connect();
                 const service = await server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e');
-                
+
                 bleRxCharacteristic = await service.getCharacteristic('6e400002-b5a3-f393-e0a9-e50e24dcca9e');
                 bleTxCharacteristic = await service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e');
 
@@ -1120,54 +2178,103 @@
                 isBleWriting = false;
                 isBleConnected = true;
                 updateHardwareStatus(true, "Bluetooth BLE");
-                alert("Đã kết nối Bluetooth thành công!");
+                alert(currentLang === 'vi' ? "Đã kết nối Bluetooth thành công!" : "Connected via Bluetooth BLE!");
             } catch (error) {
                 console.error(error);
-                alert("Không thể kết nối Bluetooth!");
+                alert(currentLang === 'vi' ? "Không thể kết nối Bluetooth!" : "Failed to connect Bluetooth BLE!");
             }
         }
 
         function handleBleNotification(event) {
             const decoder = new TextDecoder('utf-8');
-            const dataStr = decoder.decode(event.target.value);
+            const dataStr = decoder.decode(event.target.value).trim();
+            if (!dataStr) return;
 
-            if (dataStr.startsWith("TEMP:")) {
+            if (processIncomingHuskyPayload(dataStr, "BLE")) {
+                updateHardwareStatus(true, "Bluetooth BLE");
+                return;
+            }
+
+            if (dataStr.includes("TEMP:") || dataStr.includes("SCAN_EGG:") || dataStr.includes("HUSKY_ID:") || dataStr.includes("EGG:") || dataStr.includes("ID:")) {
                 const pairs = dataStr.split(",");
-                let temp = 0, hum = 0, phaseStr = "";
+                let temp = latestMeasuredTemp;
+                let hum = parseFloat(document.getElementById('hum-ground-val').innerText) || 0;
+                let phaseStr = "";
                 let isAuto = document.getElementById('master-auto-toggle').checked;
-                const isUserInteracting = (Date.now() - lastManualActionTime < 1200);
+                const isUserInteracting = (Date.now() - lastManualActionTime < 1500);
+
+                let hasEggScanUpdate = false;
+                let bleEggIdx = currentScanningEggId;
+                let bleHuskyId = null;
+                let bleDayVal = null;
 
                 pairs.forEach(p => {
-                    const [k, v] = p.split(":");
-                    if (k === "TEMP") temp = parseFloat(v);
-                    if (k === "HUM") hum = parseFloat(v);
+                    const idxColon = p.indexOf(":");
+                    if (idxColon === -1) return;
+                    const k = p.slice(0, idxColon).trim().toUpperCase();
+                    const v = p.slice(idxColon + 1).trim();
+
+                    if (k === "TEMP" && !isNaN(parseFloat(v))) temp = parseFloat(v);
+                    if (k === "HUM" && !isNaN(parseFloat(v))) hum = parseFloat(v);
                     if (k === "PHASE") phaseStr = v;
-                    if (k === "AUTO" && !isUserInteracting) isAuto = (parseInt(v) === 1);
+                    if (k === "AUTO" && !isUserInteracting && !userManualOverrideLock) {
+                        isAuto = (parseInt(v, 10) === 1);
+                    }
+
+                    if (k === "SCAN_EGG" || k === "EGG" || k === "SLOT") {
+                        const parsedE = parseValidEggId(v);
+                        if (parsedE !== null) {
+                            bleEggIdx = parsedE;
+                            hasEggScanUpdate = true;
+                        }
+                    }
+                    if (k === "HUSKY_ID" || k === "ID") {
+                        const parsedH = parseValidHuskyId(v);
+                        if (parsedH !== null) {
+                            bleHuskyId = parsedH;
+                            hasEggScanUpdate = true;
+                        }
+                    }
+                    if (k === "DAY" && !isNaN(parseInt(v, 10))) {
+                        bleDayVal = parseInt(v, 10);
+                    }
                 });
 
-                latestMeasuredTemp = temp;
-                document.getElementById('temp-ground-val').innerText = temp.toFixed(1);
-                document.getElementById('hum-ground-val').innerText = hum.toFixed(1);
-                document.getElementById('control-live-temp').innerText = temp.toFixed(1) + ' °C / 37.8 °C';
-                document.getElementById('control-live-hum').innerText = hum.toFixed(1) + ' %';
-                updateModeBadgesUI(isAuto, phaseStr);
+                if (temp > 0) {
+                    latestMeasuredTemp = temp;
+                    document.getElementById('temp-ground-val').innerText = temp.toFixed(1);
+                    document.getElementById('control-live-temp').innerText = `${temp.toFixed(1)} °C / ${currentTargetTemp.toFixed(1)} °C`;
+                }
+                if (hum > 0) {
+                    document.getElementById('hum-ground-val').innerText = hum.toFixed(1);
+                    document.getElementById('control-live-hum').innerText = hum.toFixed(1) + ' %';
+                }
+                if (phaseStr) {
+                    updateModeBadgesUI(isAuto, phaseStr);
+                }
 
-                // Cập nhật đúng giá trị thực tế từ ESP32 khi người dùng không đang kéo thanh trượt
-                if (!isUserInteracting) {
+                if (!isUserInteracting && !userManualOverrideLock && isAuto) {
                     pairs.forEach(p => {
-                        const [k, v] = p.split(":");
-                        if (k === "HEATER") syncHeaterUI(parseInt(v));
-                        if (k === "PTCFAN") syncPtcFanUI(parseInt(v));
-                        if (k === "EXHAUST") syncExhaustUI(parseInt(v));
-                        if (k === "PUMP") syncPumpUI(parseInt(v));
-                        if (k === "HFAN") syncHumidityFanUI(parseInt(v));
+                        const idxColon = p.indexOf(":");
+                        if (idxColon === -1) return;
+                        const k = p.slice(0, idxColon).trim().toUpperCase();
+                        const v = parseInt(p.slice(idxColon + 1).trim(), 10);
+                        if (isNaN(v)) return;
+                        if (k === "HEATER") syncHeaterUI(v);
+                        if (k === "PTCFAN") syncPtcFanUI(v);
+                        if (k === "EXHAUST") syncExhaustUI(v);
+                        if (k === "PUMP") syncPumpUI(v);
+                        if (k === "HFAN") syncHumidityFanUI(v);
                     });
                 }
 
-                if (temp > 0) updateChartData(temp, hum);
+                if (temp > 0 && hum > 0) updateChartData(temp, hum);
+
+                if (hasEggScanUpdate && bleHuskyId !== null) {
+                    applyEspScanReturn(bleEggIdx, bleHuskyId, bleDayVal, true, `BLE: ${dataStr}`);
+                }
 
                 renderOverviewDevices();
-                renderEggSummary();
                 updateHardwareStatus(true, "Bluetooth BLE");
             }
         }
@@ -1177,7 +2284,7 @@
             bleWriteQueue = [];
             isBleWriting = false;
             updateHardwareStatus(false);
-            alert("Đã ngắt kết nối Bluetooth!");
+            alert(currentLang === 'vi' ? "Đã ngắt kết nối Bluetooth!" : "Bluetooth BLE disconnected!");
             startBlynkDataPolling();
         }
 
@@ -1194,7 +2301,7 @@
 
             if (checked) {
                 userManualOverrideLock = false;
-                if (latestMeasuredTemp === 0 || latestMeasuredTemp < 37.8) {
+                if (latestMeasuredTemp === 0 || latestMeasuredTemp < currentTargetTemp) {
                     syncHeaterUI(100);
                     syncPtcFanUI(100);
                     syncExhaustUI(0);
@@ -1230,7 +2337,6 @@
             clearTimeout(sliderDebounceTimers[key]);
             sliderDebounceTimers[key] = setTimeout(() => {
                 lastManualActionTime = Date.now();
-                // ESP32 tự động chuyển sang MANUAL khi nhận lệnh thiết bị, không cần gửi 2 lệnh chồng nhau
                 sendToArduino(`${cmdPrefix}:${val}`);
             }, 90);
         }
@@ -1266,82 +2372,79 @@
             grid.innerHTML = '';
 
             eggsData.forEach(egg => {
-                const daysLeft = 21 - egg.day;
                 const isSelected = selectedEggId === egg.id;
                 const isScanning = currentScanningEggId === egg.id;
                 const card = document.createElement('div');
                 card.onclick = () => selectEgg(egg.id);
-                
-                let scanBadgeHtml = isScanning ? `<div class="text-[9px] font-black text-sky-600 bg-sky-100 px-1.5 py-0.5 rounded-full animate-pulse mb-1"><i class="fa-solid fa-eye"></i> ĐANG SOI...</div>` : ``;
 
-                if (egg.isAlive) {
-                    card.className = `p-3.5 rounded-2xl cursor-pointer transition-all border ${isScanning ? 'egg-scanning-active' : (isSelected ? 'border-amber-400 bg-amber-50' : 'bg-emerald-50/90 border-emerald-200')} text-center space-y-1 shadow-sm relative`;
-                    card.innerHTML = `
-                        ${scanBadgeHtml}
-                        <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-egg"></i>
-                        </div>
-                        <div class="font-extrabold text-xs text-slate-900">Trứng Quả #${egg.id}</div>
-                        <span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-200 text-emerald-800">
-                            CÒN SỐNG (${egg.day} ngày)
-                        </span>
-                        <div class="text-[11px] font-black text-amber-600 pt-1">
-                            Còn ${daysLeft > 0 ? daysLeft : 0} Ngày nở
-                        </div>
-                    `;
-                } else {
-                    card.className = `p-3.5 rounded-2xl cursor-pointer transition-all border ${isScanning ? 'egg-scanning-active' : (isSelected ? 'border-amber-400 bg-amber-50' : 'bg-rose-50/90 border-rose-200')} text-center space-y-1 shadow-sm relative`;
-                    card.innerHTML = `
-                        ${scanBadgeHtml}
-                        <div class="w-9 h-9 rounded-full bg-rose-100 text-rose-600 mx-auto flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-circle-xmark"></i>
-                        </div>
-                        <div class="font-extrabold text-xs text-slate-900">Trứng Quả #${egg.id}</div>
-                        <span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-black bg-rose-200 text-rose-800">
-                            TRỨNG HỎNG
-                        </span>
-                        <div class="text-[11px] font-bold text-slate-400 pt-1">
-                            Không thể nở
-                        </div>
-                    `;
-                }
+                const desc = getIdDescriptor(egg.huskyId);
+                const scanBadgeHtml = isScanning
+                    ? `<div class="text-[9px] font-black text-sky-700 bg-sky-100 px-1.5 py-0.5 rounded-full animate-pulse mb-1"><i class="fa-solid fa-eye"></i> ${t('scanning_badge')} (ID ${desc.id})</div>`
+                    : ``;
+
+                card.className = `p-3.5 rounded-2xl cursor-pointer transition-all border ${
+                    isScanning ? 'egg-scanning-active' : (isSelected ? 'border-amber-400 bg-amber-50' : (desc.isAbnormal ? 'bg-rose-50/90 border-rose-200' : 'bg-white/90 border-slate-200'))
+                } text-center space-y-1 shadow-sm relative`;
+
+                const subText = desc.isAbnormal
+                    ? desc.label
+                    : `${HUSKY_STAGE_IDS[desc.id].phase} • ${desc.colorName}`;
+
+                card.innerHTML = `
+                    ${scanBadgeHtml}
+                    <div class="w-9 h-9 rounded-full mx-auto flex items-center justify-center text-lg text-white shadow-sm" style="background-color:${desc.hex}">
+                        <i class="fa-solid ${desc.isAbnormal ? 'fa-triangle-exclamation' : 'fa-egg'}"></i>
+                    </div>
+                    <div class="font-extrabold text-xs text-slate-900">${t('egg_card_name')} #${egg.id}</div>
+                    <span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-black text-white truncate max-w-full" style="background-color:${desc.hex}">
+                        ${desc.shortTag}
+                    </span>
+                    <div class="text-[10px] font-bold text-slate-600 pt-1 truncate">
+                        ${subText}
+                    </div>
+                `;
                 grid.appendChild(card);
             });
         }
 
         function selectEgg(id) {
             selectedEggId = id;
+            manualSelectionLockUntil = Date.now() + 10000;
             renderEggSummary();
+            renderEggDetail(id);
+        }
 
+        function renderEggDetail(id) {
             const container = document.getElementById('egg-detail-container');
-            const backBtn = document.getElementById('btn-back-overview');
+            if (!container) return;
 
-            if (id === null || !container) {
-                if (backBtn) backBtn.classList.add('hidden');
-                if (container) container.innerHTML = '';
+            if (id === null) {
+                container.innerHTML = '';
                 return;
             }
-
-            if (backBtn) backBtn.classList.remove('hidden');
 
             const egg = eggsData.find(e => e.id === id);
             if (!egg) return;
 
-            const daysLeft = 21 - egg.day;
+            const desc = getIdDescriptor(egg.huskyId);
+            const isActiveScan = (currentScanningEggId === egg.id);
+            const dayOrTypeVal = desc.isAbnormal ? desc.label : `${t('days_word')} ${desc.dayLabel}`;
 
             container.innerHTML = `
-                <div class="ultra-glass p-4 bg-gradient-to-r from-amber-50/60 via-white/80 to-emerald-50/60 border-amber-200 shadow-md space-y-3">
-                    <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
-                        <h2 class="text-base font-black text-slate-900">Chi Tiết Trứng Quả #${egg.id}</h2>
-                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black ${egg.isAlive ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-                            ${egg.isAlive ? 'PHÔI KHỎE MẠNH' : 'TRỨNG HỎNG (ID 11 HUSKYLENS)'}
+                <div class="ultra-glass p-4 ${desc.isAbnormal ? 'bg-rose-50/60 border-rose-200' : 'bg-gradient-to-r from-amber-50/60 via-white/80 to-emerald-50/60 border-amber-200'} shadow-md space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/60 pb-2">
+                        <h2 class="text-base font-black text-slate-900">
+                            ${t('egg_card_name')} #${egg.id} ${isActiveScan ? `<span class="text-xs font-extrabold text-sky-600">(${t('esp_scanning_text')})</span>` : ''}
+                        </h2>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black text-white" style="background-color:${desc.hex}">
+                            ${desc.title}
                         </span>
                     </div>
                     <div class="grid grid-cols-2 gap-2 text-xs">
-                        <div class="bg-white/90 p-2.5 rounded-xl border">Tuổi trứng: <strong>Ngày ${egg.day}/21</strong></div>
-                        <div class="bg-white/90 p-2.5 rounded-xl border">Dự kiến nở: <strong>${egg.isAlive ? (daysLeft + ' ngày nữa') : 'Không thể nở'}</strong></div>
-                        <div class="bg-white/90 p-2.5 rounded-xl border">Trạng thái phôi: <strong class="${egg.isAlive ? 'text-emerald-600' : 'text-rose-600'}">${egg.isAlive ? 'Bình thường' : 'Bị hư/hỏng phôi'}</strong></div>
-                        <div class="bg-white/90 p-2.5 rounded-xl border">Góc xoay khay: <strong>60.0°</strong></div>
+                        <div class="bg-white/90 p-2.5 rounded-xl border">${t('id_word')}: <strong>ID ${desc.id}</strong></div>
+                        <div class="bg-white/90 p-2.5 rounded-xl border">${t('type_word')}: <strong>${dayOrTypeVal}</strong></div>
+                        <div class="bg-white/90 p-2.5 rounded-xl border">${t('color_word')}: <strong>${desc.colorName} (${desc.hex})</strong></div>
+                        <div class="bg-white/90 p-2.5 rounded-xl border">${t('note_word')}: <strong>${desc.note}</strong></div>
                     </div>
                 </div>
             `;
@@ -1356,10 +2459,13 @@
                 const card = document.createElement('div');
                 card.className = `p-3.5 rounded-2xl border transition-all ${dev.state ? 'bg-emerald-50/90 border-emerald-300 shadow-sm' : 'bg-white/80 border-slate-200'}`;
                 const watts = Math.round((dev.pct / 100) * 250);
-                const statusLabel = dev.state 
-                    ? (dev.id === 'ptc_heater' ? `● ĐANG BẬT - ${dev.pct}% (${watts}W)` : `● ĐANG BẬT - ${dev.pct}%`) 
-                    : '● ĐÃ TẮT (0%)';
-                
+                const devTitle = currentLang === 'vi' ? dev.nameVi : dev.nameEn;
+                const statusLabel = dev.state
+                    ? (dev.id === 'ptc_heater'
+                        ? (currentLang === 'vi' ? `● ĐANG BẬT - ${dev.pct}% (${watts}W)` : `● ON - ${dev.pct}% (${watts}W)`)
+                        : (currentLang === 'vi' ? `● ĐANG BẬT - ${dev.pct}%` : `● ON - ${dev.pct}%`))
+                    : (currentLang === 'vi' ? '● ĐÃ TẮT (0%)' : '● OFF (0%)');
+
                 card.innerHTML = `
                     <div class="flex items-center justify-between mb-1">
                         <i class="fa-solid ${dev.icon} ${dev.state ? 'text-emerald-600' : 'text-slate-400'} text-lg"></i>
@@ -1368,7 +2474,7 @@
                             <span class="ios-slider"></span>
                         </label>
                     </div>
-                    <div class="font-bold text-xs text-slate-900 truncate">${dev.nameVI}</div>
+                    <div class="font-bold text-xs text-slate-900 truncate">${devTitle}</div>
                     <div class="text-[10px] ${dev.state ? 'text-emerald-600' : 'text-slate-400'} font-extrabold mt-0.5">${statusLabel}</div>
                 `;
                 grid.appendChild(card);
@@ -1383,11 +2489,11 @@
             if (connected) {
                 badge.className = "flex items-center gap-1.5 bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-semibold";
                 dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
-                txt.innerText = "Đã Kết Nối (" + type + ")";
+                txt.innerText = `${t('conn_connected')} (${type})`;
             } else {
                 badge.className = "flex items-center gap-1.5 bg-rose-950/80 text-rose-300 border border-rose-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-semibold";
                 dot.className = "w-2 h-2 rounded-full bg-rose-500";
-                txt.innerText = "Chưa kết nối";
+                txt.innerText = t('conn_disconnected');
             }
         }
 
@@ -1452,16 +2558,18 @@
                 document.getElementById('current-user-display').textContent = uInput;
                 document.getElementById('user-badge').classList.remove('hidden');
                 document.getElementById('logout-btn').classList.remove('hidden');
-                
+
                 document.getElementById('page-auth').classList.add('hidden');
                 document.getElementById('subpage-wrapper').classList.remove('hidden');
-                
+
                 try { initFluidNav(); } catch(err) {}
                 try { initRealtimeChart(); } catch(err) {}
+                try { applyLanguage(); } catch(err) {}
+                try { applyEspScanReturn(1, 1, null, false, ""); } catch(err) {}
                 try { renderOverviewDevices(); } catch(err) {}
-                try { renderEggSummary(); } catch(err) {}
-                
+
                 switchTab('overview');
+                startEggTwoSecondCycle();
                 startBlynkDataPolling();
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
@@ -1482,7 +2590,7 @@
 
             document.getElementById('reg-error').classList.add('hidden');
             rawUserDb[uLower] = p;
-            alert(`Đăng ký tài khoản '${u}' thành công!`);
+            alert(currentLang === 'vi' ? `Đăng ký tài khoản '${u}' thành công!` : `Account '${u}' created successfully!`);
             switchAuthTab('login');
             document.getElementById('login-username').value = u;
             document.getElementById('login-password').value = p;
@@ -1523,10 +2631,19 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
             const activeContent = document.getElementById(`content-${tabId}`);
             if (activeContent) activeContent.classList.remove('hidden');
+            if (tabId === 'information') {
+                renderEggSummary();
+                if (selectedEggId !== null) renderEggDetail(selectedEggId);
+            }
+            if (tabId === 'chart' && realtimeChartObj) {
+                realtimeChartObj.resize();
+                realtimeChartObj.update('none');
+            }
             initFluidNav();
         }
 
         window.addEventListener('resize', () => initFluidNav());
+        applyLanguage();
     </script>
 </body>
 </html>
